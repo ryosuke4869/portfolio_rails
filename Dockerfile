@@ -4,7 +4,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && apt-get update -qq \
     && apt-get install -y nodejs yarn \
     && mkdir /portfolio_rails
-WORKDIR /myapp
+WORKDIR /portfolio_rails
 COPY Gemfile /portfolio_rails/Gemfile
 COPY Gemfile.lock /portfolio_rails/Gemfile.lock
 RUN bundle install
