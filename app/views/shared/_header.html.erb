@@ -7,6 +7,11 @@
 
   <div class="header-right">
     <div class="right-container">
+      <% if user_signed_in?%>
+        <%= current_user.username %>
+        <%= current_user.email %>
+      <% end %>
+
       <nav>
         <div class="nav-form">
           <%= link_to "ログイン", new_user_session_path, class:"btn btn-yellow btn-cubic"%>
