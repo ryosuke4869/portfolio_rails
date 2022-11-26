@@ -1,0 +1,26 @@
+<header>
+  <div class="header-left">
+    <div class="left-container">
+      <%= link_to "Desk&Device-sharing", root_path, {class: "icon"} %>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="right-container">
+      <% if user_signed_in?%>
+        <%= current_user.username %>
+        <%= current_user.email %>
+      <% end %>
+
+      <nav>
+        <div class="nav-form">
+          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class:"btn btn-yellow btn-cubic", method: :post %>
+          <%= link_to "ログイン", new_user_session_path, class:"btn btn-yellow btn-cubic"%>
+          <%= link_to "新規登録", new_user_registration_path, class:"btn btn-yellow btn-cubic"%>
+          <%= link_to "設定", edit_user_registration_path, class:"btn btn-yellow btn-cubic"%>
+          <%= link_to "ログアウト", destroy_user_session_path,class:"btn btn-yellow btn-cubic", method: :delete, data: { confirm: "ログアウトします。よろしいですか?" } %>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
