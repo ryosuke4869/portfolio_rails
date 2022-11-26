@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: 'posts#index'
-  resources :posts
+  root to: 'tops#index'
+  resources :tops
 end
