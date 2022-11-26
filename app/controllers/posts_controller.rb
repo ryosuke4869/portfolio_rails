@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  def index
+  def index #投稿用
 
   end
 
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   def update
 
   end
-  
+
   def destroy
 
   end

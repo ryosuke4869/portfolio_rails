@@ -64,10 +64,15 @@ header {
 
 //footerのcss
 footer {
-  background-color: #000;
+  background-color: #464647;
   padding: 4px 30px;
   width: 100%;
   height: 70px;
   box-sizing: border-box;
 }
+
+.footer-nav a {
+  color: #fff;
+}
+
 
