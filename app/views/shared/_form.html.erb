@@ -1,0 +1,24 @@
+<div class="form-container">
+  <p class="notice"><%= notice %></p>
+  <%= form_with model: @post, local:true do |f|%>
+    <div class="form-content">
+      <%= f.label :desk_name, "デスク名"%>
+      <%= f.text_field :desk_name, class:"area", placeholder: "デスク名を入力"%>
+    </div>
+
+    <div class="form-content">
+      <%= f.label :description, "紹介" %>
+      <%= f.text_area :description ,:size=>"60x10", class:"area", placeholder: "デスク紹介" %>
+    </div>
+
+    <div class="form-content">
+      <%= f.label :desk_image, "デスク画像" %>
+
+      <%= f.file_field :post_image, class:"area"%>
+    </div>
+
+    <div class="form-content field">
+      <%= f.submit "登録する", disable_with: '送信中...', class:"btn-orange btn-cubic btn-shadow"%>
+    </div>
+  <% end %>
+</div>
