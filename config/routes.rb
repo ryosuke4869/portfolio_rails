@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  #アクセスしたらTop画面に
   root to: 'tops#index'
-  resources :tops
+  get "tops/index"
+
+  # 投稿用のroute
+  resources :posts
 end

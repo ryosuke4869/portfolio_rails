@@ -1,0 +1,31 @@
+<div class="container">
+  <p>投稿用のページ</p>
+
+  <h2>投稿済み</h2>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>デスク名</th>
+          <th>デスク説明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.id%></td>
+            <td><%= post.desk_name%></td>
+            <td><%= post.description%></td>
+            <td><%= link_to "詳細", post_path(post), class:"btn btn-yellow btn-cubic" %></td>
+            <td><%= link_to "編集", edit_post_path(post), class:"btn btn-yellow btn-cubic" %></td>
+            <td><%= link_to "削除", post, method: :delete, data: {confirm: "ルーム#{post.desk_name}を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="nav-form">
+    <%= link_to "投稿する", new_post_path, class:"btn btn-yellow btn-cubic" %>
+  </div>
+</div>
