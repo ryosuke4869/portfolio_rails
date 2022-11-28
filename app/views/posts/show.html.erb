@@ -1,0 +1,14 @@
+<div class="container">
+  <p>詳細画面</p>
+  <div class="show">
+    <div class="show-container">
+      <h3><%= @post.desk_name%></h3>
+      <p><%= @post.description%></p>
+    </div>
+
+    <div>
+      <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
+      <td><%= link_to "削除", @post, method: :delete, data: {confirm: "ルーム#{@post.desk_name}を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+    </div>
+  </div>
+</div>
