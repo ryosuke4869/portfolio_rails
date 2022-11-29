@@ -2,6 +2,7 @@
   <p>詳細画面</p>
   <div class="show">
     <div class="show-container">
+      <%=image_tag @post.desk_image, class: "desk-show-image"%>
       <h3><%= @post.desk_name%></h3>
       <p><%= @post.description%></p>
     </div>

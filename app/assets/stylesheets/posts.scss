@@ -1,3 +1,24 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.show {
+  max-width: 1140px;
+  min-height: 100vh;
+  padding: 25px 100px;
+}
+
+.show-container{
+  float: left;
+  width :50%;
+
+}
+
+.desk-image {
+  width: 240px;
+  height: 140px;
+  object-fit: cover;
+}
+.desk-show-image {
+  max-width: 45vw;
+}
