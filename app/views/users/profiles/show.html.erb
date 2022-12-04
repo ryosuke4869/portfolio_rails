@@ -1,0 +1,21 @@
+<%# Userのマイページ %>
+<div class="container">
+  <div class="mypage">
+
+  </div>
+  <h1>Mypage</h1>
+  <%# username, desk-name, user-image%>
+  <%= current_user.username %>
+
+  <%= link_to "アカウントの編集", edit_user_registration_path, class:"btn btn-yellow btn-cubic"%>
+
+  <%# 投稿したdesk_imageを全て表示させる %>
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post.id) do%>
+      <%= post.desk_name %>
+      <%= image_tag post.desk_image, class: "desk-image" if post.desk_image.attached?%>
+    <% end %>
+  <% end %>
+
+</div>
+
