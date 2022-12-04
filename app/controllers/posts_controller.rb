@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :search]#全てのアクション(showアクションを除く)前にユーザーがログインしているかを確認
 #投稿用
   def index
-    @posts = current_user.posts.all
+    @posts = Post.all
     flash[:notice] = "ログインしていません" unless user_signed_in?
   end
 

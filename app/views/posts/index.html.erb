@@ -1,12 +1,10 @@
 <div class="container">
-  <p>投稿用のページ</p>
-
-  <h2>投稿済み</h2>
+  <h2>投稿一覧</h2>
   <div>
     <table>
       <thead>
         <tr>
-          <th>id</th>
+          <th>ユーザー名</th>
           <th>デスク画像</th>
           <th>デスク名</th>
           <th>デスク説明</th>
@@ -15,8 +13,7 @@
       <tbody>
         <% @posts.each do |post| %>
           <tr>
-            <td><%= post.id%></td>
-            <td><%= image_tag post.desk_image, class: "desk-image" if post.desk_image.attached?%></td>
+            <td><%= image_tag post.desk_image, class: "desk-image" if post.desk_image.attached? %></td>
             <td><%= post.desk_name%></td>
             <td><%= post.description%></td>
             <td><%= link_to "詳細", post_path(post), class:"btn btn-yellow btn-cubic" %></td>
@@ -31,3 +28,4 @@
     <%= link_to "投稿する", new_post_path, class:"btn btn-yellow btn-cubic" %>
   </div>
 </div>
+
