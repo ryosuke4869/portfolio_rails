@@ -7,15 +7,25 @@
 
   <div class="header-right">
     <div class="right-container">
-      <nav>
-        <div class="nav-form">
-          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class:"btn btn-yellow btn-cubic", method: :post %>
-          <%= link_to "ログイン", new_user_session_path, class:"btn btn-yellow btn-cubic"%>
-          <%= link_to "新規登録", new_user_registration_path, class:"btn btn-yellow btn-cubic"%>
-          <%= link_to "設定", edit_user_registration_path, class:"btn btn-yellow btn-cubic"%>
-          <%= link_to "ログアウト", destroy_user_session_path,class:"btn btn-yellow btn-cubic", method: :delete, data: { confirm: "ログアウトします。よろしいですか?" } %>
-        </div>
-      </nav>
+      <div class="nav">
+        <% if user_signed_in? %>
+          <div class="nav-form">
+            <% if current_user.user_image.attached? %>
+              <%=image_tag current_user.user_image, class: "host-icon nav-trigger"%>
+            <% else %>
+              <img class="host-icon nav-trigger" src="/assets/default_icon.jpeg">
+            <% end %>
+            <%= link_to "マイページ", users_profile_path, class:"btn btn-yellow btn-cubic"%>
+            <%= link_to "ログアウト", destroy_user_session_path,class:"btn btn-yellow btn-cubic", method: :delete, data: { confirm: "ログアウトします。よろしいですか?" } %>
+          </div>
+        <% else %>
+          <div class="nav-form">
+            <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class:"btn btn-yellow btn-cubic", method: :post %>
+            <%= link_to "ログイン", new_user_session_path, class:"btn btn-yellow btn-cubic"%>
+            <%= link_to "新規登録", new_user_registration_path, class:"btn btn-yellow btn-cubic"%>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </header>
