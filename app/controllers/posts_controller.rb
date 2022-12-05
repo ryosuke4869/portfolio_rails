@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 #投稿用
   def index
     @posts = Post.all
+    @user = User.all
     flash[:notice] = "ログインしていません" unless user_signed_in?
   end
 
