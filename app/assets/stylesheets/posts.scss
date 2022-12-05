@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+//一覧ページ
+.index-container {
+  padding: 100px 0 100px 0;
+}
+
+//詳細ページ
 .show {
   max-width: 1140px;
   min-height: 100vh;
