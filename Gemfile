@@ -48,7 +48,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
   gem 'rubocop-airbnb'
-  
+
   gem 'capybara'
   gem 'selenium-webdriver'
 end
@@ -65,6 +65,7 @@ group :development do
 
   gem 'devise'#ログイン
   gem 'devise-i18n' #devise国際化
+  gem 'seed-fu'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
