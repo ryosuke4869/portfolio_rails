@@ -5,5 +5,5 @@ class Users::ProfilesController < ApplicationController
   end
 end
 def current_user_params
-  params.require(:user).permit(:username, :email)
+  params.require(:user).permit(:name, :email)
 end
