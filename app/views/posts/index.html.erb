@@ -4,7 +4,7 @@
   <div>
     <% @posts.each do |post| %>
       <%= link_to post_path(post.id) do %>
-      <%= post.user.username %>
+      <%= post.user.name %>
         <%= image_tag post.desk_image, class: "desk-image" if post.desk_image.attached? %>
       <% end %>
     <% end %>

@@ -1,10 +1,6 @@
 <div class="form-container">
   <p class="notice"><%= notice %></p>
   <%= form_with model: @post, local:true do |f|%>
-    <div class="form-content">
-      <%= f.label :desk_name, "デスク名"%>
-      <%= f.text_field :desk_name, class:"area", placeholder: "デスク名を入力"%>
-    </div>
 
     <div class="form-content">
       <%= f.label :description, "紹介" %>
@@ -15,6 +11,16 @@
       <%= f.label :desk_image, "デスク画像" %>
       <%= image_tag @post.desk_image, class:"image_content" if @post.desk_image.attached?%>
       <%= f.file_field :desk_image, class:"area"%>
+    </div>
+
+    <div class="form-content">
+      <%= f.label :category_ids, "カテゴリー" %>
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, include_hidden: false do |b| %>
+        <%= b.label class: 'checkbox has-text-weight-semibold' do %>
+          <%= b.check_box + " #{b.text}" %>
+        <% end %>
+      <% end %>
+
     </div>
 
     <div class="form-content field">

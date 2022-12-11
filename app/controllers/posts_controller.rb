@@ -15,9 +15,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to posts_path
-      flash[:notice] = "#{@post.desk_name}を登録しました。"
+      flash[:notice] = "投稿しました。"
     else
-      flash[:alert] = "登録に失敗しました. <br>・#{@post.errors.full_messages.join('<br>・')}"
+      flash[:alert] = "投稿に失敗しました. <br>・#{@post.errors.full_messages.join('<br>・')}"
       render"new"
     end
   end
@@ -40,11 +40,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
-    flash[:notice] = "#{@post.desk_name}を削除しました。"
+    flash[:notice] = "投稿を削除しました。"
   end
 
   private
     def post_params
-      params.require(:post).permit(:id, :desk_name, :description, :desk_image)
+      params.require(:post).permit(:id, :description, :desk_image)
     end
 end
