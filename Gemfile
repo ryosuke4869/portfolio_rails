@@ -64,6 +64,7 @@ group :development do
   gem 'spring'
   gem 'rails-i18n'
   gem 'aws-sdk-s3'
+  gem 'rails-erd'
 
   gem 'devise'#ログイン
   gem 'devise-i18n' #devise国際化
