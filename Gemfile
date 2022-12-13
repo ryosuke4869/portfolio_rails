@@ -48,7 +48,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
   gem 'rubocop-airbnb'
-  
+
   gem 'capybara'
   gem 'selenium-webdriver'
 end
@@ -62,9 +62,13 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rails-i18n'
+  gem 'aws-sdk-s3'
+  gem 'rails-erd'
 
   gem 'devise'#ログイン
   gem 'devise-i18n' #devise国際化
+  gem 'seed-fu'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

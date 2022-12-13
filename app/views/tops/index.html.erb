@@ -1,8 +1,24 @@
 <div class="container">
-  <p>Topページ</p>
+  <div class="top-wrapper">
+    <h1>あなたの環境共有してみませんか?</h1>
+    <%= link_to "あなたのデスクを投稿する", new_post_path %>
+  </div>
 
-  <% if user_signed_in?%>
-    <%= current_user.username %>
-    <%= current_user.email %>
-  <% end %>
+  <div class="wrapper">
+    <div class="wrapper-1">
+      <h1>新着</h1>
+
+    </div>
+
+    <div class="wrapper-2">
+      <h1>#エンジニア</h1>
+    </div>
+
+    <div class="wrapper-3">
+      <h1>#ゲーミング</h1>
+    </div>
+  </div>
+
+
+
 </div>
