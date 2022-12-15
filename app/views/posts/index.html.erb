@@ -1,14 +1,15 @@
+
 <div class="container">
   <h2>投稿一覧</h2>
   <div class="index-container">
-  <div>
-    <% @posts.each do |post| %>
-      <%= link_to post_path(post.id) do %>
-      <%= post.user.name %>
-        <%= image_tag post.desk_image, class: "desk-image" if post.desk_image.attached? %>
+    <div>
+      <% @posts.each do |post| %>
+        <%= link_to post_path(post.id) do %>
+          <%= post.user.name %>
+          <%= image_tag post.desk_images[0], class: "desk-image" if post.desk_images.attached? %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
   </div>
 </div>

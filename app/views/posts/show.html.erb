@@ -2,19 +2,18 @@
   <div class="show">
     <h1>詳細画面</h1>
     <div class="show-container">
-      <%=image_tag @post.desk_image, class: "desk-show-image" if @post.desk_image.attached?%>
-      <p>ここにcategoryの名前を入れる+ClickするとCategoryページに飛べるようにする</p>
+      <% @post.desk_images.count.times do |i| %>
+        <%= image_tag @post.desk_images[i], class: "desk-show-image" %>
+      <% end %>
 
       <% @post.categories.each do |category| %>
           <%= category.name %>
       <% end %>
-
       <p><%= @post.description%></p>
-    <div>
-      <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
-      <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+      <div>
+        <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
+        <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+      </div>
     </div>
-    </div>
-
   </div>
 </div>
