@@ -68,7 +68,10 @@ group :development do
 
   gem 'devise'#ログイン
   gem 'devise-i18n' #devise国際化
+  #初期データ
   gem 'seed-fu'
+
+  gem 'mini_magick'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
