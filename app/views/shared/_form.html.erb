@@ -1,4 +1,4 @@
-<div class="container">
+<div class="wrapper">
   <div class="form-container">
     <p class="notice"><%= notice %></p>
     <%= form_with model: @post, local:true do |f|%>
@@ -19,10 +19,7 @@
           <%# 新規投稿時 %>
         <% else %>
           <div class="preview-contents">
-          <% if  %>
-
-          <% end %>
-            <%= image_tag "nophoto.jpg"%>
+            <%= image_tag "nophoto.jpg", width: "25%"%>
             <div class="preview-item"><img id="preview_0"></div>
             <div class="preview-item"><img id="preview_1"></div>
             <div class="preview-item"><img id="preview_2"></div>
@@ -30,7 +27,7 @@
             <div class="preview-item"><img id="preview_4"></div>
           </div>
         <% end %>
-          <%= f.file_field :desk_images, multiple: true %>
+        <%= f.file_field :desk_images, multiple: true %>
       </div>
       <div class="form-group"></div>
         <div class="form-content">

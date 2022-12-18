@@ -7,6 +7,15 @@
   padding: 100px 0 100px 0;
 }
 
+.gallery a {
+  color: black;
+  text-decoration: none;
+}
+
+.gallery-item img {
+  width: 100%;
+}
+
 //詳細ページ
 .show {
   max-width: 1140px;
@@ -20,11 +29,6 @@
 
 }
 
-.desk-image {
-  width: 240px;
-  height: 140px;
-  object-fit: cover;
-}
 .desk-show-image {
   max-width: 45vw;
 }

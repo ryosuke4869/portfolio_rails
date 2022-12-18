@@ -12,13 +12,12 @@ header {
 
 .header-left {
   float:left;
-  color: white;
 }
-
-.icon {
+.top-icon a {
   font-size: 25px;
   line-height: 70px;
   color: white;
+  text-decoration: none;
   font-family: 'Snell Roundhand';
 }
 
@@ -109,6 +108,7 @@ footer {
 
 .footer-nav a {
   color: #fff;
+  text-decoration: none;
 }
 
 
