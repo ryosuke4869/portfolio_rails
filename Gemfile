@@ -65,6 +65,8 @@ group :development do
   gem 'rails-i18n'
   gem 'aws-sdk-s3'
   gem 'rails-erd'
+  gem 'jquery-rails' 
+  gem 'bootstrap-sass'
 
   gem 'devise'#ログイン
   gem 'devise-i18n' #devise国際化
