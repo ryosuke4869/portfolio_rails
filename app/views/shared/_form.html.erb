@@ -1,44 +1,52 @@
-<div class="form-container">
-  <p class="notice"><%= notice %></p>
-  <%= form_with model: @post, local:true do |f|%>
-    <div class="form-content">
-      <%= f.label :description, "紹介" %>
-      <%= f.text_area :description ,:size=>"60x10", class:"area", placeholder: "デスク紹介" %>
-    </div>
+<div class="container">
+  <div class="form-container">
+    <p class="notice"><%= notice %></p>
+    <%= form_with model: @post, local:true do |f|%>
 
-    <div class="form-content">
-      <%= f.label :desk_images, 'デスク画像' %>
-      <%# 編集用のコード %>
-      <% if @post.desk_images.attached? %>
-        <% @post.desk_images.each do |desk_image| %>
-          <%= image_tag desk_image, width: "100" %>
+      <div class="form-content">
+        <%= f.label :description, "紹介"%>
+        <%= f.text_area :description, class:"text-area", placeholder: "デスク紹介" %>
+      </div>
+
+      <div class="form-content">
+        <%= f.label :desk_images, 'デスク画像' %>
+        <%# 編集用のコード %>
+        <% if @post.desk_images.attached? %>
+          <% @post.desk_images.each do |desk_image| %>
+            <%= image_tag desk_image, width: "100" %>
+          <% end %>
+          <%= f.file_field :desk_images, multiple: true %>
+          <%# 新規投稿時 %>
+        <% else %>
+          <div class="preview-contents">
+          <% if  %>
+
+          <% end %>
+            <%= image_tag "nophoto.jpg"%>
+            <div class="preview-item"><img id="preview_0"></div>
+            <div class="preview-item"><img id="preview_1"></div>
+            <div class="preview-item"><img id="preview_2"></div>
+            <div class="preview-item"><img id="preview_3"></div>
+            <div class="preview-item"><img id="preview_4"></div>
+          </div>
         <% end %>
-        <%= f.file_field :desk_images, multiple: true %>
-        <%# 新規投稿時 %>
-      <% else %>
-        <%= image_tag "nophoto.jpg" %>
-        <%= f.file_field :desk_images, multiple: true %>
-      <% end %>
-        <img id="preview_0" style="width:15%;">
-        <img id="preview_1" style="width:15%;">
-        <img id="preview_2" style="width:15%;">
-        <img id="preview_3" style="width:15%;">
-        <img id="preview_4" style="width:15%;">
-    </div>
+          <%= f.file_field :desk_images, multiple: true %>
+      </div>
+      <div class="form-group"></div>
+        <div class="form-content">
+          <%= f.label :category_id, "カテゴリー" %>
+          <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, class: 'checkbox-inline', include_hidden: false do |b| %>
+            <%= b.label class:"check" do %>
+              <%= b.check_box + " #{b.text}" %>
+            <% end %>
+          <% end %>
+        </div>
 
-    <div class="form-content">
-      <%= f.label :category_id, "カテゴリー" %>
-      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, include_hidden: false do |b| %>
-        <%= b.label class: 'checkbox has-text-weight-semibold' do %>
-          <%= b.check_box + " #{b.text}" %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div class="form-content field">
-      <%= f.submit "登録する", disable_with: '送信中...', class:"btn-orange btn-cubic btn-shadow"%>
-    </div>
-  <% end %>
+      <div class="form-content field">
+        <%= f.submit "登録する", disable_with: '送信中...', class:"btn-orange btn-cubic btn-shadow"%>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <script>
@@ -63,11 +71,11 @@ $('#post_desk_images').on('change', function (e) {
       for( let i = 0; i < 5; i++) {
         $(`#preview_${i}`).attr('src', "");
       }
-
+      //画像がアップロードされたとき
       for(let i = 0; i < e.target.files.length; i++) {
-        reader[i] = new FileReader();
-        reader[i].onload = finisher(i,e);
-        reader[i].readAsDataURL(e.target.files[i]);
+        reader[i] = new FileReader(); //画像読み込み
+        reader[i].onload = finisher(i,e); //下記の関数使用で格納
+        reader[i].readAsDataURL(e.target.files[i]);//画像ファイルからURLを取得
 
         // onloadは別関数で準備しないとfor文内では使用できないので、関数を準備。
         function finisher(i,e){
@@ -78,6 +86,5 @@ $('#post_desk_images').on('change', function (e) {
       }
     }
 });
+
 </script>
-
-
