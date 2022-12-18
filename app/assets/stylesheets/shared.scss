@@ -37,6 +37,29 @@ header {
   line-height: 70px;
 }
 
+.nav-list {
+  float: right;
+  padding-left: 50px;
+  object-fit: cover;
+}
+
+.nav-menu {
+  display: none;
+  background-color: #fff;
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  padding: 15px;
+  z-index: 1000;
+}
+
+.nav-menu li {
+  line-height: 30px;
+  font-size: 16px;
+  padding: 3px 5px;
+  list-style: none;
+}
+
 .btn{
   padding: 15px 20px;
 }
