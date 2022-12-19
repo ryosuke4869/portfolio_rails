@@ -1,20 +1,47 @@
-<div class="container">
+<div class="wrapper">
   <div class="show">
-    <h1>詳細画面</h1>
     <div class="show-container">
-      <%=image_tag @post.desk_image, class: "desk-show-image" if @post.desk_image.attached?%>
-      <p>ここにcategoryの名前を入れる+ClickするとCategoryページに飛べるようにする</p>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <% @post.desk_images.count.times do |i| %>
+            <div class="swiper-slide">
+              <%= image_tag @post.desk_images[i], class: "desk-show-image" %>
+            </div>
+          <% end %>
+        </div>
+        <!-- 必要に応じてページネーション -->
+        <div class="swiper-pagination"></div>
 
-      <% @post.categories.each do |category| %>
-          <%= category.name %>
-      <% end %>
+        <!-- 必要に応じてナビボタン -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
 
-      <p><%= @post.description%></p>
-    <div>
-      <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
-      <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+        <!-- 必要に応じてスクロールバー -->
+        <div class="swiper-scrollbar"></div>
+      </div>
+
+        <% @post.categories.each do |category| %>
+            <%= category.name %>
+        <% end %>
+        <p><%= @post.description%></p>
+        <div>
+          <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
+          <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+        </div>
     </div>
-    </div>
-
   </div>
 </div>
+
+<script>
+  const swiper = new Swiper(".swiper", {
+    // ページネーションが必要なら追加
+    pagination: {
+      el: ".swiper-pagination"
+    },
+    // ナビボタンが必要なら追加
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    }
+  });
+</script>

@@ -4,5 +4,6 @@ class Post < ApplicationRecord
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
 
-  has_one_attached :desk_image
+  has_many_attached :desk_images
+
 end

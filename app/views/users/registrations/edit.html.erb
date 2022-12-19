@@ -1,20 +1,18 @@
-
-
-<div class="container devise">
-  <div class="device-frame">
+<div class="wrapper devise">
+  <div class="devise-frame">
     <p>アカウント編集</p>
-    <div class="device_inner">
+    <div class="devise_inner">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field">
-          <div class="form-group">
+        <div class="devise-field">
+          <div class="devise-form-group">
             <%= f.label :name ,"ユーザー名" %>
             <%= f.text_field :name , class: "form-control", placeholder: "ユーザー名を入力" %>
           </div>
         </div>
 
-        <div class="field">
+        <div class="devise-field">
           <%= f.label :メールアドレス %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>
@@ -22,40 +20,41 @@
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <div class="field">
-          <div class="form-group">
+        <div class="device-field">
+          <div class="device-form-group">
             <%= f.label :変更後パスワード %> <i>(変更する場合のみ入力)</i>
             <%= f.password_field :password, autocomplete: "new-password", placeholder: "新規パスワードを入力", class: "form-control"  %>
           </div>
         </div>
 
-        <div class="field">
-          <div class="form-group">
+        <div class="devise-field">
+          <div class="devise-form-group">
             <%= f.label :パスワード確認用 %><i>(変更する場合のみ入力)</i>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:"新規パスワード確認用", class: "form-control" %>
           </div>
         </div>
 
-        <div class="field">
-          <div class="form-group">
+        <div class="devise-field">
+          <div class="devise-form-group">
             <%= f.label :現在のパスワード %>
             <%= f.password_field :current_password, autocomplete: "current-password", placeholder:"現在のパスワードを入力", class: "form-control"%>
           </div>
         </div>
 
-        <div class="actions field">
+        <div class="actions devise-field">
           <%= f.submit "更新する", class: "btn-orange btn-cubic btn-shadow"%>
         </div>
+
+        <div class="actions devise-field">
+          <%= link_to "戻る", :back %>
+        </div>
       <% end %>
-      <%= link_to "戻る", :back %>
     </div>
   </div>
-  <div class="device-frame">
-    <div class="device_inner">
+  <div class="devise-frame">
+    <div class="devise_inner">
       <h3>アカウントの削除</h3>
       <%= button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "アカウントを削除します。よろしいでしょうか?" }, method: :delete %>
-      <%= link_to "戻る", :back %>
     </div>
   </div>
-
 </div>
