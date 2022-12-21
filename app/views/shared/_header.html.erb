@@ -11,8 +11,8 @@
     <div class="right-container">
       <div class="nav">
         <% if user_signed_in? %>
-          <% if current_user.user_image.attached? %>
-            <%=image_tag current_user.user_image, class: "host-icon nav-trigger" %>
+          <% if current_user.avatar.attached? %>
+            <%=image_tag current_user.avatar, class: "host-icon nav-trigger" %>
           <% else %>
             <img class="host-icon nav-trigger" src="/assets/default_icon.jpeg">
           <% end %>
