@@ -14,4 +14,8 @@ Rails.application.routes.draw do
 
   # 投稿用のroute
   resources :posts
+  #like機能のルーティング
+  resources :posts do
+    resource :likes, only: [:create, :destroy]
+  end
 end
