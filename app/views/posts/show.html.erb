@@ -22,7 +22,12 @@
         <% @post.categories.each do |category| %>
             <%= category.name %>
         <% end %>
-        <%= render 'likes/likes', post: @post %>
+
+        <%#　いいね機能  %>
+        <div id="like_<%= @post.id %>">
+          <%= render 'likes/like', post: @post %>
+        </div>
+
         <p><%= @post.description%></p>
         <div>
           <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
