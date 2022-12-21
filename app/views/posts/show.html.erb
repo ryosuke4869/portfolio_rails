@@ -19,10 +19,10 @@
         <!-- 必要に応じてスクロールバー -->
         <div class="swiper-scrollbar"></div>
       </div>
-
         <% @post.categories.each do |category| %>
             <%= category.name %>
         <% end %>
+        <%= render 'likes/likes', post: @post %>
         <p><%= @post.description%></p>
         <div>
           <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
