@@ -12,6 +12,11 @@ body {
   box-sizing: border-box;
 }
 
+ul{
+  list-style:none;
+  padding-inline-start: 0px;
+}
+
 //後でusericonに変更
 .host-icon {
   vertical-align: middle;

@@ -14,9 +14,9 @@
 
         <div class="devise-field">
           <div class="device-form-group">
-            <%= f.label :user_image ,"アイコン画像" %>
-            <%= image_tag @user.user_image, class:"image_content" if @user.user_image.attached?%>
-            <%= f.file_field :user_image, placeholder: "アイコン画像をアップロード" %>
+            <%= f.label :avatar ,"アイコン画像" %>
+            <%= image_tag @user.avatar, class:"image_content" if @user.avatar.attached?%>
+            <%= f.file_field :avatar, placeholder: "アイコン画像をアップロード" %>
           </div>
         </div>
 

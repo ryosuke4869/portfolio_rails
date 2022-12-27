@@ -1,0 +1,28 @@
+.mypage-avatar {
+  width: 400px;
+  height: 400px;
+  object-fit:cover;
+	border-radius:50%;
+}
+
+.tab-area {
+  cursor: pointer;/* カーソルポインターに */
+}
+.tab {
+  padding: 5px;
+  text-align: center;/* 文字を中央に。 */
+}
+
+.tab.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.panel {
+  display: none;
+  text-align: center;
+}
+.panel.active {
+  display: block;
+}
+
