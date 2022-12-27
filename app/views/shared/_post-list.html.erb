@@ -1,0 +1,32 @@
+<h1>このユーザーの投稿</h1>
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <% @posts.each do |post| %>
+      <%= link_to users_profile_path(post.user), class: 'link' do %>
+        <div class="user-card row">
+        <% if user.avatar.attached? %>
+          <%= image_tag post.user.avatar, class: "host-icon" %>
+        <% else %>
+          <img class="mypage-avatar" src="/assets/default_icon.jpeg">
+        <% end %>
+          <%= post.user.name %>
+        </div>
+      <% end %>
+
+      <%= link_to post_path(post.id) do %>
+        <div class="gallery-item col-md-4">
+          <%= image_tag post.desk_images[0] if post.desk_images.attached? %>
+        </div>
+
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text"><%= post.description%></p>
+          </div>
+        </div>
+
+
+      <% end %>
+    <% end %>
+  </div>
+</div>

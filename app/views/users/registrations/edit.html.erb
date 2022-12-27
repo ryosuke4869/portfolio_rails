@@ -13,6 +13,14 @@
         </div>
 
         <div class="devise-field">
+          <div class="device-form-group">
+            <%= f.label :avatar ,"アイコン画像" %>
+            <%= image_tag @user.avatar, class:"image_content" if @user.avatar.attached?%>
+            <%= f.file_field :avatar, placeholder: "アイコン画像をアップロード" %>
+          </div>
+        </div>
+
+        <div class="devise-field">
           <%= f.label :メールアドレス %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>
