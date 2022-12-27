@@ -1,6 +1,20 @@
 <div class="wrapper">
   <div class="show">
     <div class="show-container">
+    <%# 投稿したユーザー情報 %>
+      <div class="post-user">
+        <%= link_to users_profile_path(@post.user) do %>
+          <div class="user-card row">
+            <% if @post.user.avatar.attached? %>
+              <%= image_tag @post.user.avatar, class: "host-icon" %>
+            <% else %>
+              <img class="host-icon" src="/assets/default_icon.jpeg">
+            <% end %>
+            <%= @post.user.name %>
+          </div>
+        <% end %>
+      </div>
+    <%# 投稿した画像表示 %>
       <div class="swiper">
         <div class="swiper-wrapper">
           <% @post.desk_images.count.times do |i| %>
@@ -19,20 +33,26 @@
         <!-- 必要に応じてスクロールバー -->
         <div class="swiper-scrollbar"></div>
       </div>
-        <% @post.categories.each do |category| %>
-            <%= category.name %>
-        <% end %>
 
-        <%#　いいね機能  %>
+      <%# 登録したカテゴリー表示 %>
+      <% @post.categories.each do |category| %>
+        <%= category.name %>
+      <% end %>
+
+      <%# いいね機能  %>
+      <div class="like-wrapper">
         <div id="like_<%= @post.id %>">
           <%= render 'likes/like', post: @post %>
         </div>
+      </div>
+      <p><%= @post.description%></p>
 
-        <p><%= @post.description%></p>
-        <div>
-          <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
-          <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
-        </div>
+      <%= render 'shared/comments-form'%>
+
+      <div>
+        <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
+        <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
+      </div>
     </div>
   </div>
 </div>
