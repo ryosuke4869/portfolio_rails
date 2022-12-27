@@ -3,7 +3,8 @@
     <div class="show-container">
     <%# 投稿したユーザー情報 %>
       <div class="post-user">
-        <%= link_to users_profile_path(@post.user) do %>
+      <%# ユーザー名とavatar画像からそのユーザーのMYpageに移行できるようにする %>
+        <%# <%= link_to users_profile_path(@post.user) do %>
           <div class="user-card row">
             <% if @post.user.avatar.attached? %>
               <%= image_tag @post.user.avatar, class: "host-icon" %>
@@ -12,7 +13,7 @@
             <% end %>
             <%= @post.user.name %>
           </div>
-        <% end %>
+        <%# <% end %>
       </div>
     <%# 投稿した画像表示 %>
       <div class="swiper">
