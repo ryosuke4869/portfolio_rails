@@ -1,0 +1,14 @@
+
+<div class="comment-form">
+  <h4>コメント一覧</h4>
+  <% @comments.each do |c| %>
+    <%= c.body %>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with model: [@post, @comment] do |f| %>
+      <%= f.text_area :body, placeholder: "コメントする" %>
+      <%= f.submit "コメントを投稿" %>
+    <% end %>
+  <% end %>
+</div>
