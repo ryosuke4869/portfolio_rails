@@ -2,10 +2,10 @@
   <div class="show">
     <div class="show-container">
     <%# 投稿したユーザー情報 %>
-      <div class="post-user">
+      <div class="post-user row">
       <%# ユーザー名とavatar画像からそのユーザーのMYpageに移行できるようにする %>
         <%# <%= link_to users_profile_path(@post.user) do %>
-          <div class="user-card row">
+          <div class="user-card">
             <% if @post.user.avatar.attached? %>
               <%= image_tag @post.user.avatar, class: "host-icon" %>
             <% else %>
@@ -14,6 +14,7 @@
             <%= @post.user.name %>
           </div>
         <%# <% end %>
+
       </div>
     <%# 投稿した画像表示 %>
       <div class="swiper">
@@ -40,20 +41,16 @@
         <%= category.name %>
       <% end %>
 
-      <%# いいね機能  %>
-      <div class="like-wrapper">
-        <div id="like_<%= @post.id %>">
-          <%= render 'likes/like', post: @post %>
+      <h4><%= @post.description%></h4>
+        <%# いいね機能  %>
+        <div class="like-wrapper">
+          <div id="like_<%= @post.id %>">
+            <%= render 'likes/like', post: @post %>
+          </div>
         </div>
-      </div>
-      <p><%= @post.description%></p>
 
-      <%= render 'shared/comments-form'%>
-
-      <div>
-        <td><%= link_to "編集", edit_post_path, class:"btn btn-yellow btn-cubic" %></td>
-        <td><%= link_to "削除", @post, method: :delete, data: {confirm: "投稿を削除します"}, class:"btn btn-yellow btn-cubic"%></td>
-      </div>
+      <%# コメント欄 %>
+      <%= render 'shared/comments-list'%>
     </div>
   </div>
 </div>
