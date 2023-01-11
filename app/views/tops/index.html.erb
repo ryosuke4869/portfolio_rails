@@ -1,4 +1,48 @@
-<div class="wrapper">
+<div class="top-wrapper">
+  <div class="inner-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col text">
+          <h1>デスク環境shareしてみませんか?</h1>
+          <div class="description">
+            <p>自分が使用している機材を登録することができます。<br>
+            自分のデスク画像を投稿することができます<br>
+            他の人の投稿にいいねをつけることやその投稿をお気に入りとして保存することもできます</p>
+						<%# キーワード検索（カテゴリー, 登録されているアイテム名前） %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<!-- Section 1 -->
+	<%# いいね数が多い順 %>
+  <div class="container my-5">
+    <h3>いいね数ランキング</h3>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-md-4">
+          <div class="card my-5">
+            <%= image_tag post.desk_images[0] if post.desk_images.attached?%>
+            <div class="card-body">
+                <% if post.user.avatar.attached? %>
+                  <%= image_tag post.user.avatar, class: "host-icon" %>
+                <% else %>
+                  <img class="host-icon" src="/assets/default_icon.jpeg">
+                <% end %>
+              <%= link_to post.user.name, post_path(post.id) %>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <%= post.likes.count %>
+              <i class="fa-regular fa-comments" aria-hidden="true"></i>
+              <%= post.comments.count %>
+              <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+	<%# カテゴリー別投稿 %>
+	<%# 最近の投稿 %>
 
 </div>
-

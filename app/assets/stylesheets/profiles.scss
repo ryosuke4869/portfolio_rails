@@ -7,10 +7,10 @@
 
 .tab-area {
   cursor: pointer;/* カーソルポインターに */
+  margin-top: 25px;
 }
 .tab {
   padding: 5px;
-  text-align: center;/* 文字を中央に。 */
 }
 
 .tab.active {
@@ -24,5 +24,16 @@
 }
 .panel.active {
   display: block;
+}
+
+.mypage-post {
+  background-color: rgb(236, 236, 236);
+}
+.post-info {
+  margin-top: 15px;
+}
+
+.card-text {
+  margin-top: 25px;
 }
 

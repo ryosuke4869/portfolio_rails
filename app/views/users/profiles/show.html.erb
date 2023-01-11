@@ -14,7 +14,7 @@
 
 <%# ここから 投稿, いいねした投稿、保存した投稿を表示（Tab使用）%>
   <%= link_to "アカウントの編集", edit_user_registration_path, class:"btn btn-yellow btn-cubic"%>
-  <ul class="tab-area">
+  <ul class="tab-area row">
     <li class="tab active col-md-6 ">
       <i class="fa-regular fa-images" aria-hidden="true"></i>
       Post
@@ -34,7 +34,7 @@
 
   <div class="panel-area">
     <div class="panel">
-      <%= render 'shared/like-list' %>
+      <%= render 'shared/like-list'%>
     </div>
   </div>
 
