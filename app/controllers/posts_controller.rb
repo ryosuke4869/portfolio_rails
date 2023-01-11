@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :search]#全てのアクション(showアクションを除く)前にユーザーがログインしているかを確認
+  before_action :check_user, only: [:edit, :update, :destroy]
 #投稿用
   def index
     @posts = Post.all
@@ -33,8 +34,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
+    @post = Post.find(params[:id])
+    @post.update(post_params)
     redirect_to posts_path
   end
 
@@ -48,5 +49,11 @@ class PostsController < ApplicationController
   private
     def post_params
       params.require(:post).permit(:id, :description, desk_images:[], category_ids:[])
+    end
+    #自身が投稿したものだけ編集と削除が可能
+    def check_user
+      @posts = current_user.posts
+      @post = @posts.find_by(id: params[:id])
+      redirect_to new_post_path unless @post
     end
 end

@@ -51,6 +51,12 @@
 
       <%# コメント欄 %>
       <%= render 'shared/comments-list'%>
+
+      <% if @post.user == current_user %>
+        <%= link_to "編集", edit_post_path(@post) %>
+        <%= link_to "削除", post_path(@post), method: :delete %>
+      <% end %>
+
     </div>
   </div>
 </div>
