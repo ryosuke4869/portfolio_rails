@@ -2,6 +2,7 @@ class Users::ProfilesController < ApplicationController
   def show
     @user = current_user
     @posts = current_user.posts.all
+    @like_posts = @user.like_posts
   end
 end
 def current_user_params
