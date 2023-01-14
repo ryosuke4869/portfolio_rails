@@ -14,12 +14,13 @@ Rails.application.routes.draw do
 
   # 投稿用のroute
   resources :posts
-  #like機能のルーティング
-  resources :posts do
-    resource :likes, only: [:create, :destroy]
-  end
 
   resources :posts do
+    #いいね機能のルーティング
+    resource :likes, only: [:create, :destroy]
+    #ブックマーク機能のルーティング
+    resource :bookmarks, only: [:create, :destroy]
+    #コメント機能のルーティング
     resources :comments, only: [:edit, :update, :create, :destroy]
   end
 
