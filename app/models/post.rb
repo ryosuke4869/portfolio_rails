@@ -12,7 +12,10 @@ class Post < ApplicationRecord
 
   #コメント機能のアソシエーション
   has_many :comments, dependent: :destroy
-  has_many :comment_posts, through: :comments, source: :user
+  has_many :comment_users, through: :comments, source: :user
 
+  #ブックマーク機能のアソシエーション
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_users, through: :bookmarks, source: :user
 
 end

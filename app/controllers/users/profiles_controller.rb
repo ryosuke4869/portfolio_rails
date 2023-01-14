@@ -3,6 +3,7 @@ class Users::ProfilesController < ApplicationController
     @user = current_user
     @posts = current_user.posts.all
     @like_posts = @user.like_posts
+    @bookmark_posts = @user.bookmark_posts
   end
 end
 def current_user_params

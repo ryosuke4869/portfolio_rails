@@ -49,6 +49,13 @@
           </div>
         </div>
 
+        <%# ブックマーク機能 %>
+        <div class="bookmark-wrapper">
+          <div id="bookmark_<%= @post.id %>">
+            <%= render 'bookmarks/bookmark', post: @post %>
+          </div>
+        </div>
+
       <%# コメント欄 %>
       <%= render 'shared/comments-list'%>
 
