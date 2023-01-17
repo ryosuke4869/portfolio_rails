@@ -20,30 +20,65 @@
   <div class="container my-5">
     <h3>いいね数ランキング</h3>
     <div class="row">
-      <% @posts.each do |post| %>
+      <% @like_posts.each do |like_post| %>
         <div class="col-md-4">
           <div class="card my-5">
-            <%= image_tag post.desk_images[0] if post.desk_images.attached?%>
+            <%= image_tag like_post.desk_images[0] if like_post.desk_images.attached?%>
             <div class="card-body">
-                <% if post.user.avatar.attached? %>
-                  <%= image_tag post.user.avatar, class: "host-icon" %>
+                <% if like_post.user.avatar.attached? %>
+                  <%= image_tag like_post.user.avatar, class: "host-icon" %>
                 <% else %>
                   <img class="host-icon" src="/assets/default_icon.jpeg">
                 <% end %>
-              <%= link_to post.user.name, post_path(post.id) %>
+              <%= link_to like_post.user.name, post_path(like_post.id) %>
               <i class="fa fa-heart" aria-hidden="true"></i>
-              <%= post.likes.count %>
+              <%= like_post.likes.count %>
               <i class="fa-regular fa-comments" aria-hidden="true"></i>
-              <%= post.comments.count %>
+              <%= like_post.comments.count %>
               <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-              <%= post.bookmarks.count %>
+              <%= like_post.bookmarks.count %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
   </div>
-	<%# カテゴリー別投稿 %>
-	<%# 最近の投稿 %>
 
+  <!-- Section 2 -->
+	<%# 最近の投稿 %>
+  <div class="container my-5">
+    <h3>最近の投稿</h3>
+    <div class="row">
+      <% @recent_posts.each do |recent_post| %>
+        <div class="col-md-4">
+          <div class="card my-5">
+            <%= image_tag recent_post.desk_images[0] if recent_post.desk_images.attached?%>
+            <div class="card-body">
+                <% if recent_post.user.avatar.attached? %>
+                  <%= image_tag recent_post.user.avatar, class: "host-icon" %>
+                <% else %>
+                  <img class="host-icon" src="/assets/default_icon.jpeg">
+                <% end %>
+              <%= link_to recent_post.user.name, post_path(recent_post.id) %>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <%= recent_post.likes.count %>
+              <i class="fa-regular fa-comments" aria-hidden="true"></i>
+              <%= recent_post.comments.count %>
+              <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+              <%= recent_post.bookmarks.count %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+	<%# カテゴリー別投稿 %>
+  <div class="container my-5">
+    <h3>カテゴリー別投稿</h3>
+    <div class="row">
+
+    </div>
+  </div>
 </div>
