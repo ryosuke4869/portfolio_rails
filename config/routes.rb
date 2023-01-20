@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   # 投稿用のroute
   resources :posts
+  resources :categories
 
   resources :posts do
     #いいね機能のルーティング

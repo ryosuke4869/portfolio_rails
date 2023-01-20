@@ -76,8 +76,35 @@
   <!-- Section 3 -->
 	<%# カテゴリー別投稿 %>
   <div class="container my-5">
-    <h3>カテゴリー別投稿</h3>
+    <h3>カテゴリー別検索</h3>
     <div class="row">
+      <div class="col-md-4">
+        <div class="card my-5">
+          <img src="/assets/Engineer_img.jpeg">
+          <div class="card-body">
+            <%= link_to @categories[0].name, categories_path(category_id: @categories[0].id)%>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card my-5">
+          <img src="/assets/Writer_img.jpeg">
+          <div class="card-body">
+            <%= link_to @categories[1].name, categories_path(category_id: @categories[1].id)%>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card my-5">
+          <img src="/assets/Gamer_img.jpeg">
+          <div class="card-body">
+            <%= link_to @categories[2].name, categories_path(category_id: @categories[2].id)%>
+          </div>
+        </div>
+      </div>
+
 
     </div>
   </div>
