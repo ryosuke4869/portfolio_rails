@@ -3,13 +3,19 @@
   <div class="index">
     <div class="gallery row">
       <% @posts.each do |post| %>
-        <%= link_to post_path(post.id) do %>
-          <div class="gallery-item col-md-3">
-            <%= image_tag post.desk_images[0] if post.desk_images.attached? %>
-            <%= post.user.name %>
-          </div>
-        <% end %>
+        <div class="col-md-4">
+          <%= link_to post_path(post.id) do %>
+
+            <div class="gallery-item">
+              <%= image_tag post.desk_images[0] if post.desk_images.attached? %>
+              <%= post.user.name %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
+
+
+
