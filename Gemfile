@@ -70,6 +70,7 @@ group :development do
   #初期データ
   gem 'seed-fu'
   gem 'rakuten_web_service'
+  gem 'dotenv-rails'
 
   gem 'mini_magick'
 end
