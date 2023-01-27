@@ -41,6 +41,15 @@
         <%= category.name %>
       <% end %>
 
+      <%# ここからアイテム表示機能 %>
+      <%# もしアイテムが登録されてうないなら、アイテムを追加するが表示される %>
+      <div class="item-show">
+        <i class="fa-solid fa-plus"><%= link_to search_items_items_path do %>
+          アイテムを追加する
+        <% end %></i>
+      </div>
+
+
       <h4><%= @post.description%></h4>
         <%# いいね機能  %>
         <div class="like-wrapper">
@@ -63,7 +72,6 @@
         <%= link_to "編集", edit_post_path(@post) %>
         <%= link_to "削除", post_path(@post), method: :delete %>
       <% end %>
-
     </div>
   </div>
 </div>

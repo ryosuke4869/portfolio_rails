@@ -1,0 +1,26 @@
+
+<div class="wrapper">
+
+  <div class="search">
+    <%= form_with url: search_items_items_path, method: :get, local: true do |f|%>
+      <%= f.text_field :keyword %>
+      <%= f.submit '検索する', disable_with: '検索するing...' %>
+    <% end %>
+
+    <%= form_with model: @item do |form| %>
+      <%= form.text_field :name %>
+      <%= form.submit %>
+    <% end %>
+
+    <% if @items.present? %>
+
+      <% @items.each do |item| %>
+        <li><%= item.name %></li>
+        <li><%= item.price %>円</li>
+        <li><%= image_tag item.image_url, alt: 'item.image_url' %></li>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
