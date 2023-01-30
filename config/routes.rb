@@ -22,13 +22,14 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
     #コメント機能のルーティング
     resources :comments, only: [:edit, :update, :create, :destroy]
-  end
 
-  resources :items do
-    collection do
-      get 'search_items', to: 'items#search_items'
-
+    resources :items, only: [:edit, :update, :create, :destroy] do
+      collection do
+        get 'search_items', to: 'items#search_items'
+      end
     end
+
+
   end
 
 

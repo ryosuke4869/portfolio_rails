@@ -19,7 +19,7 @@ class Post < ApplicationRecord
   has_many :bookmark_users, through: :bookmarks, source: :user
 
 
-  has_many :items, through: :post_items
   has_many :post_items, dependent: :destroy
+  has_many :items, through: :post_items
 
 end

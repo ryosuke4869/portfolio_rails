@@ -1,0 +1,9 @@
+<% @items.each do |item| %>
+  <li><%= item.name %></li>
+  <li><%= item.id %></li>
+  <%= image_tag item.image_url, alt: 'item.image_url' %>
+<% end %>
+
+
+<%# ここにpost_idと紐づいたItemwo表示できるようにする %>
+

@@ -44,9 +44,14 @@
       <%# ここからアイテム表示機能 %>
       <%# もしアイテムが登録されてうないなら、アイテムを追加するが表示される %>
       <div class="item-show">
-        <i class="fa-solid fa-plus"><%= link_to search_items_items_path do %>
+        <i class="fa-solid fa-plus"><%= link_to search_items_post_items_path(@post) do %>
           アイテムを追加する
         <% end %></i>
+
+        <div class="item">
+          <%= render 'items/item_list', post: @post %>
+        </div>
+
       </div>
 
 
