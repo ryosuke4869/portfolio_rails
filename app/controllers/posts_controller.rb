@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @user = User.all
-    flash[:notice] = "ログインしていません" unless user_signed_in?
+    flash[:alert] = "ログインしていません" unless user_signed_in?
   end
 
   def new #新規登録画面
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:user)
-    @items = Item.all
+    @items = @post.items
   end
 
   def edit

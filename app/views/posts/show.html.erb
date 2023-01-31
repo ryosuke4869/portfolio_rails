@@ -1,4 +1,6 @@
 <div class="wrapper">
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
   <div class="show">
     <div class="show-container">
     <%# 投稿したユーザー情報 %>
@@ -44,14 +46,9 @@
       <%# ここからアイテム表示機能 %>
       <%# もしアイテムが登録されてうないなら、アイテムを追加するが表示される %>
       <div class="item-show">
-        <i class="fa-solid fa-plus"><%= link_to search_items_post_items_path(@post) do %>
-          アイテムを追加する
-        <% end %></i>
-
         <div class="item">
           <%= render 'items/item_list', post: @post %>
         </div>
-
       </div>
 
 

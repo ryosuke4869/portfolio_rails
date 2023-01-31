@@ -1,9 +1,12 @@
-<% @items.each do |item| %>
-  <li><%= item.name %></li>
-  <li><%= item.id %></li>
-  <%= image_tag item.image_url, alt: 'item.image_url' %>
-<% end %>
 
-
-<%# ここにpost_idと紐づいたItemwo表示できるようにする %>
+<i class="fa-solid fa-plus"><%= link_to search_items_post_items_path(@post) do %>
+  アイテムを追加する
+<% end %></i>
+<div class="post_item">
+  <% @items.each do |item| %>
+    <td><%= image_tag(item.image_url) %></td>
+    <td><%= item.name%></td>
+    <td><%= item.price%></td>
+  <% end %>
+</div>
 

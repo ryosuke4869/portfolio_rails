@@ -1,9 +1,9 @@
 
 <div class="wrapper">
-
+  <p class="alert"><%= alert %></p>
   <div class="search">
     <%= form_with url: search_items_post_items_path, method: :get, local: true do |f|%>
-      <%= f.text_field :keyword %>
+      <%= f.text_field :keyword, required: true %>
       <%= f.submit '検索する', disable_with: '検索中...' %>
     <% end %>
   </div>
@@ -16,6 +16,7 @@
             <th>Img</th>
             <th>ProductName</th>
             <th>Price</th>
+            <th>id</th>
           </tr>
       </thead>
       <tbody>
@@ -24,11 +25,11 @@
             <td><%= image_tag(item.image_url) %></td>
             <td><%= item.name%></td>
             <td><%= item.price%></td>
+            <td><%= item.id%></td>
+            <td><%= link_to 'アイテムを追加', post_items_path(@post.id, item.id), method: :post %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
-
-

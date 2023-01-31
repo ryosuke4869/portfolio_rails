@@ -10,19 +10,28 @@ class ItemsController < ApplicationController
       @results.each do |result|
         item = Item.new(read(result))
         @items << item
+        #Itemテーブルに同じアイテムがあれば保存しない処理を書く
+        @items.each do |item|
+          unless Item.all.exists?(name: item.name)
+            item.save
+          end
+        end
       end
-    end
-    #Itemテーブルに同じアイテムがあれば保存しない処理を書く
-    @items.each do |item|
-      unless Item.all.exists?(name: item.name)
-        item.save
-      end
+      #もし同じアイテムが検索されたらそのアイテムのidを取得する必要がある
     end
   end
 
   def create
-    @post_item = PostItem.new(post_id: @post.id, item_id: item.id)
-    post_item.save
+    @item = Item.find(params[:format])
+    @post_item = PostItem.new(post_id: @post.id, item_id: @item.id)
+    binding.pry
+    if @post_item.save
+      binding.pry
+      redirect_to post_path(@post.id)
+      flash[:notice] = "アイテムを登録しました。"
+    else
+      flash[:alert] = "アイテムの登録に失敗しました."
+    end
   end
 
   private
