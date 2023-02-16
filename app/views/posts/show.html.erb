@@ -1,20 +1,18 @@
 <div class="wrapper">
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
   <div class="show">
     <div class="show-container">
     <%# 投稿したユーザー情報 %>
       <div class="post-user row">
-      <%# ユーザー名とavatar画像からそのユーザーのMYpageに移行できるようにする %>
-        <%# <%= link_to users_profile_path(@post.user) do %>
-          <div class="user-card">
-            <% if @post.user.avatar.attached? %>
-              <%= image_tag @post.user.avatar, class: "host-icon" %>
-            <% else %>
-              <img class="host-icon" src="/assets/default_icon.jpeg">
-            <% end %>
-            <%= @post.user.name %>
-          </div>
-        <%# <% end %>
-
+        <div class="user-card">
+          <% if @post.user.avatar.attached? %>
+            <%= image_tag @post.user.avatar, class: "host-icon" %>
+          <% else %>
+            <img class="host-icon" src="/assets/default_icon.jpeg">
+          <% end %>
+          <%= @post.user.name %>
+        </div>
       </div>
     <%# 投稿した画像表示 %>
       <div class="swiper">
@@ -25,36 +23,61 @@
             </div>
           <% end %>
         </div>
-        <!-- 必要に応じてページネーション -->
+        <!-- ページネーション -->
         <div class="swiper-pagination"></div>
 
-        <!-- 必要に応じてナビボタン -->
+        <!-- ナビボタン -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
 
-        <!-- 必要に応じてスクロールバー -->
+        <!-- スクロールバー -->
         <div class="swiper-scrollbar"></div>
       </div>
 
       <%# 登録したカテゴリー表示 %>
-      <% @post.categories.each do |category| %>
-        <%= category.name %>
-      <% end %>
+      <div class="category-container my-3">
+        <% @post.categories.each do |category| %>
+          #<%= category.name %>
+        <% end %>
+      </div>
 
-      <h4><%= @post.description%></h4>
+      <%# ここからアイテム表示機能 %>
+      <%# もしアイテムが登録されていないなら、アイテムを追加するが表示される %>
+      <%# 投稿したユーザーしかアイテム追加が表示されないように %>
+      <div class="item-show my-3">
+        <div class="item">
+          <p>登録されたアイテム</p>
+          <%= render 'items/item_list', post: @post %>
+        </div>
+      </div>
+      <% if @post.user == current_user %>
+        <i class="fa-solid fa-plus mb-3">
+          <%= link_to post_search_items_path(@post) do %>
+            アイテムを追加する
+          <% end %>
+        </i>
+      <% end %>
+      <div class="description-container">
+        <p>投稿の紹介</p>
+        <p><%= @post.description%></p>
+      </div>
+
+      <div class="row">
         <%# いいね機能  %>
-        <div class="like-wrapper">
+        <div class="like-wrapper col-md-1">
           <div id="like_<%= @post.id %>">
             <%= render 'likes/like', post: @post %>
           </div>
         </div>
 
         <%# ブックマーク機能 %>
-        <div class="bookmark-wrapper">
+        <div class="bookmark-wrapper col-md-1">
           <div id="bookmark_<%= @post.id %>">
             <%= render 'bookmarks/bookmark', post: @post %>
           </div>
         </div>
+
+      </div>
 
       <%# コメント欄 %>
       <%= render 'shared/comments-list'%>
@@ -63,7 +86,6 @@
         <%= link_to "編集", edit_post_path(@post) %>
         <%= link_to "削除", post_path(@post), method: :delete %>
       <% end %>
-
     </div>
   </div>
 </div>

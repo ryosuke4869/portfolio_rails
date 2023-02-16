@@ -69,6 +69,8 @@ group :development do
   gem 'devise-i18n' #devise国際化
   #初期データ
   gem 'seed-fu'
+  gem 'rakuten_web_service'
+  gem 'dotenv-rails'
 
   gem 'mini_magick'
 end

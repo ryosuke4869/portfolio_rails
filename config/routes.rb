@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get "tops/index"
 
   # 投稿用のroute
-  resources :posts
   resources :categories
 
   resources :posts do
@@ -23,6 +22,10 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
     #コメント機能のルーティング
     resources :comments, only: [:edit, :update, :create, :destroy]
+
+    get 'search_items', to: 'items#search_items'
   end
+  resources :post_items, only: [:create, :destroy]
+
 
 end
