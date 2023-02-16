@@ -23,14 +23,9 @@ Rails.application.routes.draw do
     #コメント機能のルーティング
     resources :comments, only: [:edit, :update, :create, :destroy]
 
-    resources :items, only: [:edit, :update, :create, :destroy] do
-      collection do
-        get 'search_items', to: 'items#search_items'
-      end
-    end
-
-
+    get 'search_items', to: 'items#search_items'
   end
+  resources :post_items, only: [:create, :destroy]
 
 
 end
