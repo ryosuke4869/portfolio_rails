@@ -25,3 +25,16 @@ end
 end
 
 
+post = Post.create!(
+  id: 7,
+  description: "テスト7",
+  desk_images: ActiveStorage::Blob.create_and_upload!(
+    io: File.open(Rails.root.join('public/images/post_images/Post_image6.jpeg')),
+    filename: 'Post_image6.jpeg'),
+  user_id: User.find(1).id
+)
+
+post.desk_images.attach(io: File.open(Rails.root.join('public/images/post_images/Post_image5.jpeg')),
+                filename: 'Post_image5.jpeg')
+
+
