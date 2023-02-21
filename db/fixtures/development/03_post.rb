@@ -24,7 +24,6 @@ end
                   filename: 'Post_image3.jpeg')
 end
 
-
 post = Post.create!(
   id: 7,
   description: "テスト7",
