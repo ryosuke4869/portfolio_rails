@@ -1,0 +1,64 @@
+
+<ul class="accordion-area">
+  <section>
+    <h3 class="title"><i class="fa-regular fa-comment-dots"></i>コメント</h3>
+    <div class="box">
+      <div class="comments-list">
+        <% @comments.each do |c| %>
+          <li>
+            <%# ユーザーの情報 %>
+            <div class="user-info">
+              <% if c.user.avatar.attached? %>
+                <%= image_tag c.user.avatar, class: "user-icon" %>
+              <% else %>
+                <img class="user-icon" src="/assets/default_icon.jpeg">
+              <% end %>
+              <div class="user-content">
+                <h5><%= c.user.name %>からのコメント</h5>
+                <%= c.user.created_at %>
+              </div>
+            </div>
+
+            <%# コメント本文 %>
+            <div class="comment-content">
+              <%= c.body %>
+            </div>
+            <div class="comment-delete">
+              <% if user_signed_in? %>
+                <% if current_user.id == c.user_id %>
+                  <%= link_to "削除", post_comment_path(@post, c), method: :delete %>
+                <% elsif current_user.id == @post.user_id then %>
+                  <%= link_to "削除", post_comment_path(@post, c), method: :delete %>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </div>
+      <div class="comment-form mt-5">
+        <% if user_signed_in? %>
+          <%= form_with model: [@post, @comment] do |f| %>
+            <%= f.text_area :body, class:"text-area", placeholder: "コメント記入欄" %>
+            <%= f.submit "コメントする" %>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+//アコーディオンをクリックした時の動作
+$('.title').on('click', function() {//タイトル要素をクリックしたら
+  var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+  $(findElm).slideToggle();//アコーディオンの上下動作
+
+  if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+    $(this).removeClass('close');//クラス名を除去し
+  }else{//それ以外は
+    $(this).addClass('close');//クラス名closeを付与
+  }
+});
+</script>

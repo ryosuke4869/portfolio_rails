@@ -81,7 +81,7 @@
       </div>
 
       <%# コメント欄 %>
-      <%= render 'shared/comments-list'%>
+      <%= render 'comments/comments-list'%>
 
       <% if @post.user == current_user %>
         <%= link_to "編集", edit_post_path(@post) %>
