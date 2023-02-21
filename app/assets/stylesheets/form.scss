@@ -1,14 +1,15 @@
 .form-container {
   max-width: 1000px;
   background-color: #fff;
-  border: 1px solid #eaedef;
+  border: 1px solid #000000;
   margin: 50px auto;
 }
 
 .form-content {
   margin: 50px;
-  // border-bottom: 1px solid #eaedef;
+  padding-bottom: 50px;
   border-bottom: 1px solid black;
+  text-align: center;
 }
 
 .text-area{
@@ -28,9 +29,4 @@
 
 .preview-contents img {
   max-width: 100%;
-
-}
-
-.check{
-  display: inline;
 }
