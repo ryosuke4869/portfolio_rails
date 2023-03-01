@@ -10,62 +10,63 @@
 
       <div class="form-content">
         <%= f.label :desk_images, 'デスク画像' %>
-        <%# 編集用のコード %>
-        <% if @post.desk_images.attached? %>
-          <% @post.desk_images.each do |desk_image| %>
-            <%= image_tag desk_image, width: "100" %>
+        <div class="image-area">
+          <% if @post.desk_images.attached? %>
+            <%# 編集用のコード %>
+            <% @post.desk_images.each do |desk_image| %>
+              <%= image_tag desk_image, width: "100" %>
+            <% end %>
+            <%= f.file_field :desk_images, multiple: true %>
+            <%# 新規投稿時 %>
+          <% else %>
+            <div class="preview-contents">
+            <%# もしimg idがあったらnophotoを消す %>
+
+              <div class="preview-first">
+                <%= image_tag "nophoto.jpg", width: "25%"%>
+              </div>
+              <div class="preview-area">
+                <div class="preview-item"><img id="preview_0"></div>
+                <div class="preview-item"><img id="preview_1"></div>
+                <div class="preview-item"><img id="preview_2"></div>
+                <div class="preview-item"><img id="preview_3"></div>
+                <div class="preview-item"><img id="preview_4"></div>
+              </div>
+            </div>
           <% end %>
           <%= f.file_field :desk_images, multiple: true %>
-          <%# 新規投稿時 %>
-        <% else %>
-          <div class="preview-contents">
-          <%# もしimg idがあったらnophotoを消す %>
-            <%= image_tag "nophoto.jpg", width: "25%"%>
-            <div class="preview-item"><img id="preview_0"></div>
-            <div class="preview-item"><img id="preview_1"></div>
-            <div class="preview-item"><img id="preview_2"></div>
-            <div class="preview-item"><img id="preview_3"></div>
-            <div class="preview-item"><img id="preview_4"></div>
-          </div>
-        <% end %>
-        <%= f.file_field :desk_images, multiple: true %>
+        </div>
       </div>
-
       <div class="form-content">
-        <%= f.label :category_id, "カテゴリー" %>
-        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, class: 'checkbox-inline', include_hidden: false do |b| %>
-          <%= b.label class:"check" do %>
-            <%= b.check_box + " #{b.text}" %>
+        <%= f.label :category_id, "カテゴリー"%>
+        <div class="check_boxes row mt-3">
+          <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, class: 'checkbox-inline', include_hidden: false do |b| %>
+            <%= b.label class:"check col-md-4" do %>
+              <%= b.check_box + " #{b.text}" %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
-
       <div class="form-content field">
-        <%= f.submit "登録する", disable_with: '送信中...', class:"btn-orange btn-cubic btn-shadow"%>
+        <%= f.submit "投稿する", disable_with: '投稿中...', class:"submit-btn"%>
       </div>
     <% end %>
   </div>
-
 </div>
 
 <script>
   $('#post_desk_images').on('change', function (e) {
-
       if(e.target.files.length > 5){
-
         alert('一度に投稿できるのは五枚までです。');
         // 五枚以上の画像を選択していた場合、選択したファイルをリセット。
         $('#post_desk_images').val = "";
-
         // 以前の画像のプレビューが残っていた場合は、
         // まだ画像選択できていると勘違いを誘発するため初期化。
         for( let i = 0; i < 5; i++) {
           $(`#preview_${i}`).attr('src', "");
         }
-
       }else{
         let reader = new Array(5);
-
         // 画像選択を二回した時、一回目より数が少なかったりすると画面上に残るので初期化
         for( let i = 0; i < 5; i++) {
           $(`#preview_${i}`).attr('src', "");

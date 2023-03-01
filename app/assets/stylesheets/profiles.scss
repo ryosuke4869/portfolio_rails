@@ -1,8 +1,17 @@
 .mypage-avatar {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
+  border: solid 1px #000;
   object-fit:cover;
 	border-radius:50%;
+}
+
+.gallery-img {
+  padding-top: 12px;
+}
+
+.gallery-img img{
+  width: 100%;
 }
 
 .tab-area {
@@ -26,11 +35,25 @@
   display: block;
 }
 
+.list-container{
+  margin: 2rem 0rem ;
+}
+
+.list-container a{
+  color: white;
+  text-decoration: none;
+}
+.list-container a:hover{
+  color: white;
+  text-decoration: none;
+}
+
 .mypage-post {
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(116,116,116);
 }
 .post-info {
   margin-top: 15px;
+  line-height: 60px;
 }
 
 .card-text {

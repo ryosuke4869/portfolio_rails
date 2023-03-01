@@ -2,6 +2,49 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.comments-list > li {
+  border-top: 2px dashed #72c7e6; /*スレッドを区切る点線*/
+  margin: 60px 0;
+  padding-top: 20px;
+}
+
+.user-info {
+  display: flex;
+}
+
+.user-icon {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 50px;
+  vertical-align: middle;
+  margin-right:10px;
+}
+
+.user-content {
+  padding-top: 10px;
+}
+
+.comment-delete {
+  text-align: right;
+}
+
+.comment-content { /*コメントの吹き出し*/
+  background: #e2e2e2;
+  padding: 2px 10px;
+  margin: 20px 0 6px 0;
+  border-radius: 10px;
+  position: relative;
+}
+.comment-content::before { /*吹き出しの三角部分*/
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50px;
+  border-style: solid;
+  border-color: transparent transparent #e2e2e2 transparent;
+  border-width: 0 20px 20px 0;
+}
 
 .accordion-area{
     list-style: none;
@@ -26,6 +69,9 @@
     font-weight: normal;
     padding: 3% 3% 3% 50px;
     transition: all .5s ease;
+    font-size: 24px;
+    background: #488fa9;
+    color: #fff;
 }
 
 /*アイコンの＋と×*/
@@ -65,7 +111,6 @@
 /*アコーディオンで現れるエリア*/
 .box {
     display: none;/*はじめは非表示*/
-    background: #f3f3f3;
     margin:0 3% 3% 3%;
     padding: 3%;
 }

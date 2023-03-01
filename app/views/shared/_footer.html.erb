@@ -1,35 +1,27 @@
 <footer>
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-lg-4 footer-links">
-            <div class="row">
-              <div class="col">
-                <h3>Links</h3>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <p><%= link_to "Top", root_path %></p>
-                <p><%= link_to "Search", posts_path %></p>
-                <p><%= link_to "投稿", new_post_path %></p>
-                <p><%= link_to "keep", root_path %></p>
-                <p><%= link_to "Mypage", users_profile_path %></p>
-              </div>
-            </div>
-
+  <div class="footer-top">
+    <div class="container">
+      <div class='row'>
+          <p class="col-md-3 text-center"><%= link_to "Top", root_path %></p>
+          <p class="col-md-3 text-center"><%= link_to "Search", posts_path %></p>
+          <p class="col-md-3 text-center"><%= link_to "Post", new_post_path %></p>
+          <p class="col-md-3 text-center"><%= link_to "Mypage", users_profile_path %></p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom col-md-12 text-right">
+    <div class="container">
+      <div class='row'>
+        <div class='col-12'>
+          <div class='col-md-12 text-right'>
+            <%= link_to '利用規約', '/terms', class: 'text-light text-right'%>
+            <%= link_to 'プライバシーポリシー', '/privacy_policy', class: 'text-light text-right'%>
+            <p class='text-right'>©2023 Desk&Device-sharing All Rights Reserved.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row">
-          <p>©2023 Desk&Device-sharing All Rights Reserved.</p>
-        </div>
-      </div>
-    </div>
+  </div>
 
 
 </footer>

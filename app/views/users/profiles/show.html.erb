@@ -1,21 +1,17 @@
 <%# Userのマイページ %>
 <div class="wrapper">
   <div class="mypage container">
-    <% if current_user.avatar.attached? %>
-      <%=image_tag current_user.avatar, class: "mypage-avatar" %>
-    <% else %>
-      <img class="mypage-avatar" src="/assets/default_icon.jpeg">
-    <% end %>
-    <div class="user-info">
+    <div class="mypage-info my-3">
+      <% if current_user.avatar.attached? %>
+        <%=image_tag current_user.avatar, class: "mypage-avatar" %>
+      <% else %>
+        <img class="mypage-avatar" src="/assets/default_icon.jpeg">
+      <% end %>
       <%= current_user.name %>
-    </div>
     <%= link_to "アカウントの編集", edit_user_registration_path, class:"btn btn-dark my-5"%>
-  </div>
-
+    </div>
 
 <%# ここから 投稿, いいねした投稿、保存した投稿を表示（Tab使用）%>
-
-  <div class="container">
     <ul class="tab-area row">
       <li class="tab active col-md-4 ">
         <i class="fa-regular fa-images" aria-hidden="true"></i>
@@ -50,8 +46,6 @@
         <%= render 'shared/bookmark-list'%>
       </div>
     </div>
-
-  </div>
 
 </div>
 
