@@ -12,6 +12,7 @@ import "jquery"
 import "bootstrap"
 import "../src/application"
 
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

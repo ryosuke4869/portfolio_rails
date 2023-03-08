@@ -40,10 +40,4 @@
   </div>
 </header>
 
-<script>
-  $(function(){
-    $('.menu-btn').on('click', function(){
-      $('.menu').toggleClass('is-active');
-    });
-  }());
-</script>
+<%= javascript_pack_tag 'menu' %>
