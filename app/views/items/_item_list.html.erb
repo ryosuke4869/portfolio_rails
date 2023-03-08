@@ -1,13 +1,16 @@
 <div class="row">
   <% if @items.present? %>
     <% @items.each do |item| %>
-      <div class="col-md-3">
-        <div class="card" style="width: 6rem; height: 6rem;">
-          <%= image_tag(item.image_url) %>
-        </div>
-        <div class="card-body">
-          <%= item.name%>
-          <%= item.price%>
+      <div class="col-xl-2 col-lg-4 col-sm-6">
+        <div class="card p-1 mb-5" style="height: 20rem;">
+          <%= image_tag(item.image_url, class: "mx-auto d-block") %>
+          <div class="card-body">
+            <p><%= item.name.truncate(20)%></p>
+            <p>¥<%= item.price%></p>
+            <% if @post.user == current_user %>
+              <%= link_to "削除", post_item_path(item.id, post_id: @post.id), method: :delete %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>

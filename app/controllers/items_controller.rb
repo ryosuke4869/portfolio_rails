@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
     @items = []
     @search = params[:keyword]
     if @search
-      @results = RakutenWebService::Ichiba::Product.search(keyword: params[:keyword], hits: 5)
+      @results = RakutenWebService::Ichiba::Product.search(keyword: params[:keyword], hits: 20)
       #@itemsに検索して取得したデータ入れる
       @results.each do |result|
         item = Item.new(read(result))

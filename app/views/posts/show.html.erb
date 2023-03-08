@@ -42,9 +42,7 @@
         <% end %>
       </div>
 
-      <%# ここからアイテム表示機能 %>
-      <%# もしアイテムが登録されていないなら、アイテムを追加するが表示される %>
-      <%# 投稿したユーザーしかアイテム追加が表示されないように %>
+      <%# ここからアイテム機能 %>
       <div class="item-show my-3">
         <div class="item">
           <p>登録されたアイテム</p>
@@ -52,11 +50,13 @@
         </div>
       </div>
       <% if @post.user == current_user %>
-        <i class="fa-solid fa-plus mb-3">
-          <%= link_to post_search_items_path(@post) do %>
-            アイテムを追加する
-          <% end %>
-        </i>
+        <% if @item_count < 12 %>
+          <i class="fa-solid fa-plus mb-3">
+            <%= link_to post_search_items_path(@post) do %>
+              アイテムを追加する
+            <% end %>
+          </i>
+        <% end %>
       <% end %>
       <div class="description-container">
         <p>投稿の紹介</p>

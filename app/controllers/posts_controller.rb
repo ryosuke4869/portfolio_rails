@@ -28,6 +28,7 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @comments = @post.comments.includes(:user)
     @items = @post.items
+    @item_count = PostItem.where(post_id: @post.id).count
   end
 
   def edit
