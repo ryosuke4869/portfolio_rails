@@ -54,6 +54,8 @@ GEM
       activesupport (= 6.1.7)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
+    activestorage-validator (0.2.2)
+      rails (>= 6.0.4.1)
     activesupport (6.1.7)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -126,6 +128,9 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.2)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -270,6 +275,8 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.11.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -331,6 +338,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activestorage-validator
   annotate
   aws-sdk-s3
   bootsnap (>= 1.4.4)
@@ -340,9 +348,10 @@ DEPENDENCIES
   devise-i18n
   dotenv-rails
   factory_bot_rails
+  image_processing (~> 1.12, >= 1.12.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)
-  mini_magick
+  mini_magick (~> 4.12)
   mysql2 (~> 0.5)
   pry-byebug
   pry-doc

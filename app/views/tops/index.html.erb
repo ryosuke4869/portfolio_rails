@@ -23,7 +23,7 @@
       <% @like_posts.each do |like_post| %>
         <div class="col-md-4">
           <div class="card my-5">
-            <%= image_tag like_post.desk_images[0] if like_post.desk_images.attached?%>
+            <%= image_tag like_post.desk_images[0].variant( resize: "478x269!").processed if like_post.desk_images.attached?%>
             <div class="card-body">
                 <% if like_post.user.avatar.attached? %>
                   <%= image_tag like_post.user.avatar, class: "host-icon" %>
@@ -52,7 +52,7 @@
       <% @recent_posts.each do |recent_post| %>
         <div class="col-md-4">
           <div class="card my-5">
-            <%= image_tag recent_post.desk_images[0] if recent_post.desk_images.attached?%>
+            <%= image_tag recent_post.desk_images[0].variant( resize: "478x269!").processed if recent_post.desk_images.attached?%>
             <div class="card-body">
                 <% if recent_post.user.avatar.attached? %>
                   <%= image_tag recent_post.user.avatar, class: "host-icon" %>

@@ -1,6 +1,4 @@
 <div class="wrapper">
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
   <div class="show">
     <div class="show-container">
     <%# 投稿したユーザー情報 %>
@@ -19,19 +17,13 @@
         <div class="swiper-wrapper">
           <% @post.desk_images.count.times do |i| %>
             <div class="swiper-slide">
-              <%= image_tag @post.desk_images[i], class: "desk-show-image" %>
+              <%= image_tag @post.desk_images[i].variant( resize: "690x390!").processed, class: "desk-show-image" %>
             </div>
           <% end %>
         </div>
-        <!-- ページネーション -->
-        <div class="swiper-pagination"></div>
-
         <!-- ナビボタン -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
-
-        <!-- スクロールバー -->
-        <div class="swiper-scrollbar"></div>
       </div>
 
       <%# 登録したカテゴリー表示 %>
@@ -42,7 +34,7 @@
         <% end %>
       </div>
 
-      <%# ここからアイテム機能 %>
+      <%# アイテム機能 %>
       <div class="item-show my-3">
         <div class="item">
           <p>登録されたアイテム</p>
