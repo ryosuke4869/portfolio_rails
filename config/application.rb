@@ -13,6 +13,9 @@ require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
+require 'devise'
+require 'rack-mini-profiler'
+require 'rakuten_web_service'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
