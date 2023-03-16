@@ -22,4 +22,14 @@ class Post < ApplicationRecord
   has_many :post_items, dependent: :destroy
   has_many :items, through: :post_items
 
+  with_options presence: true do
+    validates :description
+    validates :desk_images, blob: { content_type: :image }
+    validates :desk_images, attached_file_number: { maximum: 5 }
+    validates :desk_images, attached_file_size: { maximum: 5.megabytes }
+  end
+  validates :category_ids, presence: { message: 'は１つ以上選択してください。' }
+
+
+
 end
