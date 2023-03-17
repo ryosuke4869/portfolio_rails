@@ -32,17 +32,17 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
-  #デバック
+  # デバック
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
 
-  #rspec
+  # rspec
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-erd'
   gem 'annotate'
-  #rubocop
+  # rubocop
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
@@ -64,14 +64,12 @@ group :development do
   gem 'spring'
   gem 'rails-i18n'
   gem 'aws-sdk-s3'
-  gem 'rails-erd'
-  gem 'devise'#ログイン
-  gem 'devise-i18n' #devise国際化
-  #初期データ
+  gem 'devise' # ログイン
+  gem 'devise-i18n' # devise国際化
+  # 初期データ
   gem 'seed-fu'
   gem 'rakuten_web_service'
   gem 'dotenv-rails'
-
   gem 'activestorage-validator'
   gem 'mini_magick', '~> 4.12'
 end

@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-
   before_action :set_post
 
   def create
@@ -13,10 +12,8 @@ class BookmarksController < ApplicationController
   end
 
   private
-  
+
   def set_post
     @post = Post.find_by(id: params[:post_id])
   end
-
 end
-
