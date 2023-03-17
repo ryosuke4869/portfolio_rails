@@ -6,5 +6,7 @@ class CreatePostCategories < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    add_index :post_categories, %i[category_id post_id], unique: true
   end
 end
