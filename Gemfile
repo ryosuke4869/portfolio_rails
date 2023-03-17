@@ -32,17 +32,17 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
-  #デバック
+  # デバック
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
 
-  #rspec
+  # rspec
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-erd'
   gem 'annotate'
-  #rubocop
+  # rubocop
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
@@ -58,20 +58,18 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler', '~> 2.0', require: false
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rails-i18n'
   gem 'aws-sdk-s3'
-  gem 'rails-erd'
-  gem 'devise'#ログイン
-  gem 'devise-i18n' #devise国際化
-  #初期データ
+  gem 'devise' # ログイン
+  gem 'devise-i18n' # devise国際化
+  # 初期データ
   gem 'seed-fu'
   gem 'rakuten_web_service'
   gem 'dotenv-rails'
-
   gem 'activestorage-validator'
   gem 'mini_magick', '~> 4.12'
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :ensure_normal_user, only: %i[update destroy]
+  before_action :ensure_normal_user, only: %i(update destroy)
 
   def ensure_normal_user
     if resource.email == 'guest@example.com'
@@ -67,6 +67,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
-
 end

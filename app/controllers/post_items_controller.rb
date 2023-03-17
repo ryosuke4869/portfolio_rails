@@ -29,6 +29,7 @@ class PostItemsController < ApplicationController
   end
 
   private
+
   def set_post
     @post = Post.find_by(id: params[:post_id])
   end

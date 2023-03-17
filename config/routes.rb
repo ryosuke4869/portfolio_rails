@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
+    passwords: 'users/passwords',
   }
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   get 'users/profile' => 'users/profiles#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  #アクセスしたらTop画面に
+  # アクセスしたらTop画面に
   root to: 'tops#index'
   get "tops/index"
 
@@ -16,16 +16,14 @@ Rails.application.routes.draw do
   resources :categories
 
   resources :posts do
-    #いいね機能のルーティング
+    # いいね機能のルーティング
     resource :likes, only: [:create, :destroy]
-    #ブックマーク機能のルーティング
+    # ブックマーク機能のルーティング
     resource :bookmarks, only: [:create, :destroy]
-    #コメント機能のルーティング
+    # コメント機能のルーティング
     resources :comments, only: [:edit, :update, :create, :destroy]
 
     get 'search_items', to: 'items#search_items'
   end
   resources :post_items, only: [:create, :destroy]
-
-
 end

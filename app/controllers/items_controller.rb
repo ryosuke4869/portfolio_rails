@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   before_action :set_post
 
   def search_items
@@ -7,21 +6,22 @@ class ItemsController < ApplicationController
     @search = params[:keyword]
     if @search
       @results = RakutenWebService::Ichiba::Product.search(keyword: params[:keyword], hits: 20)
-      #@itemsに検索して取得したデータ入れる
+      # @itemsに検索して取得したデータ入れる
       @results.each do |result|
         item = Item.new(read(result))
         @items << item
-        #Itemテーブルに同じアイテムがあれば保存しない処理
-        @items.each do |item|
-          unless Item.all.exists?(name: item.name)
-            item.save
-          end
+        # Itemテーブルに同じアイテムがあれば保存しない処理
+      end
+      @items.each do |item|
+        unless Item.all.exists?(name: item.name)
+          item.save
         end
       end
     end
   end
 
   private
+
   def read(result)
     name = result["productName"]
     price = result["averagePrice"]
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
       name: name,
       price: price,
       image_url: image_url,
-      item_url: item_url
+      item_url: item_url,
     }
   end
 
