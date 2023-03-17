@@ -6,7 +6,7 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
           version: 20.10.14
       - run: #環境変数の設定
           name: Setup environment variable
