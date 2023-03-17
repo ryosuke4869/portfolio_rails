@@ -5,7 +5,10 @@ class Users::ProfilesController < ApplicationController
     @like_posts = @user.like_posts
     @bookmark_posts = @user.bookmark_posts
   end
-end
-def current_user_params
-  params.require(:user).permit(:name, :email)
+
+  private
+
+  def current_user_params
+    params.require(:user).permit(:name, :email)
+  end
 end
