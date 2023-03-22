@@ -1,13 +1,14 @@
 version: 2.1
 jobs:
-  build:
+  rspec:
+    working_directory: ~/web
     docker:
       - image: cimg/ruby:3.1.0
     resource_class: small
     steps:
       - checkout
-      - setup_remote_docker
-          version: 20.10.14
+      - setup_remote_docker:
+          version: 20.10.18
       - run: #環境変数の設定
           name: Setup environment variable
           command: |
@@ -27,13 +28,13 @@ jobs:
       - run:
           name: Run rspec
           command: docker-compose exec web rspec
-
   rubocop:
+    working_directory: ~/web
     docker:
-      -image: cimg/ruby:2.7.3
-      resource_class: small
-      steps:
-        -checkout
+      - image: cimg/ruby:2.7.3
+    resource_class: small
+    steps:
+      - checkout
       - restore_cache:
           keys:
             - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
@@ -60,9 +61,5 @@ workflows:
     jobs:
       - rspec
       - rubocop
-      - heroku_deploy:
-          requires:
-            - rspec
-            - rubocop
 
 
