@@ -9,17 +9,17 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.18
-      - run: #環境変数の設定
+      - run: 
           name: Setup environment variable
           command: |
             echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
-      - run: #コンテナを起動して動作確認
+      - run:
           name: Start containers and verify it is working
           command: |
             set -x
             docker-compose up -d
             docker exec web curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
-      - run: #データベースのセットアップ
+      - run:
           name: Setup database
           command: docker-compose run web rails db:create db:migrate
       - run:
@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Run rspec
           command: docker-compose exec web rspec
+
   rubocop:
     working_directory: ~/web
     docker:
