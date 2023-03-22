@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/web
     docker:
-      - image: cimg/ruby:3.1.0
+      - image: cimg/ruby:2.7.3
     resource_class: small
     steps:
       - checkout
