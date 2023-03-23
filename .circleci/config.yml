@@ -22,13 +22,12 @@ jobs:
       - run:
           name: Setup database
           command: |
-            docker-compose exec web bash 
             bundle exec rails db:create
             bundle exec rails db:migrate
             bundle exec rails db:seed_fu
       - run:
           name: Run rspec
-          command: docker-compose exec web rspec
+          command: bundle exec rspec
 
   rubocop:
     working_directory: ~/portfolio_rails
