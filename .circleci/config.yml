@@ -21,13 +21,13 @@ jobs:
             docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Setup database
-          command: docker-compose run portfolio_rails rails db:create db:migrate
+          command: docker-compose run web rails db:create db:migrate
       - run:
           name: seed db
-          command: docker-compose run portfolio_rails rails db:seed_fu
+          command: docker-compose run web rails db:seed_fu
       - run:
           name: Run rspec
-          command: docker-compose exec portfolio_rails rspec
+          command: docker-compose exec web rspec
 
   rubocop:
     working_directory: ~/portfolio_rails
