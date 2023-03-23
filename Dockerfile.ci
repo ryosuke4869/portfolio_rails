@@ -25,18 +25,7 @@ RUN apt-get update                                                              
   && gem install foreman                                                                                                                \
   && apt-get clean
 
-RUN mkdir /potepanec
-WORKDIR /potepanec
-COPY . /potepanec
-RUN bundle install
-
-COPY Gemfile /portfolio_rails/Gemfile
-COPY Gemfile.lock /portfolio_rails/Gemfile.lock
-RUN bundle install
-COPY . /portfolio_rails
-
 RUN mkdir /portfolio_rails
 WORKDIR /portfolio_rails
 COPY . /portfolio_rails
 RUN bundle install
-
