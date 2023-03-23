@@ -25,10 +25,10 @@ services:
     environment:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
-      MYSQL_HOST: mysql
+      MYSQL_HOST: db
       REDIS_URL: "redis://redis:6379"
     depends_on:
-      - mysql
+      - db
       - redis
     networks:
       - default
