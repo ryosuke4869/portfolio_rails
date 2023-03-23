@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   rspec:
-    working_directory: ~/web
+    working_directory: ~/portfolio_rails
     docker:
       - image: cimg/ruby:2.7.3
     resource_class: small
@@ -9,7 +9,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.18
-      - run: 
+      - run:
           name: Setup environment variable
           command: |
             echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
@@ -30,7 +30,7 @@ jobs:
           command: docker-compose exec web rspec
 
   rubocop:
-    working_directory: ~/web
+    working_directory: ~/portfolio_rails
     docker:
       - image: cimg/ruby:2.7.3
     resource_class: small
