@@ -18,7 +18,7 @@ jobs:
           command: |
             set -x
             docker-compose up -d
-            docker exec portfolio_rails curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+            docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Setup database
           command: docker-compose run portfolio_rails rails db:create db:migrate
