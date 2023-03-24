@@ -13,7 +13,10 @@ jobs:
       - run:
           name: Setup environment variable
           command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV      - run: bundle config --local path vendor/bundle
+      - run:
+          name: bundle install
+          command: bundle check || bundle install --jobs=8 --clean
       - run:
           name: Start containers and verify it is working
           command: |
