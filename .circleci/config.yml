@@ -7,16 +7,22 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - run: gem install bundler:1.17.2
       - setup_remote_docker:
           version: 20.10.18
       - run:
           name: Setup environment variable
           command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV      - run: bundle config --local path vendor/bundle
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
-          name: bundle install
-          command: bundle check || bundle install --jobs=8 --clean
+          # CI実行の高速化のためにgemのinstall先とキャッシュの格納先を vendor/bundle 配下に修正
+          name: Configure Bundler
+          command: |
+            gem install bundler:1.17.2
+            bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
       - run:
           name: Start containers and verify it is working
           command: |
