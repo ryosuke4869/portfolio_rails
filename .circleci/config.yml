@@ -33,10 +33,10 @@ jobs:
       - run:
           name: Setup database
           command: |
-            docker compose exec web bash
-            docker compose run web rails db:create
-            docker compose run web rails db:migrate
-            docker compose run web rails db:seed_fu
+            docker-compose exec web bash
+            rails db:create
+            rails db:migrate
+            rails db:seed_fu
 
       - run:
           name: Run rspec
