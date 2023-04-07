@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   db:
     image: mysql:8.0
@@ -7,13 +8,15 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - mysql_data:/var/lib/mysql/
+      - mysql_data:/var/lib/mysql/ #データの永続化のために必要
+
   web:
     build:
       context: .
       dockerfile: Dockerfile.dev
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      SELENIUM_DRIVER_URL: "http://selenium_chrome:4444/wd/hub"
     volumes:
       - .:/portfolio_rails
       # https://qiita.com/shotat/items/57d049793605ffc20135
@@ -27,9 +30,16 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    networks:
+      - default
     stdin_open: true
     tty: true
     command: bundle exec rails server -b 0.0.0.0
+
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
 
 volumes:
   mysql_data:

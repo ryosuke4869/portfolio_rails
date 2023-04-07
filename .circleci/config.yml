@@ -24,20 +24,23 @@ jobs:
           paths:
             - ./vendor/bundle
       - run:
-          name: Start containers and verify it is working
+          name: Start containers and verify it is working    #circle CI CLIではsetup_remote_dockerを使用するとエラー発生
           command: |
             set -x
+            docker-compose build
             docker-compose up -d
             docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Setup database
           command: |
-            bundle exec rails db:create
-            bundle exec rails db:migrate
-            bundle exec rails db:seed_fu
+            docker compose exec web bash
+            docker compose run web rails db:create
+            docker compose run web rails db:migrate
+            docker compose run web rails db:seed_fu
+
       - run:
           name: Run rspec
-          command: bundle exec rspec
+          command: docker compose exec web rspec
 
   rubocop:
     working_directory: ~/portfolio_rails
