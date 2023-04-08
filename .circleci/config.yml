@@ -23,8 +23,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-      - run:
-          name: Start containers and verify it is working    #circle CI CLIではsetup_remote_dockerを使用するとエラー発生
+      - run: #circle CI CLIではsetup_remote_dockerを使用するとエラー発生
+          name: Start containers and verify it is working
           command: |
             set -x
             docker-compose build
@@ -33,14 +33,13 @@ jobs:
       - run:
           name: Setup database
           command: |
-            docker-compose exec web bash
-            rails db:create
-            rails db:migrate
-            rails db:seed_fu
-
+            set -x
+            docker-compose run web bundle exec rails db:create
+            docker-compose run web bundle exec rails db:migrate
+            docker-compose run web bundle exec rails db:seed_fu
       - run:
           name: Run rspec
-          command: docker compose exec web rspec
+          command: docker compose run web bundle exec rspec
 
   rubocop:
     working_directory: ~/portfolio_rails
