@@ -1,20 +1,26 @@
-<% if @post.user == current_user %>
+<% unless user_signed_in? %>
     <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
     <%= post.bookmarks.count %>
     <p>保存</p>
 <% else %>
-  <% if current_user.bookmarks.find_by(post_id: post.id) %>
-    <%= link_to post_bookmarks_path(post.id), method: :delete, remote: true do %>
+  <% if @post.user == current_user %>
       <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
       <%= post.bookmarks.count %>
       <p>保存</p>
-    <% end %>
   <% else %>
-    <%= link_to post_bookmarks_path(post.id), method: :post, remote: true do %>
-      <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-      <%= post.bookmarks.count %>
-      <p>保存</p>
+    <% if current_user.bookmarks.find_by(post_id: post.id) %>
+      <%= link_to post_bookmarks_path(post.id), method: :delete, remote: true do %>
+        <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+        <%= post.bookmarks.count %>
+        <p>保存</p>
+      <% end %>
+    <% else %>
+      <%= link_to post_bookmarks_path(post.id), method: :post, remote: true do %>
+        <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+        <%= post.bookmarks.count %>
+        <p>保存</p>
+      <% end %>
     <% end %>
   <% end %>
-
 <% end %>
+
