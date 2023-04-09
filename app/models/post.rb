@@ -20,12 +20,12 @@ class Post < ApplicationRecord
   has_many :post_items, dependent: :destroy
   has_many :items, through: :post_items
 
-  with_options presence: true do
-    validates :description
-    validates :desk_images, blob: { content_type: :image }
-    validates :desk_images, attached_file_number: { maximum: 5 }
-    validates :desk_images, attached_file_size: { maximum: 5.megabytes }
-  end
+  validates :description, presence: true
+  validates :desk_images, attached: {message:"を添付してください"},
+                          content_type: {in:[:png, :jpg, :jpeg], message: "はpng, jpg, jpegいずれかの形式にして下さい"},
+                          limit: { min: 1, max: 5, message: "は5枚まで投稿できます。" },
+                          size: { between: 1.kilobyte..5.megabytes, message: 'は5MBより小さい値にしてください' }
+
   # seed_fuしなおすとvalidateに引っかかるので修正する必要あり
-  # validates :category_ids, presence: { message: 'は１つ以上選択してください。' }
+  validates :category_ids, presence: { message: 'は１つ以上選択してください。' }
 end
