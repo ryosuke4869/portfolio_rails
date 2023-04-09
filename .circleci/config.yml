@@ -8,8 +8,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.18
-      - run:
+          version: 20.10.14
+      - run: #環境変数の設定
           name: Setup environment variable
           command: |
             echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
