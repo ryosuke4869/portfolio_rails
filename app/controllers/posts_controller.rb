@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :search] # 全てのアクション(showアクションを除く)前にユーザーがログインしているかを確認
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :check_user, only: [:edit, :update, :destroy]
   # 投稿用
   def index
@@ -15,10 +15,9 @@ class PostsController < ApplicationController
   def create # 登録処理
     @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to posts_path
       flash[:notice] = "投稿しました。"
+      redirect_to posts_path
     else
-      flash[:alert] = "投稿に失敗しました. <br>・#{@post.errors.full_messages.join('<br>・')}"
       render "new"
     end
   end

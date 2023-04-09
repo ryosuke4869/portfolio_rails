@@ -70,7 +70,7 @@ group :development do
   gem 'seed-fu'
   gem 'rakuten_web_service'
   gem 'dotenv-rails'
-  gem 'activestorage-validator'
+  gem 'active_storage_validations'
   gem 'mini_magick', '~> 4.12'
 end
 

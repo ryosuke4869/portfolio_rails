@@ -22,7 +22,7 @@
             </button>
             <div class="menu d-grid gap-2 col-6 mx-auto">
               <div class="menu-item btn btn-success "><%= link_to "Top", root_path, class: "link-light text-decoration-none" %></div>
-              <div class="menu-item btn btn-success"><%= link_to "投稿する", new_post_path, class: "link-light text-decoration-none" %></div>
+              <div class="menu-item btn btn-success"><%= link_to "新規投稿", new_post_path, class: "link-light text-decoration-none" %></div>
               <div class="menu-item btn btn-success"><%= link_to "投稿一覧", posts_path , class: "link-light text-decoration-none" %></div>
               <div class="menu-item btn btn-success"><%= link_to "Mypage", users_profile_path, class: "link-light text-decoration-none" %></div>
               <div class="menu-item btn btn-success"><%= link_to "Logout", destroy_user_session_path, class: "link-light text-decoration-none", method: :delete, data: { confirm: "ログアウトします。よろしいですか?" } %></div>
