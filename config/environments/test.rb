@@ -57,4 +57,6 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  # rspec実行時にActiveRecord::StatementInvalid:Mysql2::Error: MySQL client is not connectedが発生したため追加
+  config.active_job.queue_adapter = :inline
 end
