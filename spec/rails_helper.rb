@@ -68,6 +68,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.extend ControllerMacros, :type => :controller
   config.include ActiveStorageValidations::Matchers
+  config.include SignInSupport
   config.before(:each, type: :system) do
     driven_by :rack_test
   end
@@ -85,6 +86,7 @@ RSpec.configure do |config|
   end
 end
 
+# Capybaraテストフレームワークを使用た自動テスト用の新しいドライバーを登録
 Capybara.register_driver :chrome_headless do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--headless')

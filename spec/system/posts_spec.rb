@@ -12,6 +12,7 @@ RSpec.describe "Post", type: :system do
       before do
         visit posts_path
       end
+
       context '投稿が存在する場合' do
         it '投稿一覧が表示される' do
           expect(page).to have_selector("img[src$='sample_icon.jpeg']")
@@ -29,16 +30,32 @@ RSpec.describe "Post", type: :system do
     #----------------新規投稿------------------------
     describe '新規投稿の作成' do
       context 'ログインしている場合' do
+        before do
+          sign_in(user)
+          click_on '新規投稿'
+          visit new_post_path
+        end
 
         it '投稿の作成が成功する' do
+          fill_in 'デスク紹介', with: 'デスク紹介テスト文'
+          attach_file 'デスク画像', "#{Rails.root}/spec/fixtures/image/post_image_sample_2.jpeg"
+          click_on '投稿する'
+          expect(current_path).to eq(posts_path)
+          expect(page).to have_content('投稿しました')
+          expect(page).to have_selector("img[src$='post_image_sample_2.jpeg']")
         end
 
         it '投稿の作成が失敗する' do
+          click_on '投稿する'
+          expect(page).to have_css('.field_with_errors')
+          expect(page).to have_content("件のエラーにより、投稿が失敗しました")
         end
       end
 
       context 'ログインしていない場合' do
         it 'ログインページにリダイレクトされる' do
+          visit new_post_path
+          expect(current_path).to eq(user_session_path)
         end
       end
     end
