@@ -49,6 +49,7 @@ group :development, :test do
   gem 'rubocop-rspec'
   gem 'rubocop-airbnb'
 
+  gem 'active_storage_validations'
   gem 'capybara'
   gem 'selenium-webdriver'
 end
@@ -70,7 +71,6 @@ group :development do
   gem 'seed-fu'
   gem 'rakuten_web_service'
   gem 'dotenv-rails'
-  gem 'active_storage_validations'
   gem 'mini_magick', '~> 4.12'
 end
 
