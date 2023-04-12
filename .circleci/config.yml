@@ -23,6 +23,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+      - run: bundle exec rake assets:precompile
       - run: #circle CI CLIではsetup_remote_dockerを使用するとエラー発生
           name: Start containers and verify it is working
           command: |
