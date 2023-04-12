@@ -23,7 +23,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-      - run: bundle exec rake assets:precompile
       - run: #circle CI CLIではsetup_remote_dockerを使用するとエラー発生
           name: Start containers and verify it is working
           command: |
@@ -31,6 +30,11 @@ jobs:
             docker-compose build
             docker-compose up -d
             docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+      - run:
+          name: Setup webpacker
+          command: |
+            docker-compose run web rails webpacker:install
+            docker-compose run web rails webpacker:compile
       - run:
           name: Setup database
           command: |
