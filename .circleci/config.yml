@@ -31,6 +31,12 @@ jobs:
             docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
             docker-compose stop
       - run:
+          name: yarn install & webpacker compile
+          command: |
+            set -x
+            docker-compose run --rm web yarn install --cache-files
+            docker-compose run --rm web bundle exec bin/webpack
+      - run:
           name: Setup database
           command: |
             set -x
