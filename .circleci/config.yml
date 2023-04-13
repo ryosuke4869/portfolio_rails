@@ -35,7 +35,7 @@ jobs:
           command: |
             set -x
             docker-compose run --rm web yarn install --cache-files
-            docker-compose run --rm web bundle exec bin/webpack
+            docker-compose run --rm web rails webpacker:compile
       - run:
           name: Setup database
           command: |
