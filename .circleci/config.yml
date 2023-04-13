@@ -27,18 +27,20 @@ jobs:
           name: Start containers and verify it is working
           command: |
             set -x
-            docker-compose build
-            docker-compose up -d
+            docker-compose up --build -d
             docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+            docker-compose stop
       - run:
-          name: Setup webpacker
+          name: yarn install & webpacker compile
           command: |
-            docker-compose run web rails webpacker:install
-            docker-compose run web rails webpacker:compile
+            set -x
+            docker-compose run --rm web yarn install --cache-files
+            docker-compose run --rm web rails webpacker:compile
       - run:
           name: Setup database
           command: |
             set -x
+            docker-compose up -d
             docker-compose run web bundle exec rails db:create
             docker-compose run web bundle exec rails db:migrate
             docker-compose run web bundle exec rails db:seed_fu
