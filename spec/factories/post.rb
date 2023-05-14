@@ -4,11 +4,11 @@ FactoryBot.define do
     association :user
 
     after(:build) do |post|
-      post.categories << create(:category)
       post.desk_images.attach(io: File.open(Rails.root.join('spec/fixtures/image/post_image_sample.jpeg')),
                               filename: 'post_image_sample.jpeg',
                               content_type: 'image/jpeg')
     end
+
   end
   # 中間テーブルのテストデータ
   trait :category_engineer do
