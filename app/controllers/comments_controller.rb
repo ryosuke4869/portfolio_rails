@@ -5,23 +5,12 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to request.referer, notice: "コメントを投稿しました"
     else
-      flash[:danger] = "投稿に失敗しました"
+      flash[:danger] = "コメントの投稿に失敗しました"
       redirect_back(fallback_location: root_path)
-    end
-
-    def edit
-      @post = Post.find(params[:post_id])
-      @comment = Comment.find(params[:id])
-      if @comment.update(comment_params)
-        redirect_to post_path(@post), notice: "コメントを編集しました"
-      else
-        flash.now[:danger] = "編集に失敗しました"
-        render 'edit'
-      end
     end
   end
 
-  def desstroy
+  def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:danger] = "コメントを削除しました"
