@@ -60,9 +60,7 @@
       <div class="row">
         <%# いいね機能  %>
         <div class="like-wrapper col-md-1">
-          <div id="like_<%= @post.id %>">
-            <%= render 'likes/like', post: @post %>
-          </div>
+          <%= render 'likes/like', post: @post %>
         </div>
 
         <%# ブックマーク機能 %>

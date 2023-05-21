@@ -1,1 +1,4 @@
-$('#like_<%= @post.id %>').html("<%= escape_javascript(render "likes/like", post: @post) %>");
+console.log("jsが呼び出された");
+
+$('#btn-unlike-<%= @post.id %>').replaceWith("<%= j(render('likes/like', post: @post)) %>");
+
