@@ -51,7 +51,7 @@ group :development, :test do
 
   gem 'active_storage_validations'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.2'
 end
 
 group :development do
