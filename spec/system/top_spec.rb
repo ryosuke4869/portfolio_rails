@@ -16,7 +16,7 @@ RSpec.describe "Top", type: :system do
         create(:like, post: post, user: user3),
         create(:like, post: post2, user: user),
         create(:like, post: post2, user: user2),
-        create(:like, post: post3, user: user)
+        create(:like, post: post3, user: user),
       ]
     end
 
@@ -55,19 +55,19 @@ RSpec.describe "Top", type: :system do
           within '.category-search' do
             click_on 'Engineer'
           end
-          expect(page).to have_content ('#Engineer')
+          expect(page).to have_content('#Engineer')
         end
         it 'カテゴリーがWriterの投稿に遷移できる' do
           within '.category-search' do
             click_on 'Writer'
           end
-          expect(page).to have_content ('#Writer')
+          expect(page).to have_content('#Writer')
         end
         it 'カテゴリーがGamerの投稿に遷移できる' do
           within '.category-search' do
             click_on 'Gamer'
           end
-          expect(page).to have_content ('#Gamer')
+          expect(page).to have_content('#Gamer')
         end
       end
     end

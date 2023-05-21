@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Bookmark", type: :system, js: true  do
+RSpec.describe "Bookmark", type: :system, js: true do
   describe 'BookmarkのCRUD' do
     let(:user) { create(:user) }
     let!(:post_user) { create(:post, user: user) }
@@ -16,7 +16,7 @@ RSpec.describe "Bookmark", type: :system, js: true  do
         before do
           sign_in(user)
         end
-        fit 'ブックマークを作成できる' do
+        it 'ブックマークを作成できる' do
           visit post_path(post_others)
           click_on "btn-bookmark-#{post_others.id}"
           expect(page).to have_selector('.fas.fa-bookmark')
@@ -44,7 +44,6 @@ RSpec.describe "Bookmark", type: :system, js: true  do
           expect(page).to have_css('.nologin-bookmark')
         end
       end
-
     end
   end
 end

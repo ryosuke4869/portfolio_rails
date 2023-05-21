@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Likes", type: :system, js: true  do
+RSpec.describe "Likes", type: :system, js: true do
   describe 'LikeのCRUD' do
     let(:user) { create(:user) }
     let!(:post_user) { create(:post, user: user) }
@@ -12,7 +12,7 @@ RSpec.describe "Likes", type: :system, js: true  do
     let!(:post_category_gamer) { create(:post, :category_gamer) }
 
     describe 'いいねの作成と解除' do
-      fcontext 'ログインしている場合' do
+      context 'ログインしている場合' do
         before do
           sign_in(user)
         end

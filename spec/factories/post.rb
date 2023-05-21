@@ -8,7 +8,6 @@ FactoryBot.define do
                               filename: 'post_image_sample.jpeg',
                               content_type: 'image/jpeg')
     end
-
   end
   # 中間テーブルのテストデータ
   trait :category_engineer do

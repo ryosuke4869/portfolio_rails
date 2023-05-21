@@ -1,4 +1,2 @@
-console.log("jsが呼び出された");
-
 $('#btn-like-<%= @post.id %>').replaceWith("<%= j(render('likes/like', post: @post)) %>");
 

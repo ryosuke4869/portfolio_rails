@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  fdescribe 'Post validation' do
+  describe 'Post validation' do
     context 'すべてのfieldが有効の場合' do
       it '投稿できる' do
         post = build(:post, :category_engineer)
         expect(post).to be_valid
       end
     end
-    
+
     context '画像の拡張子が許されていないものでアップロードされた場合' do
       it '投稿に失敗する' do
         post = build(:post)

@@ -42,9 +42,9 @@ Capybara.register_driver :remote_chrome do |app|
         "disable-gpu",
         # ディスクのメモリスペースを使用。
         'disable-dev-shm-usage',
-        'remote-debugging-port=9222'
+        'remote-debugging-port=9222',
 
-      ]
+      ],
     }
   )
   Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
