@@ -32,16 +32,17 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - chrome
     networks:
       - default
     stdin_open: true
     tty: true
     command: bundle exec rails server -b 0.0.0.0
 
-  selenium_chrome:
-    image: selenium/standalone-chrome-debug
-    logging:
-      driver: none
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+    - 4444:4444
 
 volumes:
   mysql_data:
