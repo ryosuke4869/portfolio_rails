@@ -65,11 +65,8 @@
 
         <%# ブックマーク機能 %>
         <div class="bookmark-wrapper col-md-1">
-          <div id="bookmark_<%= @post.id %>">
-            <%= render 'bookmarks/bookmark', post: @post %>
-          </div>
+          <%= render 'bookmarks/bookmark', post: @post %>
         </div>
-
       </div>
 
       <%# コメント欄 %>
