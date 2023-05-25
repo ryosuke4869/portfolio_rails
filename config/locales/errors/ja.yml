@@ -5,5 +5,7 @@ ja:
       too_few_files: は%{count}個以上で入力してください
       invalid_file_type: は不正なファイル形式です
       less_than: より小さい値にしてください
+      #translation missing: ja.activerecord.errors.messages.record_invalidエラーの対処
+      record_invalid: "バリデーションに失敗しました: %{errors}"
 
 

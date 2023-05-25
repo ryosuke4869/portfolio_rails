@@ -21,7 +21,7 @@ class Post < ApplicationRecord
   has_many :items, through: :post_items
 
   validates :description, presence: true
-  validates :desk_images, attached: { message: "を添付してください" },
+  validates :desk_images, presence: { message: "を添付してください" },
                           content_type: { in: [:png, :jpg, :jpeg], message: "はpng, jpg, jpegいずれかの形式にして下さい" },
                           limit: { min: 1, max: 5, message: "は5枚まで投稿できます。" },
                           size: { between: 1.kilobyte..5.megabytes, message: 'は5MBより小さい値にしてください' }

@@ -24,8 +24,13 @@ RUN apt-get update                                                              
     zip                                                                                                                                 \
   && gem install foreman                                                                                                                \
   && apt-get clean
+  
+COPY . /portfolio_rails
+
+RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile \
+ && yarn cache clean \
+ && rm -rf node_modules tmp/cache
 
 RUN mkdir /portfolio_rails
 WORKDIR /portfolio_rails
-COPY . /portfolio_rails
 RUN bundle install
