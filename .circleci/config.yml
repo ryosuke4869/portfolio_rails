@@ -1,58 +1,92 @@
 version: 2.1
 jobs:
   rspec:
-    working_directory: ~/portfolio_rails
     docker:
-      - image: cimg/ruby:2.7.3
-    resource_class: small
+      - image: cimg/ruby:2.7.3-node
+        environment:
+          MYSQL_HOST: db
+
+      - image: circleci/mysql:8.0
+        command: mysqld --default-authentication-plugin=mysql_native_password
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_HOST: '%'
+        name: db
+
+      - image: selenium/standalone-chrome-debug:latest
+        name: chrome
+
+    working_directory: ~/portfolio_rails
+
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.14
-      - run: #環境変数の設定
-          name: Setup environment variable
-          command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
-          # CI実行の高速化のためにgemのinstall先とキャッシュの格納先を vendor/bundle 配下に修正
+          name: Install Chrome Driver
+          command: |
+            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            sudo apt-get update && sudo apt-get install -y unzip
+            wget -N http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip -P ~/
+            unzip ~/chromedriver_linux64.zip -d ~/
+            rm ~/chromedriver_linux64.zip
+            sudo chown root:root ~/chromedriver
+            sudo chmod 755 ~/chromedriver
+            sudo mv ~/chromedriver /usr/bin/chromedriver
+            sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -'
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+            sudo apt-get update && sudo apt-get install -y google-chrome-stable
+
+      # キャッシュの読み込み
+      # (過去にgemインストールをしていれば、キャッシュを使用して高速起動する)
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+
+      - restore_cache:
+          keys:
+            - rails-yarn-{{ checksum "yarn.lock" }}
+            - rails-yarn-
+
+      - run:
+          name: Install bundler
+          command: gem install bundler -v 2.1.0
+
+      - run:
           name: Configure Bundler
           command: |
-            gem install bundler:1.17.2
-            bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
-      - restore_cache:
+            bundle check --path=vendor/bundle || bundle install --clean --jobs 4 --retry 3
+            bundle install --path vendor/cache
+
+      - run:
+          name: Install imagemagick
+          command: sudo apt-get -y install imagemagick
+      - run:
+          name: Install yarn
+          command: yarn install
+
+      - run:
+          name: Install webpack
+          command: bundle exec bin/webpack
+
+      - save_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-      - run: #circle CI CLIではsetup_remote_dockerを使用するとエラー発生
-          name: Start containers and verify it is working
-          command: |
-            set -x
-            docker-compose up --build -d
-            docker exec portfolio_rails_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
-            docker-compose stop
-      - run:
-          name: yarn install & webpacker compile
-          command: |
-            set -x
-            docker-compose run --rm web yarn install --cache-files
-            docker-compose run --rm web bundle exec rails webpacker:install
-            docker-compose run --rm web bundle exec rails webpacker:compile
+
       - run:
           name: Setup database
           command: |
-            set -x
-            docker-compose up -d
-            docker-compose run web bundle exec rails db:create
-            docker-compose run web bundle exec rails db:migrate
-            docker-compose run web bundle exec rails db:seed_fu
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
       - run:
           name: Run rspec
-          command: docker-compose run web bundle exec rspec
+          command: bundle exec rspec
 
   rubocop:
     working_directory: ~/portfolio_rails
     docker:
-      - image: cimg/ruby:2.7.3
+      - image: cimg/ruby:2.7.3-node
     resource_class: small
     steps:
       - checkout

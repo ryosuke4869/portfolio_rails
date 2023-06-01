@@ -1,4 +1,11 @@
 version: '3'
+volumes:
+  mysql_data:
+  gem_data:
+  vendor_bundle:
+  node_modules:
+  public_spree:
+  storage:
 
 services:
   db:
@@ -15,6 +22,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     environment:
+      MYSQL_HOST: db
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -44,11 +52,4 @@ services:
     ports:
     - 4444:4444
 
-volumes:
-  mysql_data:
-  gem_data:
-  vendor_bundle:
-  node_modules:
-  public_spree:
-  storage:
 
