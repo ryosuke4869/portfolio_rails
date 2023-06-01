@@ -73,7 +73,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-
       - run:
           name: Setup database
           command: |
