@@ -1,4 +1,11 @@
 version: '3'
+volumes:
+  mysql_data:
+  gem_data:
+  vendor_bundle:
+  node_modules:
+  public_spree:
+  storage:
 
 services:
   db:
@@ -15,6 +22,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     environment:
+      MYSQL_HOST: db
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -32,22 +40,16 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - chrome
     networks:
       - default
     stdin_open: true
     tty: true
     command: bundle exec rails server -b 0.0.0.0
 
-  selenium_chrome:
-    image: selenium/standalone-chrome-debug
-    logging:
-      driver: none
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+    - 4444:4444
 
-volumes:
-  mysql_data:
-  gem_data:
-  vendor_bundle:
-  node_modules:
-  public_spree:
-  storage:
 

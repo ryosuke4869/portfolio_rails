@@ -1,5 +1,7 @@
 <div class="wrapper">
   <div class="show">
+    <%= flash[:notice] %>
+    <%= flash[:danger] %>
     <div class="show-container">
     <%# 投稿したユーザー情報 %>
       <div class="post-user row">
@@ -58,18 +60,13 @@
       <div class="row">
         <%# いいね機能  %>
         <div class="like-wrapper col-md-1">
-          <div id="like_<%= @post.id %>">
-            <%= render 'likes/like', post: @post %>
-          </div>
+          <%= render 'likes/like', post: @post %>
         </div>
 
         <%# ブックマーク機能 %>
         <div class="bookmark-wrapper col-md-1">
-          <div id="bookmark_<%= @post.id %>">
-            <%= render 'bookmarks/bookmark', post: @post %>
-          </div>
+          <%= render 'bookmarks/bookmark', post: @post %>
         </div>
-
       </div>
 
       <%# コメント欄 %>

@@ -1,1 +1,1 @@
-$('#bookmark_<%= @post.id %>').html("<%= escape_javascript(render "bookmarks/bookmark", post: @post) %>");
+$('#btn-unbookmark-<%= @post.id %>').replaceWith("<%= j(render 'bookmarks/bookmark', post: @post) %>");

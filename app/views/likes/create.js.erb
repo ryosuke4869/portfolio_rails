@@ -1,1 +1,2 @@
-$('#like_<%= @post.id %>').html("<%= escape_javascript(render "likes/like", post: @post) %>");
+$('#btn-like-<%= @post.id %>').replaceWith("<%= j(render('likes/like', post: @post)) %>");
+
