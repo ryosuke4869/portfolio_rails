@@ -2,6 +2,22 @@
 <%= flash[:notice] %>
   <h2>投稿一覧</h2>
   <div class="index">
+  <%#ーーーーーーーーーーーーーーーーーーーーーーー ここからソート機能ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー %>
+    <%= search_form_for @q do |f| %>
+      <%= f.label :sort_by, 'Sort by:' %>
+      <%= f.select :s, options_for_select(
+        [
+          ['投稿日 降順', 'created_at desc'],
+          ['投稿日 昇順', 'created_at asc'],
+          ['いいね数 降順 ', 'likes desc'],
+          ['いいね数 昇順', 'likes asc'],
+          ['ブックマーク数 降順', 'bookmarks desc'],
+          ['ブックマーク数 昇順', 'bookmarks asc'],
+        ]
+      ), {}, class: 'form-control' %>
+      <%= f.submit 'Sort', class: 'btn btn-primary' %>
+    <% end %>
+
     <div class="gallery row">
       <% @posts.each do |post| %>
         <div class="col-md-4">
@@ -21,6 +37,7 @@
                 <i class="fa-regular fa-comments" aria-hidden="true"></i>
                 <%= post.comments.count %>
             </div>
+                <%= post.created_at %>
 
             <div class="card-body item-info row">
               <% if post.post_items.present? %>

@@ -3,9 +3,32 @@ class PostsController < ApplicationController
   before_action :check_user, only: [:edit, :update, :destroy]
   # 投稿用
   def index
-    @posts = Post.all
     @user = User.all
     flash[:alert] = "ログインしていません" unless user_signed_in?
+  # ransackを使用したsort機能
+    @q = Post.ransack(params[:q])
+    if params[:q] && params[:q][:s].present?
+      if params[:q][:s] == 'created_at asc' || params[:q][:s] == 'created_at desc'
+      created_at_order = params[:q][:s] == 'created_at asc' ? 'ASC' : 'DESC'
+      @posts = @q.result(distinct: true)
+                  .order("created_at #{created_at_order}")
+      elsif params[:q][:s] == 'likes asc' || params[:q][:s] == 'likes desc'
+        likes_order = params[:q][:s] == 'likes asc' ? 'ASC' : 'DESC'
+        @posts = @q.result(distinct: true)
+                .left_joins(:likes)
+                .group('posts.id')
+                .order(Arel.sql("COALESCE(COUNT(likes.id), 0) #{likes_order}"))
+      elsif params[:q][:s] == 'bookmarks asc' || params[:q][:s] == 'bookmarks desc'
+        bookmarks_order = params[:q][:s] == 'bookmarks asc' ? 'ASC' : 'DESC'
+        @posts = @q.result(distinct: true)
+        .left_joins(:bookmarks)
+        .group('posts.id')
+        .order(Arel.sql("COALESCE(COUNT(bookmarks.id), 0) #{bookmarks_order}"))
+      end
+    else
+      @posts = @q.result(distinct: true)
+    end
+    @posts ||= Post.all
   end
 
   def new # 新規登録画面

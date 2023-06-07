@@ -28,4 +28,11 @@ class Post < ApplicationRecord
 
   # seed_fuしなおすとvalidateに引っかかるので後で修正
   # validates :category_ids, presence: { message: 'は１つ以上選択してください。' }
+
+
+  # ransackでソートに使用できる属性追加
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "description", "likes_count", "bookmarks_count"]
+  end
+
 end
