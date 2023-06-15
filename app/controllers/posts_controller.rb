@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:id, :description, desk_images: [], category_ids: [])
+    params.require(:post).permit(:id, :title, :description, desk_images: [], category_ids: [])
   end
 
   # 自身が投稿したものだけ編集と削除が可能
