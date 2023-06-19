@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+
+
   belongs_to :user
   has_many_attached :desk_images
   # カテゴリ機能のアソシエーション
@@ -32,7 +34,7 @@ class Post < ApplicationRecord
 
   # ransackでソートに使用できる属性追加
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "likes_count", "bookmarks_count"]
+    ["created_at", "description", "likes_count"]
   end
 
 end

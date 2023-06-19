@@ -8,10 +8,7 @@ class PostsController < ApplicationController
   def index
     @user = User.all
     flash[:alert] = "ログインしていません" unless user_signed_in?
-    @q = Post.ransack(params[:q])
-    sorting_param = params[:q]&.dig(:s)
-    @posts = apply_sorting(@q.result(distinct: true), sorting_param)
-    @posts ||= Post.all
+    ransack_search
   end
 
   def new # 新規登録画面

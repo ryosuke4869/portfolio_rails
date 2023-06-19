@@ -3,20 +3,29 @@
   <h2>投稿一覧</h2>
   <div class="index">
   <%#ーーーーーーーーーーーーーーーーーーーーーーー ここからソート機能ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー %>
-    <%= search_form_for @q do |f| %>
-      <%= f.label :sort_by, 'Sort by:' %>
-      <%= f.select :s, options_for_select(
-        [
-          ['投稿日 降順', 'created_at desc'],
-          ['投稿日 昇順', 'created_at asc'],
-          ['いいね数 降順 ', 'likes desc'],
-          ['いいね数 昇順', 'likes asc'],
-          ['ブックマーク数 降順', 'bookmarks desc'],
-          ['ブックマーク数 昇順', 'bookmarks asc'],
-        ]
-      ), {}, class: 'form-control' %>
-      <%= f.submit 'Sort', class: 'btn btn-primary' %>
-    <% end %>
+  <%= form_tag posts_path, method: :get do %>
+    <div class="sort_by">
+      <%= label_tag :category, "カテゴリー" %>
+      <%= radio_button_tag :category, "指定なし", params[:category].nil? || params[:category] == "指定なし" %>
+      <%= label_tag :category_none, "指定なし" %>
+      <%= radio_button_tag :category, "Engineer", params[:category] == "Engineer" %>
+      <%= label_tag :category_engineer, "Engineer" %>
+      <%= radio_button_tag :category, "Writer", params[:category] == "Writer" %>
+      <%= label_tag :category_writer, "Writer" %>
+      <%= radio_button_tag :category, "Gamer", params[:category] == "Gamer" %>
+      <%= label_tag :category_gamer, "Gamer" %>
+    </div>
+
+    <div class="sort_order">
+      <%= label_tag :sort_by, "ソート順" %>
+      <%= select_tag :sort_by, options_for_select([["指定なし", ""], ["投稿日", "created_at"], ["いいね数", "likes"]], params[:sort_by].presence), include_blank: false %>
+
+      <%= label_tag :sort_order, "並び順" %>
+      <%= select_tag :sort_order, options_for_select([["指定なし", ""], ["降順", "desc"], ["昇順", "asc"]], params[:sort_order].presence), include_blank: false %>
+    </div>
+    <%= submit_tag "絞り込む" %>
+  <% end %>
+
 
     <div class="gallery row">
       <% @posts.each do |post| %>
