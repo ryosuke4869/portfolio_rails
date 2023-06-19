@@ -10,14 +10,16 @@ module ApplicationHelper
     end
 
     if params[:sort_by] == "likes"
-      @posts = @posts.left_joins(:likes).group(:id).order('COUNT(likes.id) DESC')
+      sort_order = params[:sort_order] == "asc" ? "ASC" : "DESC"
+      @posts = @posts.left_joins(:likes).group(:id).order("COUNT(likes.id) #{sort_order}")
     else
-      sort_order = params[:sort_order].presence || "desc" # Set a default value if sort_order is empty
+      sort_order = params[:sort_order].presence || "desc"
       if sort_order == "指定なし"
-        @posts = @posts.order(created_at: nil) # Do not apply any specific sorting order
+        @posts = @posts.order(created_at: nil)
       else
         @posts = @posts.order(created_at: sort_order)
       end
     end
+
   end
 end
