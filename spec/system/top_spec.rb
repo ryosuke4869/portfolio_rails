@@ -50,7 +50,6 @@ RSpec.describe "Top", type: :system do
           expect(page).to have_text(post2.title)
           expect(page).not_to have_text(post.title)
           expect(page).not_to have_text(post3.title)
-
         end
         it 'カテゴリーがGamerの投稿に遷移できる' do
           within '.category-search' do
@@ -59,7 +58,6 @@ RSpec.describe "Top", type: :system do
           expect(page).to have_text(post3.title)
           expect(page).not_to have_text(post.title)
           expect(page).not_to have_text(post2.title)
-
         end
       end
     end

@@ -51,7 +51,6 @@ RSpec.describe "Post", type: :system do
           expect(page).to have_text(post3.title)
           expect(page).not_to have_text(post.title)
           expect(page).not_to have_text(post2.title)
-
         end
       end
 
