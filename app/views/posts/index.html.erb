@@ -2,17 +2,45 @@
 <%= flash[:notice] %>
   <h2>投稿一覧</h2>
   <div class="index">
+  <%#ーーーーーーーーーーーーーーーーーーーーーーー ここからソート機能ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー %>
+  <%= form_tag posts_path, method: :get do %>
+    <div class="sort_by">
+      <%= label_tag :category, "カテゴリー" %>
+      <%= radio_button_tag :category, "指定なし", params[:category].nil? || params[:category] == "指定なし" %>
+      <%= label_tag :category_none, "指定なし" %>
+      <%= radio_button_tag :category, "Engineer", params[:category] == "Engineer" %>
+      <%= label_tag :category_engineer, "Engineer" %>
+      <%= radio_button_tag :category, "Writer", params[:category] == "Writer" %>
+      <%= label_tag :category_writer, "Writer" %>
+      <%= radio_button_tag :category, "Gamer", params[:category] == "Gamer" %>
+      <%= label_tag :category_gamer, "Gamer" %>
+    </div>
+
+    <div class="sort_order">
+      <%= label_tag :sort_by, "ソート順" %>
+      <%= select_tag :sort_by, options_for_select([["指定なし", ""], ["投稿日", "created_at"], ["いいね数", "likes"]], params[:sort_by].presence), include_blank: false %>
+
+      <%= label_tag :sort_order, "並び順" %>
+      <%= select_tag :sort_order, options_for_select([["指定なし", ""], ["降順", "desc"], ["昇順", "asc"]], params[:sort_order].presence), include_blank: false %>
+    </div>
+    <%= submit_tag "絞り込む" %>
+  <% end %>
+
+
     <div class="gallery row">
       <% @posts.each do |post| %>
         <div class="col-md-4">
           <div class="card my-5" style="width: 30rem; height: 40rem;">
             <%= image_tag post.desk_images[0].variant( resize: "478x269!").processed if post.desk_images.attached? %>
             <div class="card-body post-info">
+              <div class="user-info">
                 <% if post.user.avatar.attached? %>
                   <%= image_tag post.user.avatar, class: "user-icon" %>
                 <% else %>
                   <img class="user-icon" src="/assets/default_icon.jpeg">
                 <% end %>
+              </div>
+              <div class="post-stats">
                 <%= link_to post.user.name, post_path(post.id) %>
                 <i class="fa fa-heart" aria-hidden="true"></i>
                 <%= post.likes.count %>
@@ -20,9 +48,18 @@
                 <%= post.bookmarks.count %>
                 <i class="fa-regular fa-comments" aria-hidden="true"></i>
                 <%= post.comments.count %>
+              </div>
+              <div class="post-title">
+                <%= post.title %>
+              </div>
+              <%= post.created_at %>
+              <% post.categories.each do |category| %>
+                <%= category.name %>
+              <% end %>
             </div>
 
             <div class="card-body item-info row">
+
               <% if post.post_items.present? %>
                 <% post.post_items.each do |post_item| %>
                   <div class="item-list col-4">

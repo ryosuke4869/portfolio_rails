@@ -2,14 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "Post", type: :system do
   describe 'PostのCRUD' do
-    let(:user) { create(:user) }
-    let!(:post) { create(:post, user_id: user.id) }
-    let!(:post_category_engineer) { create(:post, :category_engineer) }
-    let!(:post_category_writer) { create(:post, :category_writer) }
-    let!(:post_category_gamer) { create(:post, :category_gamer) }
-    let(:post_user) { create(:post, user: user) }
-    let(:post_others) { create(:post) }
+    include_context "posts and likes"
+    let(:post_user) { create(:post, user: user, created_at: Time.now - 3.day) }
+    let(:post_others) { create(:post, created_at: Time.now - 4.day) }
 
+    #----------------一覧ページ------------------------
     describe '投稿一覧ページ' do
       before do
         visit posts_path
@@ -24,6 +21,82 @@ RSpec.describe "Post", type: :system do
         it '投稿詳細ページへの遷移テスト' do
           click_on post.user.name
           expect(current_path).to eq post_path(post.id)
+        end
+      end
+      context 'カテゴリー絞り込み機能' do
+        it '絞り込みなし' do
+          click_on '絞り込む'
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post2.title)
+          expect(page).to have_text(post3.title)
+        end
+
+        it 'Engineerに指定して絞り込みができる' do
+          choose 'category_Engineer', allow_label_click: true
+          click_button '絞り込む'
+          expect(page).to have_text(post.title)
+          expect(page).not_to have_text(post2.title)
+          expect(page).not_to have_text(post3.title)
+        end
+        it 'Writerに指定して絞り込みができる' do
+          choose 'category_Writer', allow_label_click: true
+          click_button '絞り込む'
+          expect(page).to have_text(post2.title)
+          expect(page).not_to have_text(post.title)
+          expect(page).not_to have_text(post3.title)
+        end
+        it 'Gamerに指定して絞り込みができる' do
+          choose 'category_Gamer', allow_label_click: true
+          click_button '絞り込む'
+          expect(page).to have_text(post3.title)
+          expect(page).not_to have_text(post.title)
+          expect(page).not_to have_text(post2.title)
+        end
+      end
+
+      context 'ソート機能' do
+        it 'ユーザーは投稿日降順にソートできる' do
+          select '投稿日', from: 'sort_by'
+          select '降順', from: 'sort_order'
+          click_on '絞り込む'
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post2.title)
+          expect(page).to have_text(post3.title)
+          posts = page.all('.post-title').map(&:text)
+          expect(posts).to eq([post.title, post2.title, post3.title])
+        end
+
+        it 'ユーザーは投稿日昇順にソートできる' do
+          select '投稿日', from: 'sort_by'
+          select '昇順', from: 'sort_order'
+          click_on '絞り込む'
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post2.title)
+          expect(page).to have_text(post3.title)
+          posts = page.all('.post-title').map(&:text)
+          expect(posts).to eq([post3.title, post2.title, post.title])
+        end
+
+        it 'ユーザーはいいね数降順にソートできる' do
+          select 'いいね数', from: 'sort_by'
+          select '降順', from: 'sort_order'
+          click_on '絞り込む'
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post2.title)
+          expect(page).to have_text(post3.title)
+          posts = page.all('.post-title').map(&:text)
+          expect(posts).to eq([post3.title, post2.title, post.title])
+        end
+
+        it 'ユーザーはいいね数昇順にソートできる' do
+          select 'いいね数', from: 'sort_by'
+          select '昇順', from: 'sort_order'
+          click_on '絞り込む'
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post2.title)
+          expect(page).to have_text(post3.title)
+          posts = page.all('.post-title').map(&:text)
+          expect(posts).to eq([post.title, post2.title, post3.title])
         end
       end
     end

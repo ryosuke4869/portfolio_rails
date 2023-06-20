@@ -2,25 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Top", type: :system do
   describe 'Topの表示テスト' do
-    let(:user) { create(:user) }
-    let(:user2) { create(:user) }
-    let(:user3) { create(:user) }
-    let!(:post) { create(:post, :category_engineer, created_at: Time.now) }
-    let!(:post2) { create(:post, :category_writer, created_at: Time.now - 1.day) }
-    let!(:post3) { create(:post, :category_gamer, created_at: Time.now - 2.day) }
+    include_context "posts and likes"
     let!(:post4) { create(:post, created_at: Time.now - 3.day) }
-    let!(:likes) do
-      [
-        create(:like, post: post, user: user),
-        create(:like, post: post, user: user2),
-        create(:like, post: post, user: user3),
-        create(:like, post: post2, user: user),
-        create(:like, post: post2, user: user2),
-        create(:like, post: post3, user: user),
-      ]
-    end
-
-    posts = Post.order(created_at: :desc)
 
     before do
       visit root_path
@@ -30,10 +13,11 @@ RSpec.describe "Top", type: :system do
       context 'いいね数ランキング' do
         it 'いいね数が多い順に３つ表示されている' do
           within '.like-rank' do
+            cards = page.all('.card')
             expect(page).to have_selector('.card', count: 3)
-            expect(posts.first).to eq(post)
-            expect(posts.second).to eq(post2)
-            expect(posts.third).to eq(post3)
+            expect(cards[0]).to have_content(post3.title)
+            expect(cards[1]).to have_content(post2.title)
+            expect(cards[2]).to have_content(post.title)
           end
         end
       end
@@ -41,11 +25,11 @@ RSpec.describe "Top", type: :system do
       context '最近の投稿' do
         it '最近の投稿順に３つ表示されている' do
           within '.recent-post' do
+            cards = page.all('.card')
             expect(page).to have_selector('.card', count: 3)
-            recent_posts = Post.order(created_at: :desc).take(3)
-            expect(recent_posts.first).to eq(post)
-            expect(recent_posts.second).to eq(post2)
-            expect(recent_posts.third).to eq(post3)
+            expect(cards[0]).to have_content(post.title)
+            expect(cards[1]).to have_content(post2.title)
+            expect(cards[2]).to have_content(post3.title)
           end
         end
       end
@@ -55,19 +39,25 @@ RSpec.describe "Top", type: :system do
           within '.category-search' do
             click_on 'Engineer'
           end
-          expect(page).to have_content('#Engineer')
+          expect(page).to have_text(post.title)
+          expect(page).not_to have_text(post2.title)
+          expect(page).not_to have_text(post3.title)
         end
         it 'カテゴリーがWriterの投稿に遷移できる' do
           within '.category-search' do
             click_on 'Writer'
           end
-          expect(page).to have_content('#Writer')
+          expect(page).to have_text(post2.title)
+          expect(page).not_to have_text(post.title)
+          expect(page).not_to have_text(post3.title)
         end
         it 'カテゴリーがGamerの投稿に遷移できる' do
           within '.category-search' do
             click_on 'Gamer'
           end
-          expect(page).to have_content('#Gamer')
+          expect(page).to have_text(post3.title)
+          expect(page).not_to have_text(post.title)
+          expect(page).not_to have_text(post2.title)
         end
       end
     end

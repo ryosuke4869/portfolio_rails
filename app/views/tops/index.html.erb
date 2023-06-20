@@ -37,6 +37,9 @@
               <%= like_post.comments.count %>
               <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
               <%= like_post.bookmarks.count %>
+              <div class="post-title">
+                <%= like_post.title %>
+              </div>
             </div>
           </div>
         </div>
@@ -66,6 +69,9 @@
               <%= recent_post.comments.count %>
               <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
               <%= recent_post.bookmarks.count %>
+              <div class="post-title">
+                <%= recent_post.title %>
+              </div>
             </div>
           </div>
         </div>
@@ -82,7 +88,7 @@
         <div class="card my-5">
           <img src="/assets/Engineer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[0].name, categories_path(category_id: @categories[0].id)%>
+            <%= link_to @categories[0].name, posts_path(category: "Engineer", category_id: @categories[0].id)%>
           </div>
         </div>
       </div>
@@ -91,7 +97,7 @@
         <div class="card my-5">
           <img src="/assets/Writer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[1].name, categories_path(category_id: @categories[1].id)%>
+            <%= link_to @categories[1].name, posts_path(category: "Writer", category_id: @categories[1].id)%>
           </div>
         </div>
       </div>
@@ -100,7 +106,7 @@
         <div class="card my-5">
           <img src="/assets/Gamer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[2].name, categories_path(category_id: @categories[2].id)%>
+            <%= link_to @categories[2].name, posts_path(category: "Gamer", category_id: @categories[2].id)%>
           </div>
         </div>
       </div>

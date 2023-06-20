@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   root to: 'tops#index'
   get "tops/index"
 
-  # 投稿用のroute
-  resources :categories
-
   resources :posts do
     # いいね機能のルーティング
     resource :likes, only: [:create, :destroy]

@@ -4,6 +4,10 @@
     <%= form_with model: @post, local:true do |f|%>
       <%= render "posts/error_messages"%>
       <div class="form-content">
+        <%= f.label :title, "タイトル"%>
+        <%= f.text_field :title, class:"text-area", placeholder: "タイトル" %>
+      </div>
+      <div class="form-content">
         <%= f.label :description, "紹介"%>
         <%= f.text_area :description, class:"text-area", placeholder: "デスク紹介" %>
       </div>

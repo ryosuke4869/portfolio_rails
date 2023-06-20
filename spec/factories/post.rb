@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :post do
-    sequence(:description) { |n| "テスト用の#{n}番目の投稿" }
+    sequence(:title) { |n| "テスト用の#{n}番目の投稿タイトル" }
+    sequence(:description) { |n| "テスト用の#{n}番目の投稿説明" }
     association :user
 
     after(:build) do |post|

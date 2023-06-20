@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
+  include RansackSearchActions
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :check_user, only: [:edit, :update, :destroy]
   # 投稿用
   def index
-    @posts = Post.all
     @user = User.all
     flash[:alert] = "ログインしていません" unless user_signed_in?
+    ransack_search
   end
 
   def new # 新規登録画面
@@ -51,7 +53,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:id, :description, desk_images: [], category_ids: [])
+    params.require(:post).permit(:id, :title, :description, desk_images: [], category_ids: [])
   end
 
   # 自身が投稿したものだけ編集と削除が可能
