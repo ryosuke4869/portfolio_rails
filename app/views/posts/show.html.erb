@@ -31,7 +31,7 @@
       <%# 登録したカテゴリー表示 %>
       <div class="category-container my-3">
         <% @post.categories.each do |category| %>
-          <%= link_to "##{category.name}", categories_path(category_id: category.id)%>
+          <%= link_to "##{category.name}", posts_path(category: "#{category.name}", category_id: category.id)%>
 
         <% end %>
       </div>
