@@ -2,7 +2,7 @@ module RansackSearchActions
   extend ActiveSupport::Concern
   def ransack_search
     @q = Post.ransack(params[:q])
-    @posts = @q.result.includes(:categories)
+    @posts = @q.result.includes(:categories).page(params[:page]).per(6)
 
     if params[:category].present? && params[:category] != "指定なし"
       @posts = @posts.joins(:categories).where(categories: { name: params[:category] })

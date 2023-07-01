@@ -31,3 +31,7 @@
 
 ja:
   hello: "Hello world"
+  # views:
+  #   pagination:
+  #     previous: "&lsaquo; back"
+  #     truncate: "..."
