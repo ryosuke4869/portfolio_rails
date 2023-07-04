@@ -1,5 +1,6 @@
-$(document).on('turbolinks:load',function(){
-  $('.menu-btn').on('click', function(){
+$(function(){
+  function toggleMenu() {
     $('.menu').toggleClass('is-active');
-  });
+  }
+  $('.menu-btn').off('click').on('click', toggleMenu);
 });
