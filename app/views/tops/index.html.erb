@@ -1,6 +1,7 @@
 <div class="top-wrapper">
-  <div class="inner-bg">
-    <div class="container">
+  <div class="container">
+    <div class="inner-bg">
+      <%= image_tag "background-img.jpeg", alt: "Topデスク画像" %>
       <div class="row">
         <div class="col text">
           <h1>デスク環境shareしてみませんか?</h1>
@@ -50,7 +51,6 @@
     </div>
   </div>
 
-
   <!-- Section 2 -->
 	<%# 最近の投稿 %>
   <div class="container my-5">
@@ -94,7 +94,7 @@
         <div class="card my-5">
           <img src="/assets/Engineer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[0].name, posts_path(category: "Engineer", category_id: @categories[0].id)%>
+            <%= link_to @categories[0].name, posts_path(q: { category_eq: @categories[0].name}) %>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
         <div class="card my-5">
           <img src="/assets/Writer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[1].name, posts_path(category: "Writer", category_id: @categories[1].id)%>
+            <%= link_to @categories[1].name, posts_path(q: { category_eq: @categories[1].name}) %>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@
         <div class="card my-5">
           <img src="/assets/Gamer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[2].name, posts_path(category: "Gamer", category_id: @categories[2].id)%>
+            <%= link_to @categories[2].name, posts_path(q: { category_eq: @categories[2].name}) %>
           </div>
         </div>
       </div>

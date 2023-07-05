@@ -31,9 +31,25 @@
       <%# 登録したカテゴリー表示 %>
       <div class="category-container my-3">
         <% @post.categories.each do |category| %>
-          <%= link_to "##{category.name}", posts_path(category: "#{category.name}", category_id: category.id)%>
-
+          <%= link_to "カテゴリー : ##{category.name}", posts_path(q: { category_eq: category.name }) %>
         <% end %>
+      </div>
+
+      <div class="description-container">
+        <p>デスク名 : <%= @post.title%></p>
+        <p>投稿の紹介</p>
+        <p><%= @post.description%></p>
+      </div>
+      <div class="row">
+        <%# いいね機能  %>
+        <div class="like-wrapper col-md-1">
+          <%= render 'likes/like', post: @post %>
+        </div>
+
+        <%# ブックマーク機能 %>
+        <div class="bookmark-wrapper col-md-1">
+          <%= render 'bookmarks/bookmark', post: @post %>
+        </div>
       </div>
 
       <%# アイテム機能 %>
@@ -52,22 +68,7 @@
           </i>
         <% end %>
       <% end %>
-      <div class="description-container">
-        <p>投稿の紹介</p>
-        <p><%= @post.description%></p>
-      </div>
 
-      <div class="row">
-        <%# いいね機能  %>
-        <div class="like-wrapper col-md-1">
-          <%= render 'likes/like', post: @post %>
-        </div>
-
-        <%# ブックマーク機能 %>
-        <div class="bookmark-wrapper col-md-1">
-          <%= render 'bookmarks/bookmark', post: @post %>
-        </div>
-      </div>
 
       <%# コメント欄 %>
       <%= render 'comments/comments-list'%>
@@ -79,4 +80,4 @@
     </div>
   </div>
 </div>
-<%= javascript_pack_tag 'swipper' %>
+<%= javascript_pack_tag 'swipper'%>
