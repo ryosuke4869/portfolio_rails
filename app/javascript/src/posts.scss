@@ -1,10 +1,13 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
 //一覧ページ
 .index-container {
   padding: 100px 0 100px 0;
+}
+.index h2 {
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
 .gallery a {
@@ -23,6 +26,31 @@
   text-decoration: none;
   color: inherit;
 }
+
+.card-img-top {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-info > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.post-info {
+  text-align: center;
+}
+
+.post-info p {
+  display: inline-block;
+  margin-right: 10px; /* 必要に応じて適切なマージンを設定してください */
+}
+
 
 //詳細ページ
 .show {
