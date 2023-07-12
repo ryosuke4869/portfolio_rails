@@ -32,21 +32,21 @@ RSpec.describe "Post", type: :system do
         end
 
         it 'Engineerに指定して絞り込みができる' do
-          choose 'category_Engineer', allow_label_click: true
+          choose 'q_category_eq_engineer', allow_label_click: true
           click_button '絞り込む'
           expect(page).to have_text(post.title)
           expect(page).not_to have_text(post2.title)
           expect(page).not_to have_text(post3.title)
         end
         it 'Writerに指定して絞り込みができる' do
-          choose 'category_Writer', allow_label_click: true
+          choose 'q_category_eq_writer', allow_label_click: true
           click_button '絞り込む'
           expect(page).to have_text(post2.title)
           expect(page).not_to have_text(post.title)
           expect(page).not_to have_text(post3.title)
         end
         it 'Gamerに指定して絞り込みができる' do
-          choose 'category_Gamer', allow_label_click: true
+          choose 'q_category_eq_gamer', allow_label_click: true
           click_button '絞り込む'
           expect(page).to have_text(post3.title)
           expect(page).not_to have_text(post.title)
