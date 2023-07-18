@@ -18,9 +18,15 @@
       <%= f.label :s, "投稿の並び替え" %>
       <div class="sort_order">
           <%= f.label :s, "ソート順" %>
-          <%= f.select :s, options_for_select([["指定なし", ""], ["投稿日", "created_at"], ["いいね数", "likes"]], params[:s]), include_blank: false %>
-          <%= f.label :s, "並び順" %>
-          <%= f.select :s, options_for_select([["指定なし", ""], ["降順", "desc"], ["昇順", "asc"]], params[:s]), include_blank: false %>
+          <%= f.select :s, options_for_select(
+            [
+              ["指定なし", ""],
+              ['いいね数（降順）', 'likes desc'],
+              ['いいね数（昇順）', 'likes asc'],
+              ['投稿日（降順）', 'created_at desc'],
+              ['投稿日（昇順）', 'created_at asc']
+            ],
+          ) %>
       </div>
     </div>
     <%= f.submit "絞り込む" %>
