@@ -19,6 +19,6 @@ module RansackSearchActions
       end
     end
     @posts = posts
-    @selected_option = params[:q][:s].presence || ''
+    @selected_option = params.dig(:q, :s).presence || ''
   end
 end
