@@ -19,5 +19,6 @@ module RansackSearchActions
       end
     end
     @posts = posts
+    @selected_option = params[:q][:s].presence || ''
   end
 end
