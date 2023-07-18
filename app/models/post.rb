@@ -30,10 +30,11 @@ class Post < ApplicationRecord
   # validates :category_ids, presence: { message: 'は１つ以上選択してください。' }
 
   # ransackでソートに使用できる属性追加
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(auth_object = {})
     ["created_at", "description", "category_eq"]
   end
-  def self.ransackable_associations(auth_object = nil)
+
+  def self.ransackable_associations(auth_object = {})
     ["likes"]
   end
 end

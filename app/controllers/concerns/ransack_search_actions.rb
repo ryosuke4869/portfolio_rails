@@ -10,12 +10,12 @@ module RansackSearchActions
       end
       if params[:q][:s] == 'created_at asc' || params[:q][:s] == 'created_at desc'
         created_at_order = params[:q][:s] == 'created_at asc' ? 'ASC' : 'DESC'
-        posts = posts.order("posts.created_at #{created_at_order}")
+        posts = posts.order(created_at: created_at_order)
       elsif params[:q][:s] == 'likes asc' || params[:q][:s] == 'likes desc'
         likes_order = params[:q][:s] == 'likes asc' ? 'ASC' : 'DESC'
-        posts = posts.left_joins(:likes)
-                      .group('posts.id')
-                      .order(Arel.sql("COUNT(likes.id) #{likes_order}"))
+        posts = posts.left_joins(:likes).
+          group('posts.id').
+          order(Arel.sql("COUNT(likes.id) #{likes_order}"))
       end
     end
     @posts = posts

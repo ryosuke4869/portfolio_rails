@@ -54,7 +54,7 @@ RSpec.describe "Post", type: :system do
         end
       end
 
-      fcontext 'ソート機能' do
+      context 'ソート機能' do
         it 'ユーザーは投稿日降順にソートできる' do
           select '投稿日（降順）', from: 'ソート順'
           click_on '絞り込む'
