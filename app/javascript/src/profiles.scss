@@ -1,0 +1,62 @@
+.mypage-avatar {
+  width: 300px;
+  height: 300px;
+  border: solid 1px #000;
+  object-fit:cover;
+	border-radius:50%;
+}
+
+.gallery-img {
+  padding-top: 12px;
+}
+
+.gallery-img img{
+  width: 100%;
+}
+
+.tab-area {
+  cursor: pointer;/* カーソルポインターに */
+  margin-top: 25px;
+}
+.tab {
+  padding: 5px;
+}
+
+.tab.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.panel {
+  display: none;
+  text-align: center;
+}
+.panel.active {
+  display: block;
+}
+
+.list-container{
+  margin: 2rem 0rem ;
+}
+
+.list-container a{
+  color: white;
+  text-decoration: none;
+}
+.list-container a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.mypage-post {
+  background-color: rgb(116,116,116);
+}
+.post-info {
+  margin-top: 15px;
+  line-height: 60px;
+}
+
+.card-text {
+  margin-top: 25px;
+}
+

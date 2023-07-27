@@ -32,21 +32,21 @@ RSpec.describe "Post", type: :system do
         end
 
         it 'Engineerに指定して絞り込みができる' do
-          choose 'category_Engineer', allow_label_click: true
+          choose 'q_category_eq_engineer', allow_label_click: true
           click_button '絞り込む'
           expect(page).to have_text(post.title)
           expect(page).not_to have_text(post2.title)
           expect(page).not_to have_text(post3.title)
         end
         it 'Writerに指定して絞り込みができる' do
-          choose 'category_Writer', allow_label_click: true
+          choose 'q_category_eq_writer', allow_label_click: true
           click_button '絞り込む'
           expect(page).to have_text(post2.title)
           expect(page).not_to have_text(post.title)
           expect(page).not_to have_text(post3.title)
         end
         it 'Gamerに指定して絞り込みができる' do
-          choose 'category_Gamer', allow_label_click: true
+          choose 'q_category_eq_gamer', allow_label_click: true
           click_button '絞り込む'
           expect(page).to have_text(post3.title)
           expect(page).not_to have_text(post.title)
@@ -56,47 +56,47 @@ RSpec.describe "Post", type: :system do
 
       context 'ソート機能' do
         it 'ユーザーは投稿日降順にソートできる' do
-          select '投稿日', from: 'sort_by'
-          select '降順', from: 'sort_order'
+          select '投稿日（降順）', from: 'ソート順'
           click_on '絞り込む'
           expect(page).to have_text(post.title)
           expect(page).to have_text(post2.title)
           expect(page).to have_text(post3.title)
-          posts = page.all('.post-title').map(&:text)
-          expect(posts).to eq([post.title, post2.title, post3.title])
+          posts = page.all('.post-info p:nth-child(2)').map(&:text)
+          titles = posts.map { |text| text.gsub("デスク名 : ", "") }
+          expect(titles).to eq([post.title, post2.title, post3.title])
         end
 
         it 'ユーザーは投稿日昇順にソートできる' do
-          select '投稿日', from: 'sort_by'
-          select '昇順', from: 'sort_order'
+          select '投稿日（昇順）', from: 'ソート順'
           click_on '絞り込む'
           expect(page).to have_text(post.title)
           expect(page).to have_text(post2.title)
           expect(page).to have_text(post3.title)
-          posts = page.all('.post-title').map(&:text)
-          expect(posts).to eq([post3.title, post2.title, post.title])
+          posts = page.all('.post-info p:nth-child(2)').map(&:text)
+          titles = posts.map { |text| text.gsub("デスク名 : ", "") }
+          expect(titles).to eq([post3.title, post2.title, post.title])
         end
 
         it 'ユーザーはいいね数降順にソートできる' do
-          select 'いいね数', from: 'sort_by'
-          select '降順', from: 'sort_order'
+          select 'いいね数（降順）', from: 'ソート順'
           click_on '絞り込む'
           expect(page).to have_text(post.title)
           expect(page).to have_text(post2.title)
           expect(page).to have_text(post3.title)
-          posts = page.all('.post-title').map(&:text)
-          expect(posts).to eq([post3.title, post2.title, post.title])
+          posts = page.all('.post-info p:nth-child(2)').map(&:text)
+          titles = posts.map { |text| text.gsub("デスク名 : ", "") }
+          expect(titles).to eq([post3.title, post2.title, post.title])
         end
 
         it 'ユーザーはいいね数昇順にソートできる' do
-          select 'いいね数', from: 'sort_by'
-          select '昇順', from: 'sort_order'
+          select 'いいね数（昇順）', from: 'ソート順'
           click_on '絞り込む'
           expect(page).to have_text(post.title)
           expect(page).to have_text(post2.title)
           expect(page).to have_text(post3.title)
-          posts = page.all('.post-title').map(&:text)
-          expect(posts).to eq([post.title, post2.title, post3.title])
+          posts = page.all('.post-info p:nth-child(2)').map(&:text)
+          titles = posts.map { |text| text.gsub("デスク名 : ", "") }
+          expect(titles).to eq([post.title, post2.title, post3.title])
         end
       end
     end

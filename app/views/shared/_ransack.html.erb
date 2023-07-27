@@ -1,0 +1,35 @@
+<%= search_form_for @q do |f| %>
+  <div class="ransack">
+    <div class="label_title">
+      <%= f.label :category_eq, "カテゴリーから探す" %>
+      <div class="sort_by">
+        <%= f.radio_button :category_eq, '', { checked: params[:q].nil? || params[:q][:category_eq].blank? } %>
+        <%= f.label :category_none, "指定なし" %>
+        <%= f.radio_button :category_eq, "Engineer", checked: !params[:q].nil? && params[:q][:category_eq] == "Engineer" %>
+        <%= f.label :category_engineer, "Engineer" %>
+        <%= f.radio_button :category_eq, "Writer", checked: !params[:q].nil? && params[:q][:category_eq] == "Writer" %>
+        <%= f.label :category_writer, "Writer" %>
+        <%= f.radio_button :category_eq, "Gamer", checked: !params[:q].nil? && params[:q][:category_eq] == "Gamer" %>
+        <%= f.label :category_gamer, "Gamer" %>
+      </div>
+    </div>
+
+    <div class="label_title">
+      <%= f.label :s, "投稿の並び替え" %>
+      <div class="sort_order">
+          <%= f.label :s, "ソート順" %>
+          <%= f.select :s, options_for_select(
+            [
+              ["指定なし", ""],
+              ['いいね数（降順）', 'likes desc'],
+              ['いいね数（昇順）', 'likes asc'],
+              ['投稿日（降順）', 'created_at desc'],
+              ['投稿日（昇順）', 'created_at asc']
+            ],
+            selected: @selected_option
+          ) %>
+      </div>
+    </div>
+    <%= f.submit "絞り込む" %>
+  </div>
+<% end %>

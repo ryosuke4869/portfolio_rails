@@ -1,6 +1,7 @@
 <div class="top-wrapper">
-  <div class="inner-bg">
-    <div class="container">
+  <div class="container">
+    <div class="inner-bg">
+      <%= image_tag "background-img.jpeg", alt: "Topデスク画像" %>
       <div class="row">
         <div class="col text">
           <h1>デスク環境shareしてみませんか?</h1>
@@ -8,7 +9,6 @@
             <p>自分が使用している機材を登録することができます。<br>
             自分のデスク画像を投稿することができます<br>
             他の人の投稿にいいねをつけることやその投稿をお気に入りとして保存することもできます</p>
-						<%# キーワード検索（カテゴリー, 登録されているアイテム名前） %>
           </div>
         </div>
       </div>
@@ -22,26 +22,30 @@
     <div class="row like-rank">
       <% @like_posts.each do |like_post| %>
         <div class="col-md-4">
-          <div class="card my-5">
-            <%= image_tag like_post.desk_images[0].variant( resize: "478x269!").processed if like_post.desk_images.attached?%>
-            <div class="card-body">
+          <%= link_to post_path(like_post.id) do %>
+            <div class="card my-5">
+              <div class="card-img-top" style="overflow: hidden;">
+                <%= image_tag like_post.desk_images[0].variant(resize: "478x269!").processed, style: "width: 100%; height: auto;" if like_post.desk_images.attached? %>
+              </div>
+              <div class="card-body">
                 <% if like_post.user.avatar.attached? %>
                   <%= image_tag like_post.user.avatar, class: "host-icon" %>
                 <% else %>
                   <img class="host-icon" src="/assets/default_icon.jpeg">
                 <% end %>
-              <%= link_to like_post.user.name, post_path(like_post.id) %>
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <%= like_post.likes.count %>
-              <i class="fa-regular fa-comments" aria-hidden="true"></i>
-              <%= like_post.comments.count %>
-              <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-              <%= like_post.bookmarks.count %>
-              <div class="post-title">
-                <%= like_post.title %>
+                <%= like_post.user.name %>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <%= like_post.likes.count %>
+                <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                <%= like_post.comments.count %>
+                <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                <%= like_post.bookmarks.count %>
+                <div class="post-title">
+                  <%= like_post.title %>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -54,26 +58,28 @@
     <div class="row recent-post">
       <% @recent_posts.each do |recent_post| %>
         <div class="col-md-4">
-          <div class="card my-5">
-            <%= image_tag recent_post.desk_images[0].variant( resize: "478x269!").processed if recent_post.desk_images.attached?%>
-            <div class="card-body">
-                <% if recent_post.user.avatar.attached? %>
-                  <%= image_tag recent_post.user.avatar, class: "host-icon" %>
-                <% else %>
-                  <img class="host-icon" src="/assets/default_icon.jpeg">
-                <% end %>
-              <%= link_to recent_post.user.name, post_path(recent_post.id) %>
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <%= recent_post.likes.count %>
-              <i class="fa-regular fa-comments" aria-hidden="true"></i>
-              <%= recent_post.comments.count %>
-              <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-              <%= recent_post.bookmarks.count %>
-              <div class="post-title">
-                <%= recent_post.title %>
+          <%= link_to post_path(recent_post.id) do %>
+            <div class="card my-5">
+              <%= image_tag recent_post.desk_images[0].variant( resize: "478x269!").processed if recent_post.desk_images.attached?%>
+              <div class="card-body">
+                  <% if recent_post.user.avatar.attached? %>
+                    <%= image_tag recent_post.user.avatar, class: "host-icon" %>
+                  <% else %>
+                    <img class="host-icon" src="/assets/default_icon.jpeg">
+                  <% end %>
+                <%= recent_post.user.name %>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <%= recent_post.likes.count %>
+                <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                <%= recent_post.comments.count %>
+                <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                <%= recent_post.bookmarks.count %>
+                <div class="post-title">
+                  <%= recent_post.title %>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -88,7 +94,7 @@
         <div class="card my-5">
           <img src="/assets/Engineer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[0].name, posts_path(category: "Engineer", category_id: @categories[0].id)%>
+            <%= link_to @categories[0].name, posts_path(q: { category_eq: @categories[0].name}) %>
           </div>
         </div>
       </div>
@@ -97,7 +103,7 @@
         <div class="card my-5">
           <img src="/assets/Writer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[1].name, posts_path(category: "Writer", category_id: @categories[1].id)%>
+            <%= link_to @categories[1].name, posts_path(q: { category_eq: @categories[1].name}) %>
           </div>
         </div>
       </div>
@@ -106,7 +112,7 @@
         <div class="card my-5">
           <img src="/assets/Gamer_img.jpeg">
           <div class="card-body">
-            <%= link_to @categories[2].name, posts_path(category: "Gamer", category_id: @categories[2].id)%>
+            <%= link_to @categories[2].name, posts_path(q: { category_eq: @categories[2].name}) %>
           </div>
         </div>
       </div>

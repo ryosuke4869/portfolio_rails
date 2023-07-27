@@ -73,6 +73,8 @@ group :development do
   gem 'dotenv-rails'
   gem 'mini_magick', '~> 4.12'
   gem 'ransack'
+  gem 'kaminari'
+  gem 'bootstrap5-kaminari-views'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
