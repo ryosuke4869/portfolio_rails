@@ -5,6 +5,7 @@ RSpec.describe "Post", type: :system do
     include_context "posts and likes"
     let(:post_user) { create(:post, user: user, created_at: Time.now - 3.day) }
     let(:post_others) { create(:post, created_at: Time.now - 4.day) }
+    let!(:posts_kaminari) { create_list(:post, 25) }
 
     #----------------一覧ページ------------------------
     describe '投稿一覧ページ' do
@@ -97,6 +98,25 @@ RSpec.describe "Post", type: :system do
           posts = page.all('.post-info p:nth-child(2)').map(&:text)
           titles = posts.map { |text| text.gsub("デスク名 : ", "") }
           expect(titles).to eq([post.title, post2.title, post3.title])
+        end
+      end
+
+      context 'ページネーション機能' do
+        it 'ページ数が正確に表示されている' do
+          expect(page).to have_selector('.card', count: 6)
+          page_count = find('.pagination').all('li').count - 2
+          expect(page_count).to eq(5)
+        end
+
+        it 'ページが正しく切り替わる' do
+          click_on('›')
+          expect(page).to have_selector('.page-item.active', text: '2')
+          click_on('4')
+          expect(page).to have_selector('.page-item.active', text: '4')
+          click_link('«')
+          expect(page).to have_selector('.page-item.active', text: '1')
+          click_link('»')
+          expect(page).to have_selector('.page-item.active', text: '5')
         end
       end
     end
