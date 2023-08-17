@@ -75,6 +75,9 @@ group :development do
   gem 'ransack'
   gem 'kaminari'
   gem 'bootstrap5-kaminari-views'
+  # Gon（コントローラからJavaScriptに変数を渡せるようにする）
+  gem 'gon'
+  gem 'chart-js-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
