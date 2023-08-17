@@ -3,27 +3,29 @@
   <div class="mypage-post row">
     <% @posts.each do |post| %>
       <%= link_to post_path(post.id) do %>
+
         <div class="post-info row my-3">
-          <div class="col-md-2">
-            <% if @user.avatar.attached? %>
-              <%= image_tag post.user.avatar, class: "host-icon" %>
-            <% else %>
-              <img class="host-icon" src="/assets/default_icon.jpeg">
-            <% end %>
-          </div>
-          <div class="col-md-3">
-            <%= post.user.name %>
-            <%= post.user.created_at %>
-          </div>
-          <div class="col-md-3">
-            <i class="fa fa-heart" aria-hidden="true"></i>
-            <%= post.likes.count %>
-            <i class="fa-regular fa-comments" aria-hidden="true"></i>
-            <%= post.comments.count %>
-            <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-            <%= post.bookmarks.count %>
-          </div>
+
+            <div class="col-md-4">
+              <% if @user.avatar.attached? %>
+                <%= image_tag post.user.avatar, class: "host-icon" %>
+              <% else %>
+                <img class="host-icon" src="/assets/default_icon.jpeg">
+              <% end %>
+            </div>
+            <div class="col-md-4 offset-md-3">
+              <%= post.user.name %>
+              <%= post.created_at.to_s(:datetime_jp) %>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <%= post.likes.count %>
+              <i class="fa-regular fa-comments" aria-hidden="true"></i>
+              <%= post.comments.count %>
+              <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+              <%= post.bookmarks.count %>
+            </div>
+
         </div>
+
         <div class="mypage-post row">
           <div class="gallery-img col-md-6 col-sm-12 col-12">
             <%= image_tag post.desk_images[0] if post.desk_images.attached? %>
