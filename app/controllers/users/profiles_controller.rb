@@ -4,7 +4,6 @@ class Users::ProfilesController < ApplicationController
     @posts = current_user.posts.all
     @like_posts = @user.like_posts
     @bookmark_posts = @user.bookmark_posts
-    @item_post = current_user.posts.includes(:items)
 
     # raderchartの変数
     # 投稿数

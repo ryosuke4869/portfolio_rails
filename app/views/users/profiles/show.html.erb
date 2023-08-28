@@ -54,50 +54,5 @@
       </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-<script>
-    var ctx = document.getElementById("myRaderChart");
-    var myRadarChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-          labels: ["投稿数", "いいねした数", "いいねされた数", "保存した投稿数", "登録したアイテム数"],
-          datasets: [{
-              label: '',
-              data: [ gon.rader_post,
-                      gon.rader_likes,
-                      gon.rader_post_by_liked,
-                      gon.rader_bookmarks,
-                      gon.rader_post_items
-                    ],
-          }]
-        },
-                options: {
-            scale:{
-                ticks:{
-                    display: false,
-                    fontColor: 'RGBA(255,255,255, 0.7)',
-                    suggestedMin: 0,
-                    suggestedMax: 20,
-                    stepSize: 10,
-                    callback: function(value, index, values){
-                        return  value
-                    }
-                },
-                gridLines: {         // 補助線（目盛の線）
-                    display: true,
-                    color: 'RGBA(255,255,255, 0.3)'
-                },
-                angleLines: {        // 軸（放射軸）
-                    display: true,
-                    color: 'RGBA(255,255,255, 0.3)'
-                },
-            },
-            legend: {
-                display: false
-            }
-        }
-    });
-</script>
-
 
 <%= javascript_pack_tag 'mypage' %>
