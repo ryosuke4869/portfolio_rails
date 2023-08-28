@@ -60,14 +60,15 @@
     var myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-          labels: ["投稿数", "いいねした数", "いいねされた数", "保存した投稿数", "アイテム"],
+          labels: ["投稿数", "いいねした数", "いいねされた数", "保存した投稿数", "登録したアイテム数"],
           datasets: [{
               label: '',
               data: [ gon.rader_post,
                       gon.rader_likes,
                       gon.rader_post_by_liked,
                       gon.rader_bookmarks,
-                      15],
+                      gon.rader_post_items
+                    ],
           }]
         },
                 options: {

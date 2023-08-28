@@ -4,6 +4,7 @@ class Users::ProfilesController < ApplicationController
     @posts = current_user.posts.all
     @like_posts = @user.like_posts
     @bookmark_posts = @user.bookmark_posts
+    @item_post = current_user.posts.includes(:items)
 
     # raderchartの変数
     # 投稿数
@@ -14,7 +15,8 @@ class Users::ProfilesController < ApplicationController
     gon.rader_post_by_liked = @user.get_liked_post
     # 保存した投稿数
     gon.rader_bookmarks = @user.bookmarks.count
-    # アイテム数
+    # 登録したアイテム数
+    gon.rader_post_items = @posts.map { |post| post.items.count }.sum
   end
 
   private
