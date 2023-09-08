@@ -26,19 +26,33 @@ User.seed do |s|
   s.id    = 4
   s.email = 'hoge@example.com'
   s.password = 'Hoge1234!'
-  s.name = '山田一郎'
+  s.name = '山田一華'
 end
 
 User.seed do |s|
   s.id    = 5
   s.email = 'hogehoge@example.com'
   s.password = 'HogeHoge1234!'
-  s.name = '田中次郎'
+  s.name = '田中二誌'
 end
 
 User.seed do |s|
   s.id    = 6
   s.email = 'hogehogehoge@example.com'
   s.password = 'HogeHogeHoge1234!'
-  s.name = '山田三郎'
+  s.name = '山田三次'
+end
+
+User.seed do |s|
+  s.id    = 7
+  s.email = 'hogehogehogeHoge@example.com'
+  s.password = 'HogeHogeHogeHoge1234!'
+  s.name = '山田四葉'
+end
+
+User.seed do |s|
+  s.id    = 8
+  s.email = 'hogehogehogehogehoge@example.com'
+  s.password = 'HogeHogeHogeHogeHoge1234!'
+  s.name = '山田五木'
 end

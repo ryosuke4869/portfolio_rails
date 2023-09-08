@@ -1,14 +1,30 @@
+
+# テストユーザー１のpostのデータ(id = )
 12.times do |n|
-  user = User.offset(rand(User.count)).first
   created_at = DateTime.new(2023, 6, 1, 10, 30, 0)
   post = Post.create!(
     id: n,
-    title: "タイトル#{n + 1}",
-    description: "テスト#{n + 1}",
+    title: "Mypageテストタイトル#{n}",
+    description: "mypageテストの説明文#{n}",
+    user_id: User.find(1).id,
+    created_at: created_at,
+    desk_images: ActiveStorage::Blob.create_and_upload!(
+      io: File.open(Rails.root.join('public/images/post_images/Post_image3.jpeg')),
+      filename: 'Post_image3.jpeg')
+  )
+end
+
+12.times do |n|
+  user = User.offset(rand(User.count)).first
+  created_at = DateTime.new(2023, 6, 5, 10, 30, 0)
+  post = Post.create!(
+    id: n+12,
+    title: "タイトル#{n + 12}",
+    description: "テスト#{n + 12}",
     desk_images: ActiveStorage::Blob.create_and_upload!(
       io: File.open(Rails.root.join('public/images/post_images/Post_image1.jpeg')),
       filename: 'Post_image1.jpeg'),
-    user_id: user.id,
+    user_id: User.find(2).id,
     created_at: created_at
   )
   post.desk_images.attach(io: File.open(Rails.root.join('public/images/post_images/Post_image6.jpeg')),
@@ -17,11 +33,11 @@ end
 
 12.times do |n|
   user = User.offset(rand(User.count)).first
-  created_at = DateTime.new(2023, 6, 5, 10, 30, 0)
+  created_at = DateTime.new(2023, 6, 8, 10, 30, 0)
   post = Post.create!(
-    id: n+12,
-    title: "タイトル#{n + 7}",
-    description: "テスト#{n + 7}",
+    id: n+24,
+    title: "タイトル#{n + 24}",
+    description: "テスト#{n + 24}",
     user: user,
     created_at: created_at,
     desk_images: ActiveStorage::Blob.create_and_upload!(
@@ -32,11 +48,12 @@ end
                   filename: 'Post_image3.jpeg')
 end
 
+
 post = Post.create!(
-  id: 25,
-  title: "タイトル25",
-  description: "テスト25",
-  user_id: User.find(1).id,
+  id: 37,
+  title: "タイトル37",
+  description: "テスト37",
+  user_id: User.find(3).id,
   created_at: DateTime.new(2023, 6, 10, 10, 30, 0),
   desk_images: ActiveStorage::Blob.create_and_upload!(
     io: File.open(Rails.root.join('public/images/post_images/Post_image6.jpeg')),
@@ -61,10 +78,10 @@ post.desk_images.attach(
 )
 
 post = Post.create!(
-  id: 26,
-  title: "タイトル26",
-  description: "テスト26",
-  user_id: User.find(1).id,
+  id: 38,
+  title: "タイトル38",
+  description: "テスト38",
+  user_id: User.find(4).id,
   created_at: DateTime.new(2023, 6, 10, 10, 30, 0),
   desk_images: ActiveStorage::Blob.create_and_upload!(
     io: File.open(Rails.root.join('public/images/post_images/Post_image6.jpeg')),
