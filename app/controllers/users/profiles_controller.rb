@@ -1,9 +1,9 @@
 class Users::ProfilesController < ApplicationController
   def show
     @user = current_user
-    @posts = current_user.posts.all
-    @like_posts = @user.like_posts
-    @bookmark_posts = @user.bookmark_posts
+    @posts = current_user.posts.page(params[:page]).per(6)
+    @like_posts = @user.like_posts.page(params[:page]).per(6)
+    @bookmark_posts = @user.bookmark_posts.page(params[:page]).per(6)
 
     # raderchartの変数
     # 投稿数

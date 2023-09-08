@@ -1,55 +1,60 @@
 <h3>このユーザーの投稿</h3>
 <div class="list-container">
-  <div class="mypage-post row">
+  <div class="gallery row">
     <% @posts.each do |post| %>
-      <%= link_to post_path(post.id) do %>
-
-        <div class="post-info row my-3">
-
-            <div class="col-md-4">
-              <% if @user.avatar.attached? %>
-                <%= image_tag post.user.avatar, class: "host-icon" %>
-              <% else %>
-                <img class="host-icon" src="/assets/default_icon.jpeg">
-              <% end %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card my-5" style="max-width: 30rem; height: 50rem;">
+          <%= link_to post_path(post.id), class: "card-link" do %>
+            <%= image_tag post.desk_images[0].variant(resize: "478x269!").processed , class: "card-img-top" if post.desk_images.attached? %>
+            <div class="card-body pb-0">
+              <div class="user-info mb-3">
+                <% if post.user.avatar.attached? %>
+                  <%= image_tag post.user.avatar, class: "user-icon" %>
+                <% else %>
+                  <img class="user-icon" src="/assets/default_icon.jpeg">
+                <% end %>
+                <div class="post-user-info">
+                  <div class="post-user">
+                    <%= post.user.name %>
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                    <%= post.likes.count %>
+                    <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                    <%= post.bookmarks.count %>
+                    <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                    <%= post.comments.count %>
+                  </div>
+                  <div class="post-createtime">
+                    <%= post.created_at.to_s(:datetime_jp) %>
+                  </div>
+                </div>
+              </div>
+              <div class="post-info">
+                <% post.categories.each do |category| %>
+                  <p>カテゴリー : # <%= category.name %></p>
+                  <p>デスク名 : <%= post.title %></p>
+                <% end %>
+              </div>
             </div>
-            <div class="col-md-4 offset-md-3">
-              <%= post.user.name %>
-              <%= post.created_at.to_s(:datetime_jp) %>
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <%= post.likes.count %>
-              <i class="fa-regular fa-comments" aria-hidden="true"></i>
-              <%= post.comments.count %>
-              <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-              <%= post.bookmarks.count %>
-            </div>
-
-        </div>
-
-        <div class="mypage-post row">
-          <div class="gallery-img col-md-6 col-sm-12 col-12">
-            <%= image_tag post.desk_images[0] if post.desk_images.attached? %>
-          </div>
-          <div class="card-body col-md-6 col-sm-4 col-12">
-            <div class="post-item-info p-1 row justify-content-start">
-                <% if post.post_items.present? %>
-                  <% post.post_items.each do |post_item| %>
-                  <div class="item-list p-2 col-md-3 col-sm-4 col-6">
-                    <div class="card" style="width: 8rem; height: 8rem;">
-                      <%= image_tag(post_item.item.image_url) %>
+            <div class="card-body item-info row">
+              <% if post.post_items.present? %>
+                <p>登録されたアイテム</p>
+                <% post.post_items.each do |post_item| %>
+                  <div class="item-list col-sm-3 col-lg-4 col-xl-3">
+                    <div class="card mb-4" style="width: 5rem; height: 5rem;">
+                      <%= image_tag post_item.item.image_url, style: "width: 5rem; height: 5rem;" %>
                     </div>
                   </div>
-                  <% end %>
-                <% else %>
-                  <p>この投稿にはアイテムが登録されていません</p>
                 <% end %>
+              <% else %>
+                <p>この投稿にはアイテムが登録されていません</p>
+              <% end %>
             </div>
-          </div>
+          <% end %>
         </div>
-        <p class="card-text"><%= post.description%></p>
-      <% end %>
+      </div>
     <% end %>
   </div>
+  <div class="paginate-container">
+    <%= paginate @posts %>
+  </div>
 </div>
-
-
