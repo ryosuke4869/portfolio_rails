@@ -1,4 +1,4 @@
-<h1>保存した投稿</h1>
+<div id="bookmark_post_paginate">
   <div class="container my-5">
     <div class="row">
       <% @bookmark_posts.each do |bookmark_post| %>
@@ -30,6 +30,7 @@
       <% end %>
     </div>
     <div class="paginate-container">
-      <%= paginate @bookmark_posts %>
+      <%= paginate @bookmark_posts, remote: true %>
     </div>
   </div>
+</div>

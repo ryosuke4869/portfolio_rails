@@ -1,4 +1,4 @@
-<h1>いいねした投稿</h1>
+<div id="like_post_paginate">
   <div class="container my-5">
     <div class="row">
       <% @like_posts.each do |like_post| %>
@@ -30,6 +30,7 @@
       <% end %>
     </div>
     <div class="paginate-container">
-      <%= paginate @like_posts %>
+      <%= paginate @like_posts, remote: true %>
     </div>
   </div>
+</div>

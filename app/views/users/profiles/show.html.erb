@@ -38,21 +38,25 @@
 
     <div class="panel-area">
       <div class="panel active">
-        <%= render 'shared/post-list' %>
+        <h3>このユーザーの投稿</h3>
+        <%= render 'post-list' %>
       </div>
     </div>
 
     <div class="panel-area">
       <div class="panel">
-        <%= render 'shared/like-list'%>
+        <h1>いいねした投稿</h1>
+        <%= render 'like-list'%>
       </div>
     </div>
 
     <div class="panel-area">
       <div class="panel">
-        <%= render 'shared/bookmark-list'%>
+        <h1>保存した投稿</h1>
+        <%= render 'bookmark-list'%>
       </div>
     </div>
 </div>
 
 <%= javascript_pack_tag 'mypage' %>
+<%= javascript_pack_tag 'chart' %>
