@@ -1,23 +1,29 @@
 class ItemsController < ApplicationController
   before_action :set_post
+  MAX_POST_ITEMS_COUNT = 3
 
   def search_items
     @items = []
     @search = params[:keyword]
     if @search
-      @results = RakutenWebService::Ichiba::Product.search(keyword: params[:keyword], hits: 20)
+      @results = RakutenWebService::Ichiba::Product.search(keyword: params[:keyword])
       # @itemsに検索して取得したデータ入れる
       @results.each do |result|
         item = Item.new(read(result))
         @items << item
-        # Itemテーブルに同じアイテムがあれば保存しない処理
       end
+      # Itemテーブルに同じアイテムがあれば保存しない処理
       @items.each do |item|
         unless Item.all.exists?(name: item.name)
           item.save
         end
       end
     end
+
+    @items = Kaminari.paginate_array(@items).page(params[:page]).per(9)
+    @item_posts =Item.joins(:post_items).group(:item_id)
+                      .order('COUNT(post_items.id) DESC')
+                      .limit(MAX_POST_ITEMS_COUNT)
   end
 
   private

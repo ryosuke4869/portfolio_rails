@@ -9,18 +9,44 @@
     </div>
   </div>
 
-  <div class="row">
-    <% @items.each do |item| %>
-      <div class="col-xl-2 col-lg-4 col-sm-6">
-        <div class="card p-1 mb-5"style="height: 20rem;">
-          <%= image_tag(item.image_url, class: "mx-auto d-block") %>
-          <div class="card-body">
-            <p><%= item.name.truncate(40)%></p>
-            <p>¥<%= item.price%></p>
-            <%= link_to 'アイテムを追加', post_items_path(post_id: @post.id, item_name: item.name), method: :post %>
+  <% if @items.blank? %>
+    <div class="row text-center">
+      <h4>人気Item Top3</h4>
+      <% @item_posts.each do |item_post|%>
+        <div class="col-sm-6 col-lg-4">
+          <div class="card p-1 mb-5"style="height: 20rem;">
+            <h5>投稿への登録数 : <%= item_post.posts.count%> 件</h5>
+            <%= image_tag(item_post.image_url, class: "mx-auto my-2 d-block") %>
+            <div class="card-body">
+              <h5 class="truncate"><%= item_post.name.truncate(40)%></h5>
+              <h5>¥<%= item_post.price%></h5>
+            </div>
+            <%= link_to 'アイテムの詳細情報(Rakuten検索サイトに移動)', item_post.item_url, class: "truncate", target: :_blank, rel: "noopener noreferrer" %>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="row text-center">
+      <h4>検索結果</h4>
+      <% @items.each do |item| %>
+        <div class="col-lg-4 col-sm-6">
+          <div class="card p-1 mb-5"style="height: 20rem;">
+            <%= image_tag(item.image_url, class: "mx-auto d-block") %>
+            <div class="card-body">
+              <p class="truncate"><%= item.name.truncate(40)%></p>
+              <p>¥<%= item.price%></p>
+              <%= link_to 'アイテムを追加', post_items_path(post_id: @post.id, item_name: item.name), method: :post %>
+            </div>
+            <%= link_to 'アイテムの詳細情報(Rakuten検索サイトに移動)', item.item_url, class: "truncate", target: :_blank, rel: "noopener noreferrer" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  <% end %>
+
+    <div class="paginate-container">
+      <%= paginate @items %>
+    </div>
 </div>
