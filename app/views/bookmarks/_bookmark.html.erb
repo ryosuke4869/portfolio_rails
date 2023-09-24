@@ -13,13 +13,13 @@
     </div>
   <% else %>
     <% if current_user.bookmarks.find_by(post_id: post.id) %>
-      <%= link_to post_bookmarks_path(post.id), method: :delete, id: "btn-unbookmark-#{post.id}", remote: true do %>
+      <%= link_to post_bookmarks_path(post.id), method: :delete, id: "btn-unbookmark-#{post.id}", class: "show-link", remote: true do %>
         <i class="fas fa-bookmark" aria-hidden="true"></i>
         <%= post.bookmarks.count %>
         <p>保存</p>
       <% end %>
     <% else %>
-      <%= link_to post_bookmarks_path(post.id), method: :post, id: "btn-bookmark-#{post.id}", remote: true do %>
+      <%= link_to post_bookmarks_path(post.id), method: :post, id: "btn-bookmark-#{post.id}", class: "show-link", remote: true do %>
         <i class="far fa-bookmark" aria-hidden="true"></i>
         <%= post.bookmarks.count %>
         <p>保存</p>

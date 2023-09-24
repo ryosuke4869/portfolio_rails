@@ -15,23 +15,25 @@
         </div>
       </div>
     <%# 投稿した画像表示 %>
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <% @post.desk_images.count.times do |i| %>
-            <div class="swiper-slide">
-              <%= image_tag @post.desk_images[i].variant( resize: "690x390!").processed, class: "desk-show-image" %>
-            </div>
-          <% end %>
+      <div class="post-img">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <% @post.desk_images.count.times do |i| %>
+              <div class="swiper-slide">
+                <%= image_tag @post.desk_images[i].variant( resize: "690x390!").processed, class: "desk-show-image" %>
+              </div>
+            <% end %>
+          </div>
+          <!-- ナビボタン -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
-        <!-- ナビボタン -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
       </div>
 
       <%# 登録したカテゴリー表示 %>
       <div class="category-container my-3">
         <% @post.categories.each do |category| %>
-          <%= link_to "カテゴリー : ##{category.name}", posts_path(q: { category_eq: category.name }) %>
+          <%= link_to "カテゴリー : ##{category.name}", posts_path(q: { category_eq: category.name }), class: "show-link" %>
         <% end %>
       </div>
 
@@ -40,16 +42,16 @@
         <p>投稿の紹介</p>
         <p><%= @post.description%></p>
       </div>
-      <div class="row">
-        <%# いいね機能  %>
-        <div class="like-wrapper col-md-1">
-          <%= render 'likes/like', post: @post %>
-        </div>
+      <div class="function-wrapper row">
+          <%# いいね機能  %>
+          <div class="like-wrapper col-md-1">
+            <%= render 'likes/like', post: @post %>
+          </div>
 
-        <%# ブックマーク機能 %>
-        <div class="bookmark-wrapper col-md-1">
-          <%= render 'bookmarks/bookmark', post: @post %>
-        </div>
+          <%# ブックマーク機能 %>
+          <div class="bookmark-wrapper col-md-1">
+            <%= render 'bookmarks/bookmark', post: @post %>
+          </div>
       </div>
 
       <%# アイテム機能 %>
@@ -58,25 +60,25 @@
           <p>登録されたアイテム</p>
           <%= render 'items/item_list', post: @post %>
         </div>
-      </div>
-      <% if @post.user == current_user %>
-        <% if @item_count < 12 %>
-          <i class="fa-solid fa-plus mb-3">
-            <%= link_to post_search_items_path(@post) do %>
-              アイテムを追加する
-            <% end %>
-          </i>
+        <% if @post.user == current_user %>
+          <% if @item_count < 12 %>
+            <i class="fa-solid fa-plus mb-3">
+              <%= link_to post_search_items_path(@post), class: "show-link" do %>
+                アイテムを追加する
+              <% end %>
+            </i>
+          <% end %>
         <% end %>
-      <% end %>
-
+      </div>
 
       <%# コメント欄 %>
       <%= render 'comments/comments-list'%>
-
-      <% if @post.user == current_user %>
-        <%= link_to "編集", edit_post_path(@post) %>
-        <%= link_to "削除", post_path(@post), method: :delete %>
-      <% end %>
+      <div class="edit-container">
+        <% if @post.user == current_user %>
+          <%= link_to "編集", edit_post_path(@post), class:"btn btn-dark mx-2" %>
+          <%= link_to "削除", post_path(@post), method: :delete, class:"btn btn-dark mx-2" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 .inner-bg {
   position: relative;
   overflow: hidden;
+  margin-top: 7.5rem;
 }
 
 .inner-bg::after {
@@ -42,4 +43,26 @@
 
 .col.text .description p {
   font-size: 18px;
+}
+
+.top-section {
+  margin-top: 1rem;
+  padding: 1rem 0rem 2rem 0rem;
+  border-top: 1px solid #ccc;
+}
+
+.post-title {
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #ccc;
+}
+
+.top-section h3 {
+  margin: 1rem 0rem 2rem 0rem;
+}
+
+.like-rank .card-link:hover,
+.recent-post .card-link:hover,
+.category-search .card-link:hover {
+  color: red;
 }

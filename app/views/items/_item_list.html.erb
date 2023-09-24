@@ -1,15 +1,21 @@
 <div class="row">
   <% if @items.present? %>
     <% @items.each do |item| %>
-      <div class="col-xl-2 col-lg-4 col-sm-6">
-        <div class="card p-1 mb-5" style="height: 20rem;">
+      <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="card p-1 mb-5" style="height: 24rem;">
           <%= image_tag(item.image_url, class: "mx-auto d-block") %>
-          <div class="card-body">
-            <p><%= item.name.truncate(20)%></p>
-            <p>¥<%= item.price%></p>
-            <% if @post.user == current_user %>
-              <%= link_to "削除", post_item_path(item.id, post_id: @post.id), method: :delete %>
+          <div class="card-body text-center">
+            <p class="truncate"><%= item.name.truncate(20)%></p>
+            <p>¥ <%= item.price%></p>
+            <%= link_to item.item_url, target: :_blank, rel: "noopener noreferrer", class: "show-link" do %>
+              アイテムの詳細情報<br>
+              (Rakuten検索サイトへ)
             <% end %>
+            <div class="item-delete">
+              <% if @post.user == current_user %>
+                <%= link_to "削除", post_item_path(item.id, post_id: @post.id), class:"btn btn-dark my-1", method: :delete %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

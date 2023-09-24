@@ -15,6 +15,10 @@
   text-decoration: none;
 }
 
+.post-gallery {
+  margin-bottom: 3rem;
+}
+
 .gallery-item img {
   width: 100%;
 }
@@ -24,7 +28,8 @@
   width: 100%;
   height: 100%;
   text-decoration: none;
-  color: inherit;
+  text-align: center;
+  color: black;
 }
 
 .card-img-top {
@@ -48,7 +53,8 @@
 
 .post-info p {
   display: inline-block;
-  margin-right: 10px; /* 必要に応じて適切なマージンを設定してください */
+  margin-right: 10px;
+  margin-bottom: 0px;
 }
 
 
@@ -64,18 +70,26 @@
   max-width: 60vw;
 }
 
+.post-img,
+.category-container,
+.description-container,
+.function-wrapper,
+.item-show {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
 .swiper {
   padding: 0 50px;
+  border: #333;
 }
 
 .swiper--wrapper {
-  /* wrapperのサイズを調整 */
   width: 100%;
   height: 300px;
 }
 
 .swiper-slide {
-  /* スライドのサイズを調整*/
   color: #ffffff;
   width: 100%;
   height: 100%;
@@ -91,4 +105,40 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.category-container,
+.description-container,
+.function-wrapper,
+.item-show,
+.accordion-area,
+.edit-container {
+  text-align: center;
+  font-size: large;
+}
+
+.category-container .card-link:hover {
+  color: red;
+}
+
+.function-wrapper {
+  padding-top: 2rem;
+  justify-content: center;
+}
+
+.show-link {
+  text-decoration: none;
+}
+
+.show-link:hover {
+  color: red;
+  text-decoration: none;
+}
+
+.item-delete {
+  margin-top: 1rem;
+}
+
+.edit-container {
+  margin-top: 1rem;
 }
