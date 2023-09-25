@@ -21,9 +21,9 @@ class ItemsController < ApplicationController
     end
 
     @items = Kaminari.paginate_array(@items).page(params[:page]).per(9)
-    @item_posts =Item.joins(:post_items).group(:item_id)
-                      .order('COUNT(post_items.id) DESC')
-                      .limit(MAX_POST_ITEMS_COUNT)
+    @item_posts = Item.joins(:post_items).group(:item_id).
+      order('COUNT(post_items.id) DESC').
+      limit(MAX_POST_ITEMS_COUNT)
   end
 
   private

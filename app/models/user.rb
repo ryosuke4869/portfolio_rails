@@ -27,7 +27,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def get_liked_post
-    user_posts = self.posts
+    user_posts = posts
     radar_post_by_liked = 0
     user_posts.each do |post|
       radar_post_by_liked += post.likes.count
