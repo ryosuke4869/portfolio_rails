@@ -13,10 +13,6 @@ class LikesController < ApplicationController
 
   private
 
-  # def like_params
-  #   params.require(:post).permit(user_id: current_user.id,  item_id: @post.id)
-  # end
-
   def set_post
     @post = Post.find_by(id: params[:post_id])
   end

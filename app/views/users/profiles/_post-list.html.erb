@@ -1,15 +1,11 @@
-<div class="wrapper">
-  <%= flash[:notice] %>
-  <div class="index">
-    <h2>投稿一覧</h2>
-  <%#ーーーーーーーーーーーーーーーーーーーーーーー ここからソート機能ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー %>
-    <%= render 'shared/ransack' %>
+<div id="post_paginate">
+  <div class="list-container">
     <div class="gallery row">
       <% @posts.each do |post| %>
-        <div class="post-gallery col-md-6 col-lg-4">
-          <div class="card" style="max-width: 30rem; height: 45rem;">
+        <div class="col-md-6 col-lg-4">
+          <div class="card my-5" style="max-width: 30rem; height: 45rem;">
             <%= link_to post_path(post.id), class: "card-link" do %>
-              <%= image_tag post.desk_images[0].variant(resize: "478x269!").processed , class: "card-img-top" if post.desk_images.attached? %>
+              <%= image_tag post.desk_images[0].variant(resize: "478x269!").processed, class: "card-img-top" if post.desk_images.attached? %>
               <div class="card-body pb-0">
                 <div class="user-info mb-3">
                   <% if post.user.avatar.attached? %>
@@ -48,7 +44,7 @@
                         <%= image_tag post_item.item.image_url, style: "width: 5rem; height: 5rem;" %>
                       </div>
                     </div>
-                    <% if index == 3 && post.post_items.size > 4 %>
+                    <% if index == 3 && post.post_items.size > 4  %>
                       <p>他<%= post.post_items.size - 4 %>つのアイテムが登録されています</p>
                       <% break %>
                     <% end %>
@@ -63,7 +59,7 @@
       <% end %>
     </div>
     <div class="paginate-container">
-      <%= paginate @posts %>
+      <%= paginate @posts, remote: true %>
     </div>
   </div>
 </div>

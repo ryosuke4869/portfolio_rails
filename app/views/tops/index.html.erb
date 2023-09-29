@@ -17,13 +17,13 @@
 
 	<!-- Section 1 -->
 	<%# いいね数が多い順 %>
-  <div class="container my-5">
+  <div class="container top-section">
     <h3>いいね数ランキング</h3>
     <div class="row like-rank">
       <% @like_posts.each do |like_post| %>
         <div class="col-md-4">
-          <%= link_to post_path(like_post.id) do %>
-            <div class="card my-5">
+          <%= link_to post_path(like_post.id), class: "card-link" do %>
+            <div class="card">
               <div class="card-img-top" style="overflow: hidden;">
                 <%= image_tag like_post.desk_images[0].variant(resize: "478x269!").processed, style: "width: 100%; height: auto;" if like_post.desk_images.attached? %>
               </div>
@@ -53,13 +53,13 @@
 
   <!-- Section 2 -->
 	<%# 最近の投稿 %>
-  <div class="container my-5">
+  <div class="container top-section">
     <h3>最近の投稿</h3>
     <div class="row recent-post">
       <% @recent_posts.each do |recent_post| %>
         <div class="col-md-4">
-          <%= link_to post_path(recent_post.id) do %>
-            <div class="card my-5">
+          <%= link_to post_path(recent_post.id), class: "card-link" do %>
+            <div class="card">
               <%= image_tag recent_post.desk_images[0].variant( resize: "478x269!").processed if recent_post.desk_images.attached?%>
               <div class="card-body">
                   <% if recent_post.user.avatar.attached? %>
@@ -87,35 +87,43 @@
 
   <!-- Section 3 -->
 	<%# カテゴリー別投稿 %>
-  <div class="container my-5">
+  <div class="container top-section">
     <h3>カテゴリー別検索</h3>
     <div class="row category-search">
       <div class="col-md-4">
-        <div class="card my-5">
-          <img src="/assets/Engineer_img.jpeg">
-          <div class="card-body">
-            <%= link_to @categories[0].name, posts_path(q: { category_eq: @categories[0].name}) %>
+        <%= link_to posts_path(q: { category_eq: @categories[0].name}), class: "card-link" do%>
+          <div class="card">
+            <img src="/assets/Engineer_img.jpeg">
+            <div class="card-body">
+              <%= @categories[0].name %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
 
       <div class="col-md-4">
-        <div class="card my-5">
-          <img src="/assets/Writer_img.jpeg">
-          <div class="card-body">
-            <%= link_to @categories[1].name, posts_path(q: { category_eq: @categories[1].name}) %>
+        <%= link_to posts_path(q: { category_eq: @categories[1].name}), class: "card-link" do%>
+          <div class="card">
+            <img src="/assets/Writer_img.jpeg">
+            <div class="card-body">
+              <%= @categories[1].name %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
 
       <div class="col-md-4">
-        <div class="card my-5">
-          <img src="/assets/Gamer_img.jpeg">
-          <div class="card-body">
-            <%= link_to @categories[2].name, posts_path(q: { category_eq: @categories[2].name}) %>
+        <%= link_to posts_path(q: { category_eq: @categories[2].name}), class: "card-link" do%>
+          <div class="card mb-2">
+            <img src="/assets/Gamer_img.jpeg">
+            <div class="card-body">
+              <%= @categories[2].name %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
+
     </div>
   </div>
 </div>
+
