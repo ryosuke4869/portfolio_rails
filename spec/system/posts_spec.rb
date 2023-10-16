@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Post", type: :system do
   describe 'PostのCRUD' do
     include_context "posts and likes"
-    let(:post_user) { create(:post, user: user, created_at: Time.now - 3.day) }
-    let(:post_others) { create(:post, created_at: Time.now - 4.day) }
+    let(:post_user) { create(:post, user: user, created_at: Time.now - 4.day) }
+    let(:post_others) { create(:post, created_at: Time.now - 5.day) }
 
     #----------------一覧ページ------------------------
     describe '投稿一覧ページ' do
