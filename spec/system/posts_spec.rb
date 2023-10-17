@@ -63,7 +63,7 @@ RSpec.describe "Post", type: :system do
           expect(page).to have_text(post3.title)
           posts = page.all('.post-info p:nth-child(2)').map(&:text)
           titles = posts.map { |text| text.gsub("デスク名 : ", "") }
-          expect(titles).to eq([post.title, post2.title, post3.title])
+          expect(titles).to eq([post.title, post2.title, post3.title, post4.title])
         end
 
         it 'ユーザーは投稿日昇順にソートできる' do
@@ -74,7 +74,7 @@ RSpec.describe "Post", type: :system do
           expect(page).to have_text(post3.title)
           posts = page.all('.post-info p:nth-child(2)').map(&:text)
           titles = posts.map { |text| text.gsub("デスク名 : ", "") }
-          expect(titles).to eq([post3.title, post2.title, post.title])
+          expect(titles).to eq([post4.title, post3.title, post2.title, post.title])
         end
 
         it 'ユーザーはいいね数降順にソートできる' do
@@ -85,7 +85,7 @@ RSpec.describe "Post", type: :system do
           expect(page).to have_text(post3.title)
           posts = page.all('.post-info p:nth-child(2)').map(&:text)
           titles = posts.map { |text| text.gsub("デスク名 : ", "") }
-          expect(titles).to eq([post3.title, post2.title, post.title])
+          expect(titles).to eq([post3.title, post2.title, post.title, post4.title])
         end
 
         it 'ユーザーはいいね数昇順にソートできる' do
@@ -96,7 +96,7 @@ RSpec.describe "Post", type: :system do
           expect(page).to have_text(post3.title)
           posts = page.all('.post-info p:nth-child(2)').map(&:text)
           titles = posts.map { |text| text.gsub("デスク名 : ", "") }
-          expect(titles).to eq([post.title, post2.title, post3.title])
+          expect(titles).to eq([post4.title, post.title, post2.title, post3.title])
         end
       end
     end
