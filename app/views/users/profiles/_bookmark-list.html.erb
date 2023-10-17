@@ -43,7 +43,7 @@
                   <% bookmark_post.post_items.each_with_index do |bookmark_post_item, index| %>
                     <div class="item-list col-sm-3 col-lg-4 col-xl-3">
                       <div class="card mb-4" style="width: 5rem; height: 5rem;">
-                        <%= image_tag post_item.item.image_url, style: "width: 5rem; height: 5rem;" %>
+                        <%= image_tag bookmark_post_item.item.image_url, style: "width: 5rem; height: 5rem;" %>
                       </div>
                     </div>
                     <% if index == 3 && bookmark_post.post_items.size > 4  %>
