@@ -23,7 +23,7 @@ RSpec.shared_context "posts and likes" do
   let!(:bookmarks) do
     [
       create(:bookmark, post: post2, user: user),
-      create(:bookmark, post: post3, user: user)
+      create(:bookmark, post: post3, user: user),
     ]
   end
 end

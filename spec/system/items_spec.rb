@@ -17,7 +17,12 @@ RSpec.describe "Item", type: :system do
     end
 
     it 'アイテムの検索と登録ができる' do
-      allow(RakutenWebService::Ichiba::Product).to receive(:search).and_return([{ "productName" => "test_item", "averagePrice" => 1000, "mediumImageUrl" => "test_item.jpg", "affiliateUrl" => "url1" }])
+      allow(RakutenWebService::Ichiba::Product).to receive(:search).and_return([
+        {
+          "productName" => "test_item", "averagePrice" => 1000,
+          "mediumImageUrl" => "test_item.jpg", "affiliateUrl" => "url1",
+        },
+      ])
       click_on "アイテムを追加する"
       fill_in "keyword", with: "example"
       click_button "検索する"
