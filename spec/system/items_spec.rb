@@ -1,42 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe "Item", type: :system do
-  describe 'ItemのCRUD' do
-    describe '投稿詳細ページのアイテム表示' do
-      context 'アイテムが保存されている場合' do
-        it 'アイテムの情報が表示される' do
-          # アイテムの画像が表示される
-          # expect(page).to have_selector("img[src$='post_image_sample_2.jpeg']")
-          # アイテムの名前が表示される
-          # expect(page).to have_content item.name.truncate(20)
-          # アイテムの値段が表示される
-          # expect(page).to have_content item.price
-        end
-      end
+  fdescribe 'Item_search' do
+    let(:user) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:user3) { create(:user) }
+    let!(:post) { create(:post, :category_engineer, user: user, created_at: Time.now) }
+    let!(:post2) { create(:post, :category_writer, user: user2, created_at: Time.now - 1.day) }
+    let!(:post3) { create(:post, :category_gamer, user: user3, created_at: Time.now - 2.day) }
 
-      context 'アイテムが保存されていない場合' do
-        it 'アイテムが登録されていないと表示される' do
-          # アイテムが登録されていないと表示される
-          # expect(page).to have_content('この投稿にはアイテムが登録されていません')
-        end
-      end
+    before do
+      sign_in(user)
+      visit posts_path
+      click_on post.user.name
+      visit post_path(post.id)
     end
 
-    describe 'アイテムの検索と追加' do
-      context '検索欄に入力した時' do
-        it '検索ワードに関連したアイテムの情報が表示される' do
-          # アイテムの画像が表示される
-          # アイテムの名前が表示される
-          # アイテムの値段が表示される
-        end
-        it 'アイテムを投稿に紐づけることができる' do
-          # アイテムを追加できる
-        end
-      end
-      context '検索欄に入力していない場合' do
-        it '人気Item Top3が表示されている。' do
-        end
-      end
+    it 'アイテムの検索と登録ができる' do
+      allow(RakutenWebService::Ichiba::Product).to receive(:search).and_return([{ "productName" => "test_item", "averagePrice" => 1000, "mediumImageUrl" => "test_item.jpg", "affiliateUrl" => "url1" }])
+      click_on "アイテムを追加する"
+      fill_in "keyword", with: "example"
+      click_button "検索する"
+      expect(page).to have_content("test_item")
+      expect(page).to have_selector("img[src*='test_item']")
+      # アイテムの登録機能
+      click_on "アイテムを追加"
+      expect(page).to have_content("test_item")
     end
   end
 end
