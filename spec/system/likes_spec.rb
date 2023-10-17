@@ -2,14 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Likes", type: :system, js: true do
   describe 'LikeのCRUD' do
-    let(:user) { create(:user) }
-    let!(:post_user) { create(:post, user: user) }
+    include_context "posts and likes"
     let!(:post_others) { create(:post) }
     let!(:post_others_liked) { create(:post) }
     let!(:like) { create(:like, post: post_others_liked, user: user) }
-    let!(:post_category_engineer) { create(:post, :category_engineer) }
-    let!(:post_category_writer) { create(:post, :category_writer) }
-    let!(:post_category_gamer) { create(:post, :category_gamer) }
 
     describe 'いいねの作成と解除' do
       context 'ログインしている場合' do
@@ -33,7 +29,7 @@ RSpec.describe "Likes", type: :system, js: true do
       context '自分の投稿の場合' do
         it 'いいねをclickすることができない' do
           sign_in(user)
-          visit post_path(post_user)
+          visit post_path(post)
           expect(page).to have_css('.mypost-like')
         end
       end

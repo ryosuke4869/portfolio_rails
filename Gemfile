@@ -42,6 +42,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-erd'
   gem 'annotate'
+  gem 'rspec-mocks'
   # rubocop
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false

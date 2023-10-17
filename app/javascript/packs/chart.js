@@ -3,7 +3,7 @@ var ctx = document.getElementById("myRaderChart");
 var myRadarChart = new Chart(ctx, {
   type: 'radar',
   data: {
-    labels: ["投稿数", "いいねした数", "いいねされた数", "保存した投稿数", "登録したアイテム数"],
+    labels: ["投稿数", "いいねした投稿数", "いいねされた投稿数", "保存した投稿数", "登録したアイテム数"],
     datasets: [{
         label: '',
         data: [ gon.rader_post,

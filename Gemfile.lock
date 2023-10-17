@@ -413,6 +413,7 @@ DEPENDENCIES
   rails-i18n
   rakuten_web_service
   ransack
+  rspec-mocks
   rspec-rails
   rubocop
   rubocop-airbnb

@@ -33,10 +33,12 @@
                   </div>
                 </div>
                 <div class="post-info">
-                  <% post.categories.each do |category| %>
-                    <p>カテゴリー : # <%= category.name %></p>
-                    <p>デスク名 : <%= post.title %></p>
-                  <% end %>
+                  <p>カテゴリー:
+                    <% post.categories.each_with_index do |category, index| %>
+                      <%= category.name %><%= ',' unless index == post.categories.size - 1 %>
+                    <% end %>
+                  </p>
+                  <p>デスク名 : <%= post.title %></p>
                 </div>
               </div>
               <div class="card-body item-info row">

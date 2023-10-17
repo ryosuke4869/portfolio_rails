@@ -1,28 +1,59 @@
 <div id="bookmark_post_paginate">
-  <div class="container my-5">
-    <div class="row">
+  <div class="list-container">
+    <div class="gallery row">
       <% @bookmark_posts.each do |bookmark_post| %>
         <div class="col-md-6 col-lg-4">
-          <div class="card my-5" style="max-width: 30rem; height: 23rem;">
+          <div class="card my-5" style="max-width: 30rem; height: 45rem;">
             <%= link_to post_path(bookmark_post.id), class: "card-link" do %>
-              <%= image_tag bookmark_post.desk_images[0], class: "card-img-top" if bookmark_post.desk_images.attached?%>
-              <div class="card-body">
+              <%= image_tag bookmark_post.desk_images[0].variant(resize: "478x269!").processed, class: "card-img-top" if bookmark_post.desk_images.attached? %>
+              <div class="card-body pb-0">
                 <div class="user-info mb-3">
                   <% if bookmark_post.user.avatar.attached? %>
-                    <%= image_tag bookmark_post.user.avatar, class: "host-icon" %>
+                    <%= image_tag bookmark_post.user.avatar, class: "user-icon" %>
                   <% else %>
-                    <img class="host-icon" src="/assets/default_icon.jpeg">
+                    <img class="user-icon" src="/assets/default_icon.jpeg">
                   <% end %>
                   <div class="post-user-info">
-                    <%= bookmark_post.user.name %>
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                    <%= bookmark_post.likes.count %>
-                    <i class="fa-regular fa-comments" aria-hidden="true"></i>
-                    <%= bookmark_post.comments.count %>
-                    <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
-                    <%= bookmark_post.bookmarks.count %>
+                    <div class="post-user">
+                      <%= bookmark_post.user.name %>
+                      <i class="fa fa-heart" aria-hidden="true"></i>
+                      <%= bookmark_post.likes.count %>
+                      <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                      <%= bookmark_post.bookmarks.count %>
+                      <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                      <%= bookmark_post.comments.count %>
+                    </div>
+                    <div class="post-createtime">
+                      <%= bookmark_post.created_at.to_s(:datetime_jp) %>
+                    </div>
                   </div>
                 </div>
+                <div class="post-info">
+                  <p>カテゴリー:
+                    <% bookmark_post.categories.each_with_index do |category, index| %>
+                      <%= category.name %><%= ',' unless index == bookmark_post.categories.size - 1 %>
+                    <% end %>
+                  </p>
+                  <p>デスク名 : <%= bookmark_post.title %></p>
+                </div>
+              </div>
+              <div class="card-body item-info row">
+                <% if bookmark_post.post_items.present? %>
+                  <p>登録されているアイテム</p>
+                  <% bookmark_post.post_items.each_with_index do |bookmark_post_item, index| %>
+                    <div class="item-list col-sm-3 col-lg-4 col-xl-3">
+                      <div class="card mb-4" style="width: 5rem; height: 5rem;">
+                        <%= image_tag bookmark_post_item.item.image_url, style: "width: 5rem; height: 5rem;" %>
+                      </div>
+                    </div>
+                    <% if index == 3 && bookmark_post.post_items.size > 4  %>
+                      <p>他<%= bookmark_post.post_items.size - 4 %>つのアイテムが登録されています</p>
+                      <% break %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <p>この投稿にはアイテムが登録されていません</p>
+                <% end %>
               </div>
             <% end %>
           </div>

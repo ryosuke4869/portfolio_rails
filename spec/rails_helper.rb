@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'active_storage_validations/matchers'
 require 'ransack'
 require 'kaminari'
+require 'gon'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -45,11 +46,10 @@ Capybara.register_driver :remote_chrome do |app|
         # ディスクのメモリスペースを使用。
         'disable-dev-shm-usage',
         'remote-debugging-port=9222',
-
       ],
     }
   )
-  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
+  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps, timeout: 120)
 end
 
 RSpec.configure do |config|
